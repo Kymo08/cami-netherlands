@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valutazione ricevuta – CAMI Netherlands</title>
+<style>
+  body { margin:0; padding:0; background:#F9FAFB; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .wrapper { max-width:600px; margin:0 auto; background:#ffffff; }
+  .header  { background:#1E3A8A; padding:32px 40px; text-align:center; }
+  .header h1 { color:#ffffff; margin:0; font-size:24px; font-weight:700; letter-spacing:-0.5px; }
+  .header p  { color:#93C5FD; margin:6px 0 0; font-size:14px; }
+  .body    { padding:40px; }
+  .body h2 { color:#1E3A8A; font-size:20px; margin-top:0; }
+  .body p  { color:#374151; line-height:1.7; font-size:15px; }
+  .badge   { display:inline-block; background:#EFF6FF; color:#1E3A8A; border:1.5px solid #BFDBFE;
+             border-radius:8px; padding:12px 20px; font-weight:600; font-size:15px; margin:16px 0; }
+  .steps   { background:#F9FAFB; border-radius:10px; padding:24px 28px; margin:24px 0; }
+  .steps ol{ margin:0; padding-left:20px; }
+  .steps li{ color:#374151; font-size:14px; margin-bottom:10px; line-height:1.6; }
+  .cta     { text-align:center; margin:32px 0; }
+  .cta a   { background:#10B981; color:#ffffff; text-decoration:none; padding:14px 32px;
+             border-radius:8px; font-weight:700; font-size:15px; display:inline-block; }
+  .footer  { background:#F3F4F6; padding:24px 40px; text-align:center; }
+  .footer p{ color:#9CA3AF; font-size:12px; margin:4px 0; }
+  .footer a{ color:#6B7280; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="header">
+    <h1>CAMI Netherlands</h1>
+    <p>Clinical Exercise &amp; Athletic Performance · Utrecht</p>
+  </div>
+
+  <div class="body">
+    <h2>Ciao {{name}}, abbiamo ricevuto la tua valutazione! 🎉</h2>
+    <p>Grazie per aver completato il questionario. Il nostro team analizzerà le tue risposte e preparerà una raccomandazione personalizzata per te.</p>
+
+    <div class="badge">
+      Programma stimato: <strong>Track {{track}} – {{track_label}}</strong>
+    </div>
+
+    <div class="steps">
+      <p style="font-weight:700;color:#1E3A8A;margin:0 0 12px;">Cosa succede adesso:</p>
+      <ol>
+        <li><strong>Entro 24 ore</strong> riceverai un'email con la raccomandazione definitiva e il link per completare l'iscrizione.</li>
+        <li><strong>Controlla anche la cartella spam</strong> – a volte i filtri spostano le email di servizio.</li>
+        <li>Dopo il pagamento riceverai tutti i dettagli: date, luogo, WhatsApp del gruppo.</li>
+      </ol>
+    </div>
+
+    {{#if medical_clearance}}
+    <p style="background:#FFFBEB;border:1.5px solid #FCD34D;border-radius:8px;padding:14px 18px;font-size:14px;color:#92400E;">
+      ⚠️ <strong>Nota:</strong> in base alle tue risposte abbiamo bisogno di un'autorizzazione medica prima di confermare l'iscrizione. Ti invieremo il modulo insieme alla raccomandazione del programma.
+    </p>
+    {{/if}}
+
+    <p>Hai domande? Rispondi a questa email oppure scrivici su WhatsApp.</p>
+    <p style="color:#6B7280;font-size:13px;">ID Valutazione: <code>{{assessment_id}}</code></p>
+  </div>
+
+  <div class="footer">
+    <p><strong>CAMI Netherlands</strong> · Utrecht, Netherlands</p>
+    <p><a href="mailto:info@centrocami.it">info@centrocami.it</a> · <a href="https://nl.centrocami.it">nl.centrocami.it</a></p>
+    <p style="margin-top:12px;">© 2026 CAMI Netherlands. Questo è un messaggio di servizio relativo alla tua valutazione.</p>
+  </div>
+</div>
+</body>
+</html>

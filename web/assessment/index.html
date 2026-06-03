@@ -1801,27 +1801,78 @@
             });
         });
         
+        // ── API Submit ─────────────────────────────────────────────────────────
+        const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:5000'
+            : 'https://api.nl.centrocami.it';
+
+        async function submitAssessment() {
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.disabled = true;
+            nextBtn.innerHTML = '<span data-lang-content="it" class="active">Invio in corso...</span><span data-lang-content="en">Submitting...</span><span data-lang-content="nl">Verzenden...</span>';
+            switchLanguage(localStorage.getItem('preferredLanguage') || 'en');
+
+            // Capture UTM from URL
+            const params = new URLSearchParams(window.location.search);
+            const payload = {
+                ...formData,
+                utm_source:   params.get('utm_source')   || '',
+                utm_medium:   params.get('utm_medium')   || '',
+                utm_campaign: params.get('utm_campaign') || '',
+            };
+
+            try {
+                const resp = await fetch(`${API_BASE}/api/assessment/submit`, {
+                    method:  'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body:    JSON.stringify(payload),
+                });
+
+                const result = await resp.json();
+
+                if (resp.ok) {
+                    // Override track recommendation with server result
+                    formData.track_recommended = result.track_recommended;
+                    formData.assessment_id      = result.assessment_id;
+                    formData.sentinel_status    = result.sentinel_status;
+                    formData.medical_clearance_required = result.medical_clearance_required;
+
+                    currentStep++;
+                    showStep(currentStep);
+                } else {
+                    console.error('Submit error:', result);
+                    alert('Si è verificato un errore. Riprova tra qualche secondo.');
+                    nextBtn.disabled = false;
+                    nextBtn.innerHTML = '<span data-lang-content="it" class="active">Avanti →</span><span data-lang-content="en">Next →</span><span data-lang-content="nl">Volgende →</span>';
+                    switchLanguage(localStorage.getItem('preferredLanguage') || 'en');
+                }
+            } catch (err) {
+                console.warn('API not reachable, proceeding offline:', err);
+                // Fallback: advance without API (useful when testing locally without backend)
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
         // Next button
         document.getElementById('next-btn').addEventListener('click', () => {
             if (validateStep(currentStep)) {
-                if (currentStep < totalSteps) {
+                // Step 5 (Consent) is the last data-collection step → submit to API then go to Step 6
+                if (currentStep === 5) {
+                    submitAssessment();
+                } else if (currentStep < totalSteps) {
                     currentStep++;
                     showStep(currentStep);
                 }
             }
         });
-        
+
         // Previous button
         document.getElementById('prev-btn').addEventListener('click', () => {
             if (currentStep > 1) {
                 currentStep--;
                 showStep(currentStep);
             }
-        });
-        
-        // Log formData for debugging (would be submitted to backend in production)
-        window.addEventListener('beforeunload', () => {
-            console.log('Assessment Data:', formData);
         });
     </script>
 </body>

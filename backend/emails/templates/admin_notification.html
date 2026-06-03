@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  body { margin:0; padding:0; background:#F3F4F6; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; }
+  .wrapper { max-width:640px; margin:0 auto; background:#fff; border-radius:12px; overflow:hidden; }
+  .header  { background:#1E3A8A; padding:20px 32px; }
+  .header h1 { color:#fff; margin:0; font-size:18px; }
+  .header p  { color:#93C5FD; margin:4px 0 0; font-size:13px; }
+  .body    { padding:32px; }
+  .row     { display:flex; justify-content:space-between; border-bottom:1px solid #F3F4F6; padding:10px 0; font-size:14px; }
+  .row .label { color:#6B7280; font-weight:500; }
+  .row .value { color:#111827; font-weight:600; text-align:right; max-width:60%; }
+  .section { margin:24px 0 8px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.8px; color:#9CA3AF; }
+  .badge   { display:inline-block; border-radius:6px; padding:4px 10px; font-size:12px; font-weight:700; }
+  .pass    { background:#D1FAE5; color:#065F46; }
+  .clearance { background:#FEF3C7; color:#92400E; }
+  .declined  { background:#FEE2E2; color:#991B1B; }
+  .track-a { background:#EFF6FF; color:#1D4ED8; }
+  .track-b { background:#F0FDF4; color:#15803D; }
+  .hybrid  { background:#FDF4FF; color:#7E22CE; }
+  .goals   { background:#F9FAFB; border-radius:8px; padding:12px 16px; margin:8px 0; }
+  .goals span { display:inline-block; background:#E0E7FF; color:#3730A3; border-radius:4px; padding:2px 8px; font-size:12px; font-weight:600; margin:2px; }
+  .cta     { text-align:center; margin:28px 0 0; }
+  .cta a   { background:#1E3A8A; color:#fff; text-decoration:none; padding:12px 28px; border-radius:8px; font-weight:700; font-size:14px; display:inline-block; margin:0 6px; }
+  .cta a.green { background:#10B981; }
+  .footer  { background:#F9FAFB; padding:16px 32px; text-align:center; }
+  .footer p{ color:#9CA3AF; font-size:11px; margin:0; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+  <div class="header">
+    <h1>🔔 Nuovo Assessment – CAMI Netherlands</h1>
+    <p>{{created_at}} · ID: {{assessment_id}}</p>
+  </div>
+
+  <div class="body">
+
+    <div class="section">Profilo</div>
+    <div class="row"><span class="label">Nome</span><span class="value">{{name}}</span></div>
+    <div class="row"><span class="label">Email</span><span class="value">{{email}}</span></div>
+    <div class="row"><span class="label">Età</span><span class="value">{{age}} anni</span></div>
+    <div class="row"><span class="label">Telefono</span><span class="value">{{phone}}</span></div>
+    <div class="row"><span class="label">Lingua</span><span class="value">{{language}}</span></div>
+    <div class="row"><span class="label">Provenienza</span><span class="value">{{referral_source}}</span></div>
+
+    <div class="section">Risultati</div>
+    <div class="row">
+      <span class="label">Track consigliato</span>
+      <span class="value">
+        <span class="badge {{track_css}}">Track {{track_recommended}}</span>
+      </span>
+    </div>
+    <div class="row">
+      <span class="label">SENTINEL Status</span>
+      <span class="value">
+        <span class="badge {{sentinel_css}}">{{sentinel_status}}</span>
+      </span>
+    </div>
+    <div class="row"><span class="label">Score Clinico</span><span class="value">{{clinical_score}}</span></div>
+    <div class="row"><span class="label">Score Performance</span><span class="value">{{performance_score}}</span></div>
+    <div class="row"><span class="label">Medical Clearance</span><span class="value">{{medical_clearance}}</span></div>
+
+    <div class="section">Obiettivi Selezionati</div>
+    <div class="goals">{{goals_html}}</div>
+
+    {{#if screening_summary}}
+    <div class="section">Screening Highlights</div>
+    <div class="goals" style="background:#FFF;">{{screening_summary}}</div>
+    {{/if}}
+
+    <div class="cta">
+      <a href="mailto:{{email}}?subject=CAMI Netherlands – Raccomandazione Programma&body=Ciao {{name}},%0A%0Aabbiamo analizzato la tua valutazione...">✉️ Rispondi al cliente</a>
+      <a class="green" href="https://dashboard.stripe.com/payment-links">💳 Crea Payment Link</a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <p>Assessment ricevuto il {{created_at}} · CAMI Netherlands Admin</p>
+  </div>
+</div>
+</body>
+</html>
