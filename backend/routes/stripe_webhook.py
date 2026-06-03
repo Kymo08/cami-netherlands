@@ -15,7 +15,7 @@ import stripe
 from flask import Blueprint, request, jsonify
 
 from models.database import get_db
-from services.email_service import send_assessment_confirmation
+from services.email_service import send_enrollment_confirmation
 
 stripe.api_key        = os.getenv('STRIPE_SECRET_KEY', '')
 WEBHOOK_SECRET        = os.getenv('STRIPE_WEBHOOK_SECRET', '')
@@ -49,8 +49,12 @@ def _enroll(session: dict):
         db.close()
 
     if row:
-        print(f"[STRIPE] Enrolled {dict(row)['name']} ({assessment_id}) — €{amount_total/100:.2f}")
-        # Optionally re-send a payment confirmation email here
+        record = dict(row)
+        print(f"[STRIPE] Enrolled {record['name']} ({assessment_id}) — €{amount_total/100:.2f}")
+        try:
+            send_enrollment_confirmation(record)
+        except Exception as e:
+            print(f"[STRIPE] Enrollment email failed: {e}")
     else:
         print(f"[STRIPE] Assessment {assessment_id} not found in DB after payment")
 

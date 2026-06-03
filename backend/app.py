@@ -12,6 +12,7 @@ from models.database import init_db
 from routes.assessment import assessment_bp
 from routes.admin import admin_bp
 from routes.stripe_webhook import stripe_bp
+from routes.calendar import calendar_bp
 
 load_dotenv()
 
@@ -32,6 +33,7 @@ CORS(app, origins=[
 app.register_blueprint(assessment_bp)
 app.register_blueprint(admin_bp)
 app.register_blueprint(stripe_bp)
+app.register_blueprint(calendar_bp)
 
 
 # ── API Health ─────────────────────────────────────────────────────────────────
