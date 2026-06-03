@@ -77,6 +77,7 @@ def _migrate(conn):
     migrations = [
         ("medical_clearance_required", "BOOLEAN DEFAULT 0"),
         ("stripe_payment_link",        "TEXT"),
+        ("ai_analysis",                "TEXT"),
     ]
     for col, definition in migrations:
         if col not in existing:

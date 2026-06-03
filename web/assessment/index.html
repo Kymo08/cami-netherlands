@@ -1214,6 +1214,19 @@
                     </div>
                 </div>
                 
+                <!-- AI Analysis (populated from API response if available) -->
+                <div id="ai-analysis-box" class="rounded-xl p-6 mb-8 hidden" style="background:#F0FDF4; border:2px solid #6EE7B7;">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="text-2xl">🤖</div>
+                        <h3 class="font-bold text-lg" style="color:#065F46;">
+                            <span data-lang-content="it" class="active">Analisi CAMIX Personalizzata</span>
+                            <span data-lang-content="en">Personalised CAMIX Analysis</span>
+                            <span data-lang-content="nl">Gepersonaliseerde CAMIX Analyse</span>
+                        </h3>
+                    </div>
+                    <div id="ai-analysis-text" class="text-gray-700 leading-relaxed text-sm"></div>
+                </div>
+                
                 <!-- Next steps -->
                 <div class="bg-white border-2 border-gray-200 rounded-xl p-6 mb-8">
                     <h3 class="font-bold text-lg mb-4" style="color: var(--color-text);">
@@ -1505,7 +1518,7 @@
                         <div class="text-4xl">🧘</div>
                         <div>
                             <h4 class="font-bold text-xl mb-2" style="color: var(--color-primary);">
-                                ${lang === 'it' ? 'Track A: Esercizio Clinico & Invecchiamento Sano' : lang === 'nl' ? 'Track A: Klinische Oefening & Gezond Ouder Worden' : 'Track A: Clinical Exercise & Healthy Aging'}
+                                ${lang === 'it' ? 'CAMI Restore: Esercizio Clinico & Invecchiamento Sano' : lang === 'nl' ? 'CAMI Restore: Klinische Oefening & Gezond Ouder Worden' : 'CAMI Restore: Clinical Exercise & Healthy Aging'}
                             </h4>
                             <p class="text-gray-700">
                                 ${lang === 'it' ? 'Programma perfetto per ridurre dolore cronico, migliorare mobilità ed equilibrio con esercizi sicuri e personalizzati.' : lang === 'nl' ? 'Perfect programma om chronische pijn te verminderen, mobiliteit en evenwicht te verbeteren met veilige en gepersonaliseerde oefeningen.' : 'Perfect program to reduce chronic pain, improve mobility and balance with safe, personalized exercises.'}
@@ -1519,7 +1532,7 @@
                         <div class="text-4xl">🏋️</div>
                         <div>
                             <h4 class="font-bold text-xl mb-2" style="color: var(--color-primary);">
-                                ${lang === 'it' ? 'Track B: Performance & Preparazione Atletica' : lang === 'nl' ? 'Track B: Prestatie & Atletische Voorbereiding' : 'Track B: Performance & Athletic Preparation'}
+                                ${lang === 'it' ? 'CAMI Perform: Performance & Preparazione Atletica' : lang === 'nl' ? 'CAMI Perform: Prestatie & Atletische Voorbereiding' : 'CAMI Perform: Performance & Athletic Preparation'}
                             </h4>
                             <p class="text-gray-700">
                                 ${lang === 'it' ? 'Programma ideale per aumentare forza, potenza e preparazione sport-specifica con allenamento periodizzato.' : lang === 'nl' ? 'Ideaal programma om kracht, kracht en sportspecifieke voorbereiding te verhogen met geperiodiseerde training.' : 'Ideal program to increase strength, power, and sport-specific preparation with periodized training.'}
@@ -1544,6 +1557,14 @@
             }
             
             content.innerHTML = html;
+
+            // AI Analysis box
+            const aiBox  = document.getElementById('ai-analysis-box');
+            const aiText = document.getElementById('ai-analysis-text');
+            if (formData.ai_analysis && aiBox && aiText) {
+                aiText.textContent = formData.ai_analysis;
+                aiBox.classList.remove('hidden');
+            }
         }
         
         // Calculate track recommendation
@@ -1838,6 +1859,7 @@
                     formData.assessment_id      = result.assessment_id;
                     formData.sentinel_status    = result.sentinel_status;
                     formData.medical_clearance_required = result.medical_clearance_required;
+                    formData.ai_analysis        = result.ai_analysis || null;
 
                     currentStep++;
                     showStep(currentStep);

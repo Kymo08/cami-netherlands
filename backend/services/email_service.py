@@ -14,15 +14,15 @@ from services.calendar_service import google_calendar_links, get_program_days
 TEMPLATE_DIR = Path(__file__).parent.parent / 'emails' / 'templates'
 
 TRACK_LABELS = {
-    'A':      {'it': 'Esercizio Clinico & Invecchiamento Sano',
-               'en': 'Clinical Exercise & Healthy Aging',
-               'nl': 'Klinische Oefening & Gezond Ouder Worden'},
-    'B':      {'it': 'Performance & Preparazione Atletica',
-               'en': 'Performance & Athletic Preparation',
-               'nl': 'Prestatie & Atletische Voorbereiding'},
-    'Hybrid': {'it': 'Programma Ibrido',
-               'en': 'Hybrid Program',
-               'nl': 'Hybride Programma'},
+    'A':      {'it': 'CAMI Restore – Esercizio Clinico & Invecchiamento Sano',
+               'en': 'CAMI Restore – Clinical Exercise & Healthy Aging',
+               'nl': 'CAMI Restore – Klinische Oefening & Gezond Ouder Worden'},
+    'B':      {'it': 'CAMI Perform – Performance & Preparazione Atletica',
+               'en': 'CAMI Perform – Performance & Athletic Preparation',
+               'nl': 'CAMI Perform – Prestatie & Atletische Voorbereiding'},
+    'Hybrid': {'it': 'CAMI Hybrid – Programma Integrato',
+               'en': 'CAMI Hybrid – Integrated Program',
+               'nl': 'CAMI Hybrid – Geïntegreerd Programma'},
 }
 
 SUBJECTS = {
@@ -97,6 +97,7 @@ def send_assessment_confirmation(assessment: dict) -> dict:
         'track_label':   labels.get(lang, labels['en']),
         'assessment_id': assessment['id'],
         'medical_clearance': assessment.get('medical_clearance_required', False),
+        'ai_analysis':   assessment.get('ai_analysis') or '',
     }
 
     tpl_name = f'assessment_confirmation_{lang}.html'

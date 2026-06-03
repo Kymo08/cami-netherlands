@@ -10,6 +10,7 @@ from flask import Blueprint, request, jsonify
 from models.database import get_db
 from services.triage import triage, sentinel_check
 from services.email_service import send_assessment_confirmation, send_admin_notification
+from services.ai_service import analyze_assessment
 
 assessment_bp = Blueprint('assessment', __name__)
 
@@ -74,6 +75,16 @@ def submit_assessment():
     triage_result  = triage(goals, age, screening)
     sentinel_status = sentinel_check(goals, screening)
 
+    # AI personalised analysis (non-blocking: None if key missing or call fails)
+    lang = profile.get('language', 'en')
+    ai_analysis = analyze_assessment(
+        profile=profile,
+        goals=goals,
+        screening=screening,
+        track=triage_result['track_recommended'],
+        lang=lang,
+    )
+
     assessment_id  = str(uuid.uuid4())
     now            = datetime.now(timezone.utc).isoformat()
 
@@ -87,9 +98,10 @@ def submit_assessment():
                track_recommended, sentinel_status, clinical_score, performance_score,
                medical_clearance_required,
                consent_health, consent_marketing, consent_liability, consent_timestamp,
-               utm_source, utm_medium, utm_campaign)
+               utm_source, utm_medium, utm_campaign,
+               ai_analysis)
             VALUES
-              (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+              (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         """, (
             assessment_id, now,
             profile['name'].strip(),
@@ -112,6 +124,7 @@ def submit_assessment():
             data.get('utm_source', ''),
             data.get('utm_medium', ''),
             data.get('utm_campaign', ''),
+            ai_analysis,
         ))
         db.commit()
     finally:
@@ -134,6 +147,7 @@ def submit_assessment():
         'clinical_score':          triage_result['clinical_score'],
         'performance_score':       triage_result['performance_score'],
         'medical_clearance_required': triage_result['medical_clearance_required'],
+        'ai_analysis':             ai_analysis,
     }
 
     # Send emails (non-blocking: log errors but don't fail the request)
@@ -155,5 +169,6 @@ def submit_assessment():
         'performance_score':         triage_result['performance_score'],
         'sentinel_status':           sentinel_status,
         'medical_clearance_required': triage_result['medical_clearance_required'],
+        'ai_analysis':               ai_analysis,
         'message':                   'Assessment received. Check your email within 5 minutes.',
     }), 201
