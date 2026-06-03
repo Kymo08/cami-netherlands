@@ -1,0 +1,57 @@
+# Environment & Secrets
+.env
+.env.local
+*.key
+*.pem
+credentials.json
+secrets/
+
+# Logs
+*.log
+logs/
+nohup.out
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Node
+node_modules/
+package-lock.json
+yarn.lock
+.npm/
+.yarn/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+.cache/
+
+# OS
+Thumbs.db
+desktop.ini

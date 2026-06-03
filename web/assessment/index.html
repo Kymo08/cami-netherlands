@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment - CAMI Netherlands</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        :root {
+            --color-primary: #1E3A8A;
+            --color-primary-light: #3B82F6;
+            --color-accent: #10B981;
+            --color-text: #1F2937;
+            --color-text-light: #6B7280;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #F9FAFB;
+        }
+        
+        /* Hide inactive steps */
+        .step-content {
+            display: none;
+        }
+        
+        .step-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Progress bar */
+        .progress-bar {
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover:not(:disabled) {
+            background: var(--color-primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--color-text);
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            border: 2px solid #E5E7EB;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+        
+        /* Form inputs */
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+        
+        input.error,
+        select.error {
+            border-color: #EF4444;
+        }
+        
+        .error-message {
+            color: #EF4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+        
+        /* Checkboxes (goal selection) */
+        .checkbox-card {
+            border: 2px solid #E5E7EB;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: start;
+            gap: 0.75rem;
+        }
+        
+        .checkbox-card:hover {
+            border-color: var(--color-primary-light);
+            background: #F0F9FF;
+        }
+        
+        .checkbox-card.selected {
+            border-color: var(--color-primary);
+            background: #EFF6FF;
+        }
+        
+        .checkbox-card input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+        
+        /* Language content */
+        [data-lang-content]:not(.active) {
+            display: none;
+        }
+        
+        .lang-switcher button {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            background: transparent;
+            color: var(--color-text-light);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .lang-switcher button.active {
+            background: var(--color-primary);
+            color: white;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold" style="color: var(--color-primary);">CAMI</a>
+            
+            <!-- Language switcher -->
+            <div class="lang-switcher flex gap-2">
+                <button onclick="switchLanguage('it')" data-lang-btn="it" class="active">IT</button>
+                <button onclick="switchLanguage('en')" data-lang-btn="en">EN</button>
+                <button onclick="switchLanguage('nl')" data-lang-btn="nl">NL</button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-4 py-8 md:py-12">
+        <!-- Progress indicator -->
+        <div class="mb-8">
+            <div class="flex justify-between items-center mb-3">
+                <div>
+                    <span data-lang-content="it" class="active text-sm text-gray-500">Passo <span id="current-step">1</span> di 6</span>
+                    <span data-lang-content="en" class="text-sm text-gray-500">Step <span id="current-step-en">1</span> of 6</span>
+                    <span data-lang-content="nl" class="text-sm text-gray-500">Stap <span id="current-step-nl">1</span> van 6</span>
+                </div>
+                <span class="text-sm font-medium" style="color: var(--color-primary);" id="progress-percent">17%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width: 17%;"></div>
+            </div>
+        </div>
+        
+        <!-- Form -->
+        <form id="assessment-form" class="bg-white rounded-2xl shadow-lg p-6 md:p-8">
+            
+            <!-- Step 1: Profile -->
+            <div class="step-content active" data-step="1">
+                <h2 class="text-3xl font-bold mb-3" style="color: var(--color-primary);">
+                    <span data-lang-content="it" class="active">Conosciamoci</span>
+                    <span data-lang-content="en">Let's Get to Know You</span>
+                    <span data-lang-content="nl">Laten We Kennismaken</span>
+                </h2>
+                <p class="text-gray-600 mb-8">
+                    <span data-lang-content="it" class="active">Iniziamo con alcune informazioni di base. Ti serve solo 1 minuto.</span>
+                    <span data-lang-content="en">Let's start with some basic information. This takes just 1 minute.</span>
+                    <span data-lang-content="nl">Laten we beginnen met wat basisinformatie. Dit duurt maar 1 minuut.</span>
+                </p>
+                
+                <div class="space-y-6">
+                    <!-- Name -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2" style="color: var(--color-text);">
+                            <span data-lang-content="it" class="active">Nome e Cognome *</span>
+                            <span data-lang-content="en">Full Name *</span>
+                            <span data-lang-content="nl">Volledige Naam *</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="name" 
+                            name="name" 
+                            required
+                            placeholder="Mario Rossi"
+                        >
+                        <div class="error-message" id="name-error">
+                            <span data-lang-content="it" class="active">Per favore inserisci il tuo nome</span>
+                            <span data-lang-content="en">Please enter your name</span>
+                            <span data-lang-content="nl">Voer alstublieft uw naam in</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2" style="color: var(--color-text);">
+                            <span data-lang-content="it" class="active">Email *</span>
+                            <span data-lang-content="en">Email *</span>
+                            <span data-lang-content="nl">E-mail *</span>
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required
+                            placeholder="mario@esempio.com"
+                        >
+                        <div class="error-message" id="email-error">
+                            <span data-lang-content="it" class="active">Per favore inserisci un'email valida</span>
+                            <span data-lang-content="en">Please enter a valid email</span>
+                            <span data-lang-content="nl">Voer alstublieft een geldig e-mailadres in</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Age -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2" style="color: var(--color-text);">
+                            <span data-lang-content="it" class="active">Età *</span>
+                            <span data-lang-content="en">Age *</span>
+                            <span data-lang-content="nl">Leeftijd *</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="age" 
+                            name="age" 
+                            min="18" 
+                            max="99" 
+                            required
+                            placeholder="45"
+                        >
+                        <div class="error-message" id="age-error">
+                            <span data-lang-content="it" class="active">Età deve essere tra 18 e 99 anni</span>
+                            <span data-lang-content="en">Age must be between 18 and 99</span>
+                            <span data-lang-content="nl">Leeftijd moet tussen 18 en 99 zijn</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Phone (optional) -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2" style="color: var(--color-text);">
+                            <span data-lang-content="it" class="active">Telefono (opzionale)</span>
+                            <span data-lang-content="en">Phone (optional)</span>
+                            <span data-lang-content="nl">Telefoon (optioneel)</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="phone" 
+                            name="phone"
+                            placeholder="+31 6 1234 5678"
+                        >
+                    </div>
+                    
+                    <!-- Referral source -->
+                    <div>
+                        <label class="block text-sm font-semibold mb-2" style="color: var(--color-text);">
+                            <span data-lang-content="it" class="active">Come ci hai conosciuto? *</span>
+                            <span data-lang-content="en">How did you hear about us? *</span>
+                            <span data-lang-content="nl">Hoe heb je ons gevonden? *</span>
+                        </label>
+                        <select id="referral" name="referral" required>
+                            <option value="" data-lang-content="it" class="active">Seleziona...</option>
+                            <option value="" data-lang-content="en">Select...</option>
+                            <option value="" data-lang-content="nl">Selecteer...</option>
+                            
+                            <option value="meta_ad" data-lang-content="it" class="active">Facebook/Instagram</option>
+                            <option value="meta_ad" data-lang-content="en">Facebook/Instagram</option>
+                            <option value="meta_ad" data-lang-content="nl">Facebook/Instagram</option>
+                            
+                            <option value="google_ad" data-lang-content="it" class="active">Google</option>
+                            <option value="google_ad" data-lang-content="en">Google</option>
+                            <option value="google_ad" data-lang-content="nl">Google</option>
+                            
+                            <option value="friend" data-lang-content="it" class="active">Passaparola (amico)</option>
+                            <option value="friend" data-lang-content="en">Word of mouth (friend)</option>
+                            <option value="friend" data-lang-content="nl">Mond-tot-mondreclame (vriend)</option>
+                            
+                            <option value="website" data-lang-content="it" class="active">Sito web</option>
+                            <option value="website" data-lang-content="en">Website</option>
+                            <option value="website" data-lang-content="nl">Website</option>
+                            
+                            <option value="other" data-lang-content="it" class="active">Altro</option>
+                            <option value="other" data-lang-content="en">Other</option>
+                            <option value="other" data-lang-content="nl">Ander</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2: Goals -->
+            <div class="step-content" data-step="2">
+                <h2 class="text-3xl font-bold mb-3" style="color: var(--color-primary);">
+                    <span data-lang-content="it" class="active">Quali Sono i Tuoi Obiettivi?</span>
+                    <span data-lang-content="en">What Are Your Goals?</span>
+                    <span data-lang-content="nl">Wat Zijn Je Doelen?</span>
+                </h2>
+                <p class="text-gray-600 mb-8">
+                    <span data-lang-content="it" class="active">Seleziona tutte le opzioni che ti riguardano. Questo ci aiuta a consigliare il programma giusto per te.</span>
+                    <span data-lang-content="en">Select all that apply. This helps us recommend the right program for you.</span>
+                    <span data-lang-content="nl">Selecteer alle van toepassing. Dit helpt ons om het juiste programma voor je aan te bevelen.</span>
+                </p>
+                
+                <div class="space-y-3">
+                    <!-- Goal: Reduce chronic pain -->
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="reduce_chronic_pain">
+                        <div>
+                            <div class="font-semibold" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">🩹 Ridurre il dolore cronico</span>
+                                <span data-lang-content="en">🩹 Reduce chronic pain</span>
+                                <span data-lang-content="nl">🩹 Verminder chronische pijn</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mt-1">
+                                <span data-lang-content="it" class="active">Schiena, collo, ginocchia, articolazioni</span>
+                                <span data-lang-content="en">Back, neck, knees, joints</span>
+                                <span data-lang-content="nl">Rug, nek, knieën, gewrichten</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Goal: Improve mobility -->
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="improve_mobility">
+                        <div>
+                            <div class="font-semibold" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">🤸 Migliorare la mobilità</span>
+                                <span data-lang-content="en">🤸 Improve mobility</span>
+                                <span data-lang-content="nl">🤸 Verbeter mobiliteit</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mt-1">
+                                <span data-lang-content="it" class="active">Flessibilità, movimento delle articolazioni</span>
+                                <span data-lang-content="en">Flexibility, joint range of motion</span>
+                                <span data-lang-content="nl">Flexibiliteit, gewrichtsbereik</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Goal: Improve balance -->
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="improve_balance">
+                        <div>
+                            <div class="font-semibold" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">⚖️ Migliorare l'equilibrio</span>
+                                <span data-lang-content="en">⚖️ Improve balance</span>
+                                <span data-lang-content="nl">⚖️ Verbeter evenwicht</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mt-1">
+                                <span data-lang-content="it" class="active">Stabilità, prevenzione cadute</span>
+                                <span data-lang-content="en">Stability, fall prevention</span>
+                                <span data-lang-content="nl">Stabiliteit, valpreventie</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Goal: Maintain independence -->
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="maintain_independence">
+                        <div>
+                            <div class="font-semibold" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">🚶 Mantenere l'autonomia</span>
+                                <span data-lang-content="en">🚶 Maintain independence</span>
+                                <span data-lang-content="nl">🚶 Behoud zelfstandigheid</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mt-1">
+                                <span data-lang-content="it" class="active">Attività quotidiane senza aiuto</span>
+                                <span data-lang-content="en">Daily activities without assistance</span>
+                                <span data-lang-content="nl">Dagelijkse activiteiten zonder hulp</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <hr class="my-6 border-gray-200">
+                    
+                    <!-- Goal: Increase strength -->
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="increase_strength">
+                        <div>
+                            <div class="font-semibold" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">💪 Aumentare la forza</span>
+                                <span data-lang-content="en">💪 Increase strength</span>
+                                <span data-lang-content="nl">💪 Verhoog kracht</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mt-1">
+                                <span data-lang-content="it" class="active">Massimali, massa muscolare</span>
+                                <span data-lang-content="en">1RM, build muscle</span>
+                                <span data-lang-content="nl">1RM, bouw spieren</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Goal: Improve power -->
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="improve_power">
+                        <div>
+                            <div class="font-semibold" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">⚡ Migliorare la potenza</span>
+                                <span data-lang-content="en">⚡ Improve power</span>
+                                <span data-lang-content="nl">⚡ Verbeter kracht</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mt-1">
+                                <span data-lang-content="it" class="active">Esplosività, velocità</span>
+                                <span data-lang-content="en">Explosiveness, speed</span>
+                                <span data-lang-content="nl">Explosiviteit, snelheid</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Goal: Competition prep -->
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="competition_prep">
+                        <div>
+                            <div class="font-semibold" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">🏆 Preparazione competizioni</span>
+                                <span data-lang-content="en">🏆 Competition preparation</span>
+                                <span data-lang-content="nl">🏆 Competitie voorbereiding</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mt-1">
+                                <span data-lang-content="it" class="active">Gare, eventi sportivi</span>
+                                <span data-lang-content="en">Races, sport events</span>
+                                <span data-lang-content="nl">Wedstrijden, sportevenementen</span>
+                            </div>
+                        </div>
+                    </label>
+                    
+                    <!-- Goal: Injury recovery -->
+                    <label class="checkbox-card">
+                        <input type="checkbox" name="goals" value="injury_recovery_return">
+                        <div>
+                            <div class="font-semibold" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">🩺 Recupero da infortunio</span>
+                                <span data-lang-content="en">🩺 Injury recovery</span>
+                                <span data-lang-content="nl">🩺 Blessureherstel</span>
+                            </div>
+                            <div class="text-sm text-gray-600 mt-1">
+                                <span data-lang-content="it" class="active">Ritorno all'allenamento dopo infortunio</span>
+                                <span data-lang-content="en">Return to training after injury</span>
+                                <span data-lang-content="nl">Terugkeer naar training na blessure</span>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                
+                <div class="error-message mt-4" id="goals-error">
+                    <span data-lang-content="it" class="active">Per favore seleziona almeno un obiettivo</span>
+                    <span data-lang-content="en">Please select at least one goal</span>
+                    <span data-lang-content="nl">Selecteer minimaal één doel</span>
+                </div>
+            </div>
+            
+            <!-- Step 3: Health Screening (PAR-Q+) -->
+            <div class="step-content" data-step="3">
+                <h2 class="text-3xl font-bold mb-3" style="color: var(--color-primary);">
+                    <span data-lang-content="it" class="active">Screening di Sicurezza</span>
+                    <span data-lang-content="en">Safety Screening</span>
+                    <span data-lang-content="nl">Veiligheidsscreening</span>
+                </h2>
+                <p class="text-gray-600 mb-8">
+                    <span data-lang-content="it" class="active">Queste domande ci aiutano a personalizzare il programma in modo sicuro. Rispondi con sincerità.</span>
+                    <span data-lang-content="en">These questions help us personalize your program safely. Please answer honestly.</span>
+                    <span data-lang-content="nl">Deze vragen helpen ons je programma veilig te personaliseren. Antwoord alsjeblieft eerlijk.</span>
+                </p>
+                
+                <!-- PAR-Q+ Core Questions -->
+                <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 mb-8">
+                    <h3 class="font-semibold text-lg mb-4" style="color: var(--color-primary);">
+                        <span data-lang-content="it" class="active">PAR-Q+ Screening</span>
+                        <span data-lang-content="en">PAR-Q+ Screening</span>
+                        <span data-lang-content="nl">PAR-Q+ Screening</span>
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <!-- Q1: Heart condition -->
+                        <div class="bg-white p-4 rounded-lg">
+                            <div class="font-medium mb-3" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">1. Un medico ti ha mai detto che hai un problema cardiaco?</span>
+                                <span data-lang-content="en">1. Has your doctor ever said you have a heart condition?</span>
+                                <span data-lang-content="nl">1. Heeft uw arts ooit gezegd dat u een hartaandoening heeft?</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_heart" value="no" class="mr-2" required>
+                                    <span data-lang-content="it" class="active">No</span>
+                                    <span data-lang-content="en">No</span>
+                                    <span data-lang-content="nl">Nee</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_heart" value="yes" class="mr-2">
+                                    <span data-lang-content="it" class="active">Sì</span>
+                                    <span data-lang-content="en">Yes</span>
+                                    <span data-lang-content="nl">Ja</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Q2: Chest pain active -->
+                        <div class="bg-white p-4 rounded-lg">
+                            <div class="font-medium mb-3" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">2. Hai dolore al petto quando fai attività fisica?</span>
+                                <span data-lang-content="en">2. Do you have chest pain when you do physical activity?</span>
+                                <span data-lang-content="nl">2. Heeft u pijn op de borst bij lichamelijke activiteit?</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_chest_active" value="no" class="mr-2" required>
+                                    <span data-lang-content="it" class="active">No</span>
+                                    <span data-lang-content="en">No</span>
+                                    <span data-lang-content="nl">Nee</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_chest_active" value="yes" class="mr-2">
+                                    <span data-lang-content="it" class="active">Sì</span>
+                                    <span data-lang-content="en">Yes</span>
+                                    <span data-lang-content="nl">Ja</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Q3: Chest pain rest -->
+                        <div class="bg-white p-4 rounded-lg">
+                            <div class="font-medium mb-3" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">3. Nell'ultimo mese, hai avuto dolore al petto quando NON eri attivo?</span>
+                                <span data-lang-content="en">3. In the past month, have you had chest pain when not active?</span>
+                                <span data-lang-content="nl">3. Heeft u de afgelopen maand pijn op de borst gehad terwijl u niet actief was?</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_chest_rest" value="no" class="mr-2" required>
+                                    <span data-lang-content="it" class="active">No</span>
+                                    <span data-lang-content="en">No</span>
+                                    <span data-lang-content="nl">Nee</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_chest_rest" value="yes" class="mr-2">
+                                    <span data-lang-content="it" class="active">Sì</span>
+                                    <span data-lang-content="en">Yes</span>
+                                    <span data-lang-content="nl">Ja</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Q4: Dizziness -->
+                        <div class="bg-white p-4 rounded-lg">
+                            <div class="font-medium mb-3" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">4. Perdi l'equilibrio per vertigini o perdi conoscenza?</span>
+                                <span data-lang-content="en">4. Do you lose balance due to dizziness or lose consciousness?</span>
+                                <span data-lang-content="nl">4. Verliest u uw evenwicht door duizeligheid of verliest u het bewustzijn?</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_dizziness" value="no" class="mr-2" required>
+                                    <span data-lang-content="it" class="active">No</span>
+                                    <span data-lang-content="en">No</span>
+                                    <span data-lang-content="nl">Nee</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_dizziness" value="yes" class="mr-2">
+                                    <span data-lang-content="it" class="active">Sì</span>
+                                    <span data-lang-content="en">Yes</span>
+                                    <span data-lang-content="nl">Ja</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Q5: Bone/joint problem -->
+                        <div class="bg-white p-4 rounded-lg">
+                            <div class="font-medium mb-3" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">5. Hai un problema osseo o articolare che potrebbe peggiorare con l'attività fisica?</span>
+                                <span data-lang-content="en">5. Do you have a bone or joint problem that could worsen with activity?</span>
+                                <span data-lang-content="nl">5. Heeft u een bot- of gewrichtsprobleem dat kan verergeren door activiteit?</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_bone_joint" value="no" class="mr-2" required>
+                                    <span data-lang-content="it" class="active">No</span>
+                                    <span data-lang-content="en">No</span>
+                                    <span data-lang-content="nl">Nee</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_bone_joint" value="yes" class="mr-2">
+                                    <span data-lang-content="it" class="active">Sì</span>
+                                    <span data-lang-content="en">Yes</span>
+                                    <span data-lang-content="nl">Ja</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Q6: Blood pressure medication -->
+                        <div class="bg-white p-4 rounded-lg">
+                            <div class="font-medium mb-3" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">6. Un medico ti prescrive farmaci per pressione alta o cuore?</span>
+                                <span data-lang-content="en">6. Is your doctor prescribing medication for blood pressure or heart?</span>
+                                <span data-lang-content="nl">6. Schrijft uw arts medicatie voor voor bloeddruk of hart?</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_medication" value="no" class="mr-2" required>
+                                    <span data-lang-content="it" class="active">No</span>
+                                    <span data-lang-content="en">No</span>
+                                    <span data-lang-content="nl">Nee</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_medication" value="yes" class="mr-2">
+                                    <span data-lang-content="it" class="active">Sì</span>
+                                    <span data-lang-content="en">Yes</span>
+                                    <span data-lang-content="nl">Ja</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Q7: Other reason -->
+                        <div class="bg-white p-4 rounded-lg">
+                            <div class="font-medium mb-3" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">7. Conosci qualche altro motivo per cui NON dovresti fare attività fisica?</span>
+                                <span data-lang-content="en">7. Do you know any other reason you should not do physical activity?</span>
+                                <span data-lang-content="nl">7. Kent u een andere reden waarom u geen lichamelijke activiteit zou moeten doen?</span>
+                            </div>
+                            <div class="flex gap-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_other" value="no" class="mr-2" required>
+                                    <span data-lang-content="it" class="active">No</span>
+                                    <span data-lang-content="en">No</span>
+                                    <span data-lang-content="nl">Nee</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="parq_other" value="yes" class="mr-2">
+                                    <span data-lang-content="it" class="active">Sì</span>
+                                    <span data-lang-content="en">Yes</span>
+                                    <span data-lang-content="nl">Ja</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Follow-up if any YES -->
+                    <div id="parq-followup" style="display: none;" class="mt-6 bg-yellow-50 border-2 border-yellow-200 rounded-lg p-4">
+                        <label class="block font-semibold mb-2" style="color: var(--color-text);">
+                            <span data-lang-content="it" class="active">Per favore descrivi la tua condizione e le indicazioni mediche ricevute:</span>
+                            <span data-lang-content="en">Please describe your condition and any medical guidance received:</span>
+                            <span data-lang-content="nl">Beschrijf alstublieft uw aandoening en eventuele medische begeleiding:</span>
+                        </label>
+                        <textarea 
+                            id="parq_followup_text" 
+                            name="parq_followup" 
+                            rows="4"
+                            class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-yellow-400 focus:outline-none"
+                            placeholder="Es: Ho la pressione alta controllata con farmaci, il mio medico ha detto che l'esercizio moderato va bene..."
+                        ></textarea>
+                    </div>
+                </div>
+                
+                <!-- Track A Additional Questions (shown if clinical goals selected) -->
+                <div id="track-a-questions" style="display: none;">
+                    <h3 class="font-semibold text-lg mb-4" style="color: var(--color-primary);">
+                        <span data-lang-content="it" class="active">Domande Aggiuntive</span>
+                        <span data-lang-content="en">Additional Questions</span>
+                        <span data-lang-content="nl">Aanvullende Vragen</span>
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Chronic pain -->
+                        <div>
+                            <label class="block font-semibold mb-3" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">Hai dolore cronico?</span>
+                                <span data-lang-content="en">Do you have chronic pain?</span>
+                                <span data-lang-content="nl">Heeft u chronische pijn?</span>
+                            </label>
+                            <div class="flex gap-4 mb-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="has_chronic_pain" value="no" class="mr-2" onclick="togglePainDetails(false)">
+                                    <span data-lang-content="it" class="active">No</span>
+                                    <span data-lang-content="en">No</span>
+                                    <span data-lang-content="nl">Nee</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="has_chronic_pain" value="yes" class="mr-2" onclick="togglePainDetails(true)">
+                                    <span data-lang-content="it" class="active">Sì</span>
+                                    <span data-lang-content="en">Yes</span>
+                                    <span data-lang-content="nl">Ja</span>
+                                </label>
+                            </div>
+                            
+                            <div id="pain-details" style="display: none;" class="space-y-4 bg-gray-50 p-4 rounded-lg">
+                                <!-- Pain location -->
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">
+                                        <span data-lang-content="it" class="active">Dove senti dolore? (seleziona tutti)</span>
+                                        <span data-lang-content="en">Where do you feel pain? (select all)</span>
+                                        <span data-lang-content="nl">Waar voelt u pijn? (selecteer alles)</span>
+                                    </label>
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="pain_location" value="back" class="mr-2">
+                                            <span data-lang-content="it" class="active">Schiena</span>
+                                            <span data-lang-content="en">Back</span>
+                                            <span data-lang-content="nl">Rug</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="pain_location" value="neck" class="mr-2">
+                                            <span data-lang-content="it" class="active">Collo</span>
+                                            <span data-lang-content="en">Neck</span>
+                                            <span data-lang-content="nl">Nek</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="pain_location" value="knees" class="mr-2">
+                                            <span data-lang-content="it" class="active">Ginocchia</span>
+                                            <span data-lang-content="en">Knees</span>
+                                            <span data-lang-content="nl">Knieën</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="pain_location" value="hips" class="mr-2">
+                                            <span data-lang-content="it" class="active">Anche</span>
+                                            <span data-lang-content="en">Hips</span>
+                                            <span data-lang-content="nl">Heupen</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="pain_location" value="shoulders" class="mr-2">
+                                            <span data-lang-content="it" class="active">Spalle</span>
+                                            <span data-lang-content="en">Shoulders</span>
+                                            <span data-lang-content="nl">Schouders</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" name="pain_location" value="other" class="mr-2">
+                                            <span data-lang-content="it" class="active">Altro</span>
+                                            <span data-lang-content="en">Other</span>
+                                            <span data-lang-content="nl">Ander</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <!-- Pain severity -->
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">
+                                        <span data-lang-content="it" class="active">Intensità del dolore (0 = nessuno, 10 = massimo)</span>
+                                        <span data-lang-content="en">Pain intensity (0 = none, 10 = worst)</span>
+                                        <span data-lang-content="nl">Pijnintensiteit (0 = geen, 10 = ergste)</span>
+                                    </label>
+                                    <input type="range" id="pain_severity" name="pain_severity" min="0" max="10" value="5" class="w-full">
+                                    <div class="flex justify-between text-sm text-gray-600 mt-1">
+                                        <span>0</span>
+                                        <span id="pain-value" class="font-semibold">5</span>
+                                        <span>10</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Pain duration -->
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">
+                                        <span data-lang-content="it" class="active">Da quanto tempo hai questo dolore?</span>
+                                        <span data-lang-content="en">How long have you had this pain?</span>
+                                        <span data-lang-content="nl">Hoe lang heeft u deze pijn al?</span>
+                                    </label>
+                                    <select name="pain_duration" class="w-full p-2 border-2 border-gray-300 rounded-lg">
+                                        <option value="less_3_months" data-lang-content="it" class="active">Meno di 3 mesi</option>
+                                        <option value="less_3_months" data-lang-content="en">Less than 3 months</option>
+                                        <option value="less_3_months" data-lang-content="nl">Minder dan 3 maanden</option>
+                                        
+                                        <option value="3_12_months" data-lang-content="it" class="active">3-12 mesi</option>
+                                        <option value="3_12_months" data-lang-content="en">3-12 months</option>
+                                        <option value="3_12_months" data-lang-content="nl">3-12 maanden</option>
+                                        
+                                        <option value="1_5_years" data-lang-content="it" class="active">1-5 anni</option>
+                                        <option value="1_5_years" data-lang-content="en">1-5 years</option>
+                                        <option value="1_5_years" data-lang-content="nl">1-5 jaar</option>
+                                        
+                                        <option value="5plus_years" data-lang-content="it" class="active">Più di 5 anni</option>
+                                        <option value="5plus_years" data-lang-content="en">More than 5 years</option>
+                                        <option value="5plus_years" data-lang-content="nl">Meer dan 5 jaar</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Fall history -->
+                        <div>
+                            <label class="block font-semibold mb-3" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">Sei caduto/a nell'ultimo anno?</span>
+                                <span data-lang-content="en">Have you fallen in the past year?</span>
+                                <span data-lang-content="nl">Bent u het afgelopen jaar gevallen?</span>
+                            </label>
+                            <div class="flex gap-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="has_fallen" value="no" class="mr-2">
+                                    <span data-lang-content="it" class="active">No</span>
+                                    <span data-lang-content="en">No</span>
+                                    <span data-lang-content="nl">Nee</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="has_fallen" value="yes" class="mr-2">
+                                    <span data-lang-content="it" class="active">Sì</span>
+                                    <span data-lang-content="en">Yes</span>
+                                    <span data-lang-content="nl">Ja</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!-- Balance difficulty -->
+                        <div>
+                            <label class="block font-semibold mb-3" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">Hai difficoltà con equilibrio o camminare?</span>
+                                <span data-lang-content="en">Do you have difficulty with balance or walking?</span>
+                                <span data-lang-content="nl">Heeft u moeite met evenwicht of lopen?</span>
+                            </label>
+                            <div class="flex gap-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="balance_difficulty" value="no" class="mr-2">
+                                    <span data-lang-content="it" class="active">No</span>
+                                    <span data-lang-content="en">No</span>
+                                    <span data-lang-content="nl">Nee</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="balance_difficulty" value="yes" class="mr-2">
+                                    <span data-lang-content="it" class="active">Sì</span>
+                                    <span data-lang-content="en">Yes</span>
+                                    <span data-lang-content="nl">Ja</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Track B Additional Questions (shown if performance goals selected) -->
+                <div id="track-b-questions" style="display: none;">
+                    <h3 class="font-semibold text-lg mb-4 mt-8" style="color: var(--color-primary);">
+                        <span data-lang-content="it" class="active">Il Tuo Background Atletico</span>
+                        <span data-lang-content="en">Your Athletic Background</span>
+                        <span data-lang-content="nl">Je Atletische Achtergrond</span>
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Sport/activity -->
+                        <div>
+                            <label class="block font-semibold mb-2" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">Qual è il tuo sport o attività principale?</span>
+                                <span data-lang-content="en">What is your primary sport or activity?</span>
+                                <span data-lang-content="nl">Wat is je primaire sport of activiteit?</span>
+                            </label>
+                            <select name="primary_sport" class="w-full p-3 border-2 border-gray-300 rounded-lg">
+                                <option value="">
+                                    <span data-lang-content="it" class="active">Seleziona...</span>
+                                    <span data-lang-content="en">Select...</span>
+                                    <span data-lang-content="nl">Selecteer...</span>
+                                </option>
+                                <option value="running">Running</option>
+                                <option value="cycling">Cycling</option>
+                                <option value="strength_training">
+                                    <span data-lang-content="it" class="active">Allenamento forza</span>
+                                    <span data-lang-content="en">Strength training</span>
+                                    <span data-lang-content="nl">Krachttraining</span>
+                                </option>
+                                <option value="crossfit">CrossFit</option>
+                                <option value="martial_arts">
+                                    <span data-lang-content="it" class="active">Arti marziali</span>
+                                    <span data-lang-content="en">Martial arts</span>
+                                    <span data-lang-content="nl">Vechtsporten</span>
+                                </option>
+                                <option value="team_sports">
+                                    <span data-lang-content="it" class="active">Sport di squadra</span>
+                                    <span data-lang-content="en">Team sports</span>
+                                    <span data-lang-content="nl">Teamsporten</span>
+                                </option>
+                                <option value="other">
+                                    <span data-lang-content="it" class="active">Altro</span>
+                                    <span data-lang-content="en">Other</span>
+                                    <span data-lang-content="nl">Ander</span>
+                                </option>
+                            </select>
+                        </div>
+                        
+                        <!-- Training years -->
+                        <div>
+                            <label class="block font-semibold mb-2" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">Da quanti anni ti alleni?</span>
+                                <span data-lang-content="en">How many years have you been training?</span>
+                                <span data-lang-content="nl">Hoeveel jaar train je al?</span>
+                            </label>
+                            <select name="training_years" class="w-full p-3 border-2 border-gray-300 rounded-lg">
+                                <option value="less_1">
+                                    <span data-lang-content="it" class="active">Meno di 1 anno</span>
+                                    <span data-lang-content="en">Less than 1 year</span>
+                                    <span data-lang-content="nl">Minder dan 1 jaar</span>
+                                </option>
+                                <option value="1_3">1-3 
+                                    <span data-lang-content="it" class="active">anni</span>
+                                    <span data-lang-content="en">years</span>
+                                    <span data-lang-content="nl">jaar</span>
+                                </option>
+                                <option value="3_5">3-5 
+                                    <span data-lang-content="it" class="active">anni</span>
+                                    <span data-lang-content="en">years</span>
+                                    <span data-lang-content="nl">jaar</span>
+                                </option>
+                                <option value="5_10">5-10 
+                                    <span data-lang-content="it" class="active">anni</span>
+                                    <span data-lang-content="en">years</span>
+                                    <span data-lang-content="nl">jaar</span>
+                                </option>
+                                <option value="10plus">10+ 
+                                    <span data-lang-content="it" class="active">anni</span>
+                                    <span data-lang-content="en">years</span>
+                                    <span data-lang-content="nl">jaar</span>
+                                </option>
+                            </select>
+                        </div>
+                        
+                        <!-- Training frequency -->
+                        <div>
+                            <label class="block font-semibold mb-2" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">Quante volte a settimana ti alleni?</span>
+                                <span data-lang-content="en">How often do you train per week?</span>
+                                <span data-lang-content="nl">Hoe vaak train je per week?</span>
+                            </label>
+                            <select name="training_frequency" class="w-full p-3 border-2 border-gray-300 rounded-lg">
+                                <option value="1_2x">1-2x</option>
+                                <option value="3_4x">3-4x</option>
+                                <option value="5_6x">5-6x</option>
+                                <option value="7plus_x">7+x</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Injury history -->
+                        <div>
+                            <label class="block font-semibold mb-3" style="color: var(--color-text);">
+                                <span data-lang-content="it" class="active">Hai avuto infortuni negli ultimi 6 mesi?</span>
+                                <span data-lang-content="en">Have you had any injuries in the past 6 months?</span>
+                                <span data-lang-content="nl">Heeft u de afgelopen 6 maanden blessures gehad?</span>
+                            </label>
+                            <div class="flex gap-4">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="recent_injury" value="no" class="mr-2">
+                                    <span data-lang-content="it" class="active">No</span>
+                                    <span data-lang-content="en">No</span>
+                                    <span data-lang-content="nl">Nee</span>
+                                </label>
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="recent_injury" value="yes" class="mr-2">
+                                    <span data-lang-content="it" class="active">Sì</span>
+                                    <span data-lang-content="en">Yes</span>
+                                    <span data-lang-content="nl">Ja</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 4: Safety Gate (SENTINEL) -->
+            <div class="step-content" data-step="4">
+                <h2 class="text-3xl font-bold mb-3" style="color: var(--color-primary);">
+                    <span data-lang-content="it" class="active">Verifica di Sicurezza</span>
+                    <span data-lang-content="en">Safety Review</span>
+                    <span data-lang-content="nl">Veiligheidscontrole</span>
+                </h2>
+                <p class="text-gray-600 mb-8">
+                    <span data-lang-content="it" class="active">Stiamo analizzando le tue risposte per garantire un programma sicuro e adatto a te...</span>
+                    <span data-lang-content="en">We're reviewing your responses to ensure a safe and suitable program for you...</span>
+                    <span data-lang-content="nl">We bekijken je antwoorden om een veilig en geschikt programma voor je te garanderen...</span>
+                </p>
+                
+                <!-- Loading spinner -->
+                <div id="sentinel-loading" class="text-center py-12">
+                    <div class="inline-block animate-spin rounded-full h-16 w-16 border-b-4 border-primary mb-4" style="border-color: var(--color-primary);"></div>
+                    <p class="text-gray-600 font-medium">
+                        <span data-lang-content="it" class="active">Analisi in corso...</span>
+                        <span data-lang-content="en">Analyzing...</span>
+                        <span data-lang-content="nl">Analyseren...</span>
+                    </p>
+                </div>
+                
+                <!-- Passed -->
+                <div id="sentinel-pass" style="display: none;" class="bg-green-50 border-2 border-green-200 rounded-lg p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">✅</div>
+                        <div>
+                            <h3 class="font-bold text-xl mb-2" style="color: var(--color-accent);">
+                                <span data-lang-content="it" class="active">Tutto OK!</span>
+                                <span data-lang-content="en">All Clear!</span>
+                                <span data-lang-content="nl">Alles Oké!</span>
+                            </h3>
+                            <p class="text-gray-700 mb-4">
+                                <span data-lang-content="it" class="active">Puoi procedere in sicurezza con il programma. Clicca "Avanti" per continuare.</span>
+                                <span data-lang-content="en">You can safely proceed with the program. Click "Next" to continue.</span>
+                                <span data-lang-content="nl">Je kunt veilig doorgaan met het programma. Klik op "Volgende" om door te gaan.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Medical clearance required -->
+                <div id="sentinel-clearance" style="display: none;" class="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">⚠️</div>
+                        <div>
+                            <h3 class="font-bold text-xl mb-2" style="color: #D97706;">
+                                <span data-lang-content="it" class="active">Autorizzazione Medica Richiesta</span>
+                                <span data-lang-content="en">Medical Clearance Required</span>
+                                <span data-lang-content="nl">Medische Toestemming Vereist</span>
+                            </h3>
+                            <p class="text-gray-700 mb-4">
+                                <span data-lang-content="it" class="active">In base alle tue risposte, abbiamo bisogno di un'autorizzazione dal tuo medico prima di iniziare. Questo è per la tua sicurezza. Ti invieremo un modulo da compilare con il tuo medico entro 24 ore.</span>
+                                <span data-lang-content="en">Based on your responses, we need clearance from your doctor before starting. This is for your safety. We'll send you a form to complete with your doctor within 24 hours.</span>
+                                <span data-lang-content="nl">Op basis van je antwoorden hebben we toestemming van je arts nodig voordat we beginnen. Dit is voor je veiligheid. We sturen je binnen 24 uur een formulier om in te vullen met je arts.</span>
+                            </p>
+                            <p class="text-sm text-gray-600">
+                                <span data-lang-content="it" class="active">Puoi comunque continuare la valutazione. Ti contatteremo dopo aver ricevuto l'autorizzazione medica.</span>
+                                <span data-lang-content="en">You can still complete the assessment. We'll contact you after receiving medical clearance.</span>
+                                <span data-lang-content="nl">Je kunt de beoordeling nog steeds voltooien. We nemen contact met je op na ontvangst van medische toestemming.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Declined (unsuitable) -->
+                <div id="sentinel-decline" style="display: none;" class="bg-red-50 border-2 border-red-300 rounded-lg p-6">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">❌</div>
+                        <div>
+                            <h3 class="font-bold text-xl mb-2" style="color: #DC2626;">
+                                <span data-lang-content="it" class="active">Non Idoneo al Momento</span>
+                                <span data-lang-content="en">Not Suitable at This Time</span>
+                                <span data-lang-content="nl">Op Dit Moment Niet Geschikt</span>
+                            </h3>
+                            <p class="text-gray-700 mb-4">
+                                <span data-lang-content="it" class="active">Purtroppo, in base alle tue risposte, questo programma non è adatto per te al momento. Ti consigliamo di consultare un medico o fisioterapista prima di iniziare un programma di esercizio.</span>
+                                <span data-lang-content="en">Unfortunately, based on your responses, this program is not suitable for you at this time. We recommend consulting with a doctor or physiotherapist before starting an exercise program.</span>
+                                <span data-lang-content="nl">Helaas is dit programma op basis van je antwoorden op dit moment niet geschikt voor je. We raden je aan om een arts of fysiotherapeut te raadplegen voordat je een oefenprogramma start.</span>
+                            </p>
+                            <p class="text-sm text-gray-600">
+                                <span data-lang-content="it" class="active">Se hai domande, contattaci: info@centrocami.it</span>
+                                <span data-lang-content="en">If you have questions, contact us: info@centrocami.it</span>
+                                <span data-lang-content="nl">Als je vragen hebt, neem contact met ons op: info@centrocami.it</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 5: Consent -->
+            <div class="step-content" data-step="5">
+                <h2 class="text-3xl font-bold mb-3" style="color: var(--color-primary);">
+                    <span data-lang-content="it" class="active">Consenso e Privacy</span>
+                    <span data-lang-content="en">Consent & Privacy</span>
+                    <span data-lang-content="nl">Toestemming & Privacy</span>
+                </h2>
+                <p class="text-gray-600 mb-8">
+                    <span data-lang-content="it" class="active">Per continuare, abbiamo bisogno del tuo consenso esplicito per trattare i tuoi dati sanitari in conformità al GDPR.</span>
+                    <span data-lang-content="en">To proceed, we need your explicit consent to process your health data in accordance with GDPR.</span>
+                    <span data-lang-content="nl">Om door te gaan, hebben we je uitdrukkelijke toestemming nodig om je gezondheidsgegevens te verwerken in overeenstemming met de AVG.</span>
+                </p>
+                
+                <div class="space-y-6">
+                    <!-- Health data consent (GDPR Art. 9) -->
+                    <div class="bg-blue-50 border-2 border-blue-200 rounded-lg p-6">
+                        <h3 class="font-semibold text-lg mb-3" style="color: var(--color-primary);">
+                            <span data-lang-content="it" class="active">Consenso Dati Sanitari (GDPR Art. 9)</span>
+                            <span data-lang-content="en">Health Data Consent (GDPR Art. 9)</span>
+                            <span data-lang-content="nl">Gezondheidsgegevens Toestemming (AVG Art. 9)</span>
+                        </h3>
+                        <div class="bg-white rounded p-4 mb-4 max-h-48 overflow-y-auto text-sm text-gray-700 leading-relaxed">
+                            <p class="mb-3" data-lang-content="it" class="active">
+                                Acconsento esplicitamente al trattamento dei miei dati sanitari (dolore, mobilità, equilibrio, condizioni mediche, storia clinica) da parte di CAMI Netherlands per i seguenti scopi: (1) Valutazione della sicurezza e idoneità al programma, (2) Personalizzazione degli esercizi e raccomandazioni, (3) Monitoraggio progressi e adattamento del programma, (4) Comunicazioni relative al servizio. I miei dati saranno conservati per 1 anno e protetti con crittografia. Posso revocare questo consenso in qualsiasi momento scrivendo a privacy@centrocami.it.
+                            </p>
+                            <p class="mb-3" data-lang-content="en">
+                                I explicitly consent to the processing of my health data (pain, mobility, balance, medical conditions, medical history) by CAMI Netherlands for the following purposes: (1) Safety assessment and program suitability, (2) Personalization of exercises and recommendations, (3) Progress monitoring and program adaptation, (4) Service-related communications. My data will be retained for 1 year and protected with encryption. I can withdraw this consent at any time by writing to privacy@centrocami.it.
+                            </p>
+                            <p class="mb-3" data-lang-content="nl">
+                                Ik geef uitdrukkelijk toestemming voor de verwerking van mijn gezondheidsgegevens (pijn, mobiliteit, evenwicht, medische aandoeningen, medische geschiedenis) door CAMI Netherlands voor de volgende doeleinden: (1) Veiligheidsbeoordeling en geschiktheid programma, (2) Personalisatie van oefeningen en aanbevelingen, (3) Voortgangsbewaking en programma-aanpassing, (4) Dienstgerelateerde communicatie. Mijn gegevens worden 1 jaar bewaard en beschermd met versleuteling. Ik kan deze toestemming op elk moment intrekken door te schrijven naar privacy@centrocami.it.
+                            </p>
+                        </div>
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" id="consent-health" name="consent_health" required class="mt-1" style="width: 20px; height: 20px;">
+                            <span class="text-sm font-medium">
+                                <span data-lang-content="it" class="active">Acconsento al trattamento dei miei dati sanitari *</span>
+                                <span data-lang-content="en">I consent to the processing of my health data *</span>
+                                <span data-lang-content="nl">Ik geef toestemming voor de verwerking van mijn gezondheidsgegevens *</span>
+                            </span>
+                        </label>
+                        <div class="error-message mt-2" id="consent-health-error">
+                            <span data-lang-content="it" class="active">Questo consenso è obbligatorio per continuare</span>
+                            <span data-lang-content="en">This consent is required to continue</span>
+                            <span data-lang-content="nl">Deze toestemming is vereist om door te gaan</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Marketing consent (optional) -->
+                    <div class="border-2 border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold text-lg mb-3" style="color: var(--color-text);">
+                            <span data-lang-content="it" class="active">Consenso Marketing (Opzionale)</span>
+                            <span data-lang-content="en">Marketing Consent (Optional)</span>
+                            <span data-lang-content="nl">Marketing Toestemming (Optioneel)</span>
+                        </h3>
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" id="consent-marketing" name="consent_marketing" class="mt-1" style="width: 20px; height: 20px;">
+                            <span class="text-sm">
+                                <span data-lang-content="it" class="active">Desidero ricevere email con consigli, nuovi programmi e offerte speciali da CAMI Netherlands. Posso annullare l'iscrizione in qualsiasi momento.</span>
+                                <span data-lang-content="en">I would like to receive emails with tips, new programs, and special offers from CAMI Netherlands. I can unsubscribe at any time.</span>
+                                <span data-lang-content="nl">Ik wil graag e-mails ontvangen met tips, nieuwe programma's en speciale aanbiedingen van CAMI Netherlands. Ik kan me op elk moment afmelden.</span>
+                            </span>
+                        </label>
+                    </div>
+                    
+                    <!-- Liability waiver -->
+                    <div class="bg-gray-50 border-2 border-gray-300 rounded-lg p-6">
+                        <h3 class="font-semibold text-lg mb-3" style="color: var(--color-text);">
+                            <span data-lang-content="it" class="active">Assunzione di Responsabilità</span>
+                            <span data-lang-content="en">Liability Waiver</span>
+                            <span data-lang-content="nl">Aansprakelijkheidsverklaring</span>
+                        </h3>
+                        <div class="bg-white rounded p-4 mb-4 max-h-48 overflow-y-auto text-sm text-gray-700 leading-relaxed">
+                            <p class="mb-3" data-lang-content="it" class="active">
+                                Riconosco che: (1) L'esercizio fisico comporta rischi intrinseci, (2) Questo programma è di natura wellness e non sostituisce consulenza medica o fisioterapia, (3) Devo fermarmi immediatamente e consultare un medico se avverto dolore acuto, vertigini, difficoltà respiratorie o altri sintomi preoccupanti, (4) Sono responsabile della mia sicurezza e devo adattare gli esercizi alle mie capacità, (5) Ho fornito informazioni accurate sulla mia salute. Esonero CAMI Netherlands da responsabilità per infortuni, tranne in caso di negligenza grave.
+                            </p>
+                            <p class="mb-3" data-lang-content="en">
+                                I acknowledge that: (1) Physical exercise involves inherent risks, (2) This program is wellness-focused and does not replace medical advice or physiotherapy, (3) I must stop immediately and consult a doctor if I experience sharp pain, dizziness, breathing difficulties, or other concerning symptoms, (4) I am responsible for my safety and must adapt exercises to my abilities, (5) I have provided accurate health information. I release CAMI Netherlands from liability for injuries, except in cases of gross negligence.
+                            </p>
+                            <p class="mb-3" data-lang-content="nl">
+                                Ik erken dat: (1) Lichamelijke oefening inherente risico's met zich meebrengt, (2) Dit programma is welzijnsgericht en vervangt geen medisch advies of fysiotherapie, (3) Ik moet onmiddellijk stoppen en een arts raadplegen als ik scherpe pijn, duizeligheid, ademhalingsmoeilijkheden of andere zorgwekkende symptomen ervaar, (4) Ik ben verantwoordelijk voor mijn veiligheid en moet oefeningen aanpassen aan mijn capaciteiten, (5) Ik heb nauwkeurige gezondheidsinformatie verstrekt. Ik onthef CAMI Netherlands van aansprakelijkheid voor blessures, behalve in gevallen van grove nalatigheid.
+                            </p>
+                        </div>
+                        <label class="flex items-start gap-3 cursor-pointer">
+                            <input type="checkbox" id="consent-liability" name="consent_liability" required class="mt-1" style="width: 20px; height: 20px;">
+                            <span class="text-sm font-medium">
+                                <span data-lang-content="it" class="active">Ho letto e accetto l'assunzione di responsabilità *</span>
+                                <span data-lang-content="en">I have read and accept the liability waiver *</span>
+                                <span data-lang-content="nl">Ik heb de aansprakelijkheidsverklaring gelezen en geaccepteerd *</span>
+                            </span>
+                        </label>
+                        <div class="error-message mt-2" id="consent-liability-error">
+                            <span data-lang-content="it" class="active">Questo consenso è obbligatorio per continuare</span>
+                            <span data-lang-content="en">This consent is required to continue</span>
+                            <span data-lang-content="nl">Deze toestemming is vereist om door te gaan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 6: Summary -->
+            <div class="step-content" data-step="6">
+                <div class="text-center py-8">
+                    <div class="text-6xl mb-6">🎉</div>
+                    <h2 class="text-3xl font-bold mb-3" style="color: var(--color-primary);">
+                        <span data-lang-content="it" class="active">Valutazione Completata!</span>
+                        <span data-lang-content="en">Assessment Complete!</span>
+                        <span data-lang-content="nl">Beoordeling Voltooid!</span>
+                    </h2>
+                    <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+                        <span data-lang-content="it" class="active">Grazie per aver completato la valutazione. Abbiamo tutto ciò di cui abbiamo bisogno per personalizzare il tuo programma.</span>
+                        <span data-lang-content="en">Thank you for completing the assessment. We have everything we need to personalize your program.</span>
+                        <span data-lang-content="nl">Bedankt voor het voltooien van de beoordeling. We hebben alles wat we nodig hebben om je programma te personaliseren.</span>
+                    </p>
+                </div>
+                
+                <!-- Track recommendation -->
+                <div id="track-recommendation" class="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 rounded-xl p-8 mb-8">
+                    <h3 class="font-bold text-xl mb-4" style="color: var(--color-primary);">
+                        <span data-lang-content="it" class="active">Programma Consigliato</span>
+                        <span data-lang-content="en">Recommended Program</span>
+                        <span data-lang-content="nl">Aanbevolen Programma</span>
+                    </h3>
+                    <div id="track-recommendation-content">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Next steps -->
+                <div class="bg-white border-2 border-gray-200 rounded-xl p-6 mb-8">
+                    <h3 class="font-bold text-lg mb-4" style="color: var(--color-text);">
+                        <span data-lang-content="it" class="active">Prossimi Passi</span>
+                        <span data-lang-content="en">Next Steps</span>
+                        <span data-lang-content="nl">Volgende Stappen</span>
+                    </h3>
+                    <ol class="space-y-3 text-gray-700">
+                        <li class="flex gap-3" data-lang-content="it" class="active">
+                            <span class="font-bold" style="color: var(--color-primary);">1.</span>
+                            <span>Riceverai un'email di conferma entro 5 minuti</span>
+                        </li>
+                        <li class="flex gap-3" data-lang-content="en">
+                            <span class="font-bold" style="color: var(--color-primary);">1.</span>
+                            <span>You'll receive a confirmation email within 5 minutes</span>
+                        </li>
+                        <li class="flex gap-3" data-lang-content="nl">
+                            <span class="font-bold" style="color: var(--color-primary);">1.</span>
+                            <span>Je ontvangt binnen 5 minuten een bevestigingsmail</span>
+                        </li>
+                        
+                        <li class="flex gap-3" data-lang-content="it" class="active">
+                            <span class="font-bold" style="color: var(--color-primary);">2.</span>
+                            <span>Ti invieremo la raccomandazione del programma e il link di pagamento entro 24 ore</span>
+                        </li>
+                        <li class="flex gap-3" data-lang-content="en">
+                            <span class="font-bold" style="color: var(--color-primary);">2.</span>
+                            <span>We'll send you the program recommendation and payment link within 24 hours</span>
+                        </li>
+                        <li class="flex gap-3" data-lang-content="nl">
+                            <span class="font-bold" style="color: var(--color-primary);">2.</span>
+                            <span>We sturen je de programma-aanbeveling en betaallink binnen 24 uur</span>
+                        </li>
+                        
+                        <li class="flex gap-3" data-lang-content="it" class="active">
+                            <span class="font-bold" style="color: var(--color-primary);">3.</span>
+                            <span>Controlla la tua casella di posta (e spam) per i prossimi aggiornamenti</span>
+                        </li>
+                        <li class="flex gap-3" data-lang-content="en">
+                            <span class="font-bold" style="color: var(--color-primary);">3.</span>
+                            <span>Check your inbox (and spam) for updates</span>
+                        </li>
+                        <li class="flex gap-3" data-lang-content="nl">
+                            <span class="font-bold" style="color: var(--color-primary);">3.</span>
+                            <span>Controleer je inbox (en spam) voor updates</span>
+                        </li>
+                    </ol>
+                </div>
+                
+                <!-- CTA -->
+                <div class="text-center">
+                    <a href="/" class="inline-block btn-primary">
+                        <span data-lang-content="it" class="active">← Torna alla Home</span>
+                        <span data-lang-content="en">← Back to Home</span>
+                        <span data-lang-content="nl">← Terug naar Home</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Navigation buttons -->
+            <div class="flex justify-between mt-8 pt-6 border-t border-gray-200">
+                <button type="button" class="btn-secondary" id="prev-btn" style="display: none;">
+                    <span data-lang-content="it" class="active">← Indietro</span>
+                    <span data-lang-content="en">← Back</span>
+                    <span data-lang-content="nl">← Terug</span>
+                </button>
+                
+                <button type="button" class="btn-primary ml-auto" id="next-btn">
+                    <span data-lang-content="it" class="active">Avanti →</span>
+                    <span data-lang-content="en">Next →</span>
+                    <span data-lang-content="nl">Volgende →</span>
+                </button>
+            </div>
+        </form>
+    </main>
+    
+    <script>
+        // State
+        let currentStep = 1;
+        const totalSteps = 6;
+        const formData = {};
+        
+        // Language switcher
+        function switchLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.setAttribute('data-lang', lang);
+            
+            document.querySelectorAll('[data-lang-content]').forEach(el => {
+                el.classList.remove('active');
+                if (el.getAttribute('data-lang-content') === lang) {
+                    el.classList.add('active');
+                }
+            });
+            
+            document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang-btn') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            const preferredLang = localStorage.getItem('preferredLanguage') || 'en';
+            switchLanguage(preferredLang);
+            updateStepDisplay();
+            
+            // Pain severity slider
+            const painSlider = document.getElementById('pain_severity');
+            if (painSlider) {
+                painSlider.addEventListener('input', function() {
+                    document.getElementById('pain-value').textContent = this.value;
+                });
+            }
+            
+            // PAR-Q+ followup logic
+            const parqQuestions = ['parq_heart', 'parq_chest_active', 'parq_chest_rest', 'parq_dizziness', 'parq_bone_joint', 'parq_medication', 'parq_other'];
+            parqQuestions.forEach(name => {
+                document.querySelectorAll(`input[name="${name}"]`).forEach(radio => {
+                    radio.addEventListener('change', updateParqFollowup);
+                });
+            });
+        });
+        
+        // PAR-Q+ followup
+        function updateParqFollowup() {
+            const parqQuestions = ['parq_heart', 'parq_chest_active', 'parq_chest_rest', 'parq_dizziness', 'parq_bone_joint', 'parq_medication', 'parq_other'];
+            let hasYes = false;
+            
+            parqQuestions.forEach(name => {
+                const selected = document.querySelector(`input[name="${name}"]:checked`);
+                if (selected && selected.value === 'yes') {
+                    hasYes = true;
+                }
+            });
+            
+            document.getElementById('parq-followup').style.display = hasYes ? 'block' : 'none';
+        }
+        
+        // Toggle pain details
+        function togglePainDetails(show) {
+            document.getElementById('pain-details').style.display = show ? 'block' : 'none';
+        }
+        
+        // Update progress
+        function updateProgress() {
+            const percent = Math.round((currentStep / totalSteps) * 100);
+            document.getElementById('progress-fill').style.width = percent + '%';
+            document.getElementById('progress-percent').textContent = percent + '%';
+            updateStepDisplay();
+        }
+        
+        function updateStepDisplay() {
+            document.getElementById('current-step').textContent = currentStep;
+            document.getElementById('current-step-en').textContent = currentStep;
+            document.getElementById('current-step-nl').textContent = currentStep;
+        }
+        
+        // Show/hide steps
+        function showStep(step) {
+            document.querySelectorAll('.step-content').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.querySelector(`[data-step="${step}"]`).classList.add('active');
+            
+            // Update buttons
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            if (step === 1) {
+                prevBtn.style.display = 'none';
+            } else {
+                prevBtn.style.display = 'block';
+            }
+            
+            // Hide next button on step 6 (final)
+            if (step === 6) {
+                nextBtn.style.display = 'none';
+            } else {
+                nextBtn.style.display = 'block';
+            }
+            
+            // Special handling for step 4 (SENTINEL check)
+            if (step === 4) {
+                performSentinelCheck();
+            }
+            
+            // Special handling for step 6 (summary)
+            if (step === 6) {
+                displayTrackRecommendation();
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            updateProgress();
+        }
+        
+        // Dynamic Track A/B question routing (triggered when leaving Step 2)
+        function updateTrackQuestions() {
+            const goals = formData.goals || [];
+            const clinicalGoals = ['reduce_chronic_pain', 'improve_mobility', 'improve_balance', 'maintain_independence'];
+            const performanceGoals = ['increase_strength', 'improve_power', 'competition_prep'];
+            
+            const hasClinical = goals.some(g => clinicalGoals.includes(g));
+            const hasPerformance = goals.some(g => performanceGoals.includes(g));
+            
+            // Show/hide Track A questions
+            document.getElementById('track-a-questions').style.display = hasClinical ? 'block' : 'none';
+            
+            // Show/hide Track B questions
+            document.getElementById('track-b-questions').style.display = hasPerformance ? 'block' : 'none';
+        }
+        
+        // SENTINEL safety check (Step 4)
+        function performSentinelCheck() {
+            // Show loading
+            document.getElementById('sentinel-loading').style.display = 'block';
+            document.getElementById('sentinel-pass').style.display = 'none';
+            document.getElementById('sentinel-clearance').style.display = 'none';
+            document.getElementById('sentinel-decline').style.display = 'none';
+            
+            // Simulate check (2 seconds)
+            setTimeout(() => {
+                const result = calculateSentinelStatus();
+                
+                document.getElementById('sentinel-loading').style.display = 'none';
+                
+                if (result === 'pass') {
+                    document.getElementById('sentinel-pass').style.display = 'block';
+                    formData.sentinel_status = 'pass';
+                } else if (result === 'clearance') {
+                    document.getElementById('sentinel-clearance').style.display = 'block';
+                    formData.sentinel_status = 'medical_clearance_required';
+                } else {
+                    document.getElementById('sentinel-decline').style.display = 'block';
+                    formData.sentinel_status = 'declined';
+                }
+            }, 2000);
+        }
+        
+        // Calculate SENTINEL status
+        function calculateSentinelStatus() {
+            const parqAnswers = ['parq_heart', 'parq_chest_active', 'parq_chest_rest', 'parq_dizziness', 'parq_bone_joint', 'parq_medication', 'parq_other'];
+            let yesCount = 0;
+            
+            parqAnswers.forEach(name => {
+                const selected = document.querySelector(`input[name="${name}"]:checked`);
+                if (selected && selected.value === 'yes') {
+                    yesCount++;
+                }
+            });
+            
+            // Check pain severity if Track A
+            const hasPain = document.querySelector('input[name="has_chronic_pain"]:checked');
+            if (hasPain && hasPain.value === 'yes') {
+                const painSeverity = parseInt(document.getElementById('pain_severity').value) || 0;
+                if (painSeverity >= 8) {
+                    return 'clearance';
+                }
+            }
+            
+            // Decision logic
+            if (yesCount === 0) {
+                return 'pass';
+            } else if (yesCount >= 3) {
+                return 'decline';
+            } else {
+                return 'clearance';
+            }
+        }
+        
+        // Display track recommendation (Step 6)
+        function displayTrackRecommendation() {
+            const track = calculateTrackRecommendation();
+            formData.track_recommended = track;
+            
+            const content = document.getElementById('track-recommendation-content');
+            const lang = localStorage.getItem('preferredLanguage') || 'en';
+            
+            let html = '';
+            
+            if (track === 'A') {
+                html = `
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">🧘</div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-2" style="color: var(--color-primary);">
+                                ${lang === 'it' ? 'Track A: Esercizio Clinico & Invecchiamento Sano' : lang === 'nl' ? 'Track A: Klinische Oefening & Gezond Ouder Worden' : 'Track A: Clinical Exercise & Healthy Aging'}
+                            </h4>
+                            <p class="text-gray-700">
+                                ${lang === 'it' ? 'Programma perfetto per ridurre dolore cronico, migliorare mobilità ed equilibrio con esercizi sicuri e personalizzati.' : lang === 'nl' ? 'Perfect programma om chronische pijn te verminderen, mobiliteit en evenwicht te verbeteren met veilige en gepersonaliseerde oefeningen.' : 'Perfect program to reduce chronic pain, improve mobility and balance with safe, personalized exercises.'}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            } else if (track === 'B') {
+                html = `
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">🏋️</div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-2" style="color: var(--color-primary);">
+                                ${lang === 'it' ? 'Track B: Performance & Preparazione Atletica' : lang === 'nl' ? 'Track B: Prestatie & Atletische Voorbereiding' : 'Track B: Performance & Athletic Preparation'}
+                            </h4>
+                            <p class="text-gray-700">
+                                ${lang === 'it' ? 'Programma ideale per aumentare forza, potenza e preparazione sport-specifica con allenamento periodizzato.' : lang === 'nl' ? 'Ideaal programma om kracht, kracht en sportspecifieke voorbereiding te verhogen met geperiodiseerde training.' : 'Ideal program to increase strength, power, and sport-specific preparation with periodized training.'}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                html = `
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">🔄</div>
+                        <div>
+                            <h4 class="font-bold text-xl mb-2" style="color: var(--color-primary);">
+                                ${lang === 'it' ? 'Programma Ibrido' : lang === 'nl' ? 'Hybride Programma' : 'Hybrid Program'}
+                            </h4>
+                            <p class="text-gray-700">
+                                ${lang === 'it' ? 'Un programma personalizzato che combina elementi clinici e performance per i tuoi obiettivi unici.' : lang === 'nl' ? 'Een gepersonaliseerd programma dat klinische en prestatie-elementen combineert voor je unieke doelen.' : 'A personalized program combining clinical and performance elements for your unique goals.'}
+                            </p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            content.innerHTML = html;
+        }
+        
+        // Calculate track recommendation
+        function calculateTrackRecommendation() {
+            const goals = formData.goals || [];
+            const age = formData.profile?.age || 40;
+            
+            const clinicalGoals = ['reduce_chronic_pain', 'improve_mobility', 'improve_balance', 'maintain_independence'];
+            const performanceGoals = ['increase_strength', 'improve_power', 'competition_prep'];
+            
+            let clinicalScore = 0;
+            let performanceScore = 0;
+            
+            // Count goals
+            goals.forEach(goal => {
+                if (clinicalGoals.includes(goal)) clinicalScore += 3;
+                if (performanceGoals.includes(goal)) performanceScore += 3;
+                if (goal === 'injury_recovery_return') {
+                    // Hybrid indicator
+                    clinicalScore += 1;
+                    performanceScore += 1;
+                }
+            });
+            
+            // Age modifiers
+            if (age >= 66) clinicalScore += 2;
+            else if (age >= 56) clinicalScore += 1;
+            else if (age <= 45) performanceScore += 1;
+            
+            // Decision
+            if (Math.abs(clinicalScore - performanceScore) <= 2) {
+                return 'Hybrid';
+            } else if (clinicalScore > performanceScore) {
+                return 'A';
+            } else {
+                return 'B';
+            }
+        }
+        
+        // Validation
+        function validateStep(step) {
+            let isValid = true;
+            
+            if (step === 1) {
+                // Validate profile
+                const name = document.getElementById('name');
+                const email = document.getElementById('email');
+                const age = document.getElementById('age');
+                const referral = document.getElementById('referral');
+                
+                // Name
+                if (!name.value.trim()) {
+                    showError('name');
+                    isValid = false;
+                } else {
+                    hideError('name');
+                }
+                
+                // Email
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!email.value.trim() || !emailRegex.test(email.value)) {
+                    showError('email');
+                    isValid = false;
+                } else {
+                    hideError('email');
+                }
+                
+                // Age
+                const ageValue = parseInt(age.value);
+                if (!ageValue || ageValue < 18 || ageValue > 99) {
+                    showError('age');
+                    isValid = false;
+                } else {
+                    hideError('age');
+                }
+                
+                // Referral
+                if (!referral.value) {
+                    referral.classList.add('error');
+                    isValid = false;
+                } else {
+                    referral.classList.remove('error');
+                }
+                
+                if (isValid) {
+                    formData.profile = {
+                        name: name.value.trim(),
+                        email: email.value.trim(),
+                        age: ageValue,
+                        phone: document.getElementById('phone').value.trim(),
+                        referral: referral.value,
+                        language: localStorage.getItem('preferredLanguage') || 'en'
+                    };
+                }
+            }
+            
+            if (step === 2) {
+                // Validate goals (at least one selected)
+                const goals = document.querySelectorAll('input[name="goals"]:checked');
+                if (goals.length === 0) {
+                    showError('goals');
+                    isValid = false;
+                } else {
+                    hideError('goals');
+                    formData.goals = Array.from(goals).map(cb => cb.value);
+                    
+                    // Update Track A/B questions for next step
+                    updateTrackQuestions();
+                }
+            }
+            
+            if (step === 3) {
+                // Validate PAR-Q+ (all 7 questions answered)
+                const parqQuestions = ['parq_heart', 'parq_chest_active', 'parq_chest_rest', 'parq_dizziness', 'parq_bone_joint', 'parq_medication', 'parq_other'];
+                let allAnswered = true;
+                
+                parqQuestions.forEach(name => {
+                    const selected = document.querySelector(`input[name="${name}"]:checked`);
+                    if (!selected) {
+                        allAnswered = false;
+                    }
+                });
+                
+                if (!allAnswered) {
+                    alert('Please answer all PAR-Q+ screening questions');
+                    isValid = false;
+                }
+                
+                // Save PAR-Q+ data
+                if (isValid) {
+                    formData.screening = {
+                        parq: {}
+                    };
+                    
+                    parqQuestions.forEach(name => {
+                        const selected = document.querySelector(`input[name="${name}"]:checked`);
+                        formData.screening.parq[name] = selected.value;
+                    });
+                    
+                    // Followup if any YES
+                    const followup = document.getElementById('parq_followup_text');
+                    if (followup && followup.value.trim()) {
+                        formData.screening.parq.followup = followup.value.trim();
+                    }
+                    
+                    // Track A questions (if shown)
+                    if (document.getElementById('track-a-questions').style.display !== 'none') {
+                        const hasPain = document.querySelector('input[name="has_chronic_pain"]:checked');
+                        if (!hasPain) {
+                            alert('Please answer if you have chronic pain');
+                            isValid = false;
+                        } else {
+                            formData.screening.has_chronic_pain = hasPain.value === 'yes';
+                            
+                            if (hasPain.value === 'yes') {
+                                const painLocations = Array.from(document.querySelectorAll('input[name="pain_location"]:checked')).map(cb => cb.value);
+                                if (painLocations.length === 0) {
+                                    alert('Please select at least one pain location');
+                                    isValid = false;
+                                }
+                                formData.screening.pain_location = painLocations;
+                                formData.screening.pain_severity = parseInt(document.getElementById('pain_severity').value);
+                                formData.screening.pain_duration = document.querySelector('select[name="pain_duration"]').value;
+                            }
+                        }
+                        
+                        const hasFallen = document.querySelector('input[name="has_fallen"]:checked');
+                        const balanceDiff = document.querySelector('input[name="balance_difficulty"]:checked');
+                        
+                        if (!hasFallen || !balanceDiff) {
+                            alert('Please answer all Track A questions');
+                            isValid = false;
+                        } else {
+                            formData.screening.has_fallen = hasFallen.value === 'yes';
+                            formData.screening.balance_difficulty = balanceDiff.value === 'yes';
+                        }
+                    }
+                    
+                    // Track B questions (if shown)
+                    if (document.getElementById('track-b-questions').style.display !== 'none') {
+                        const sport = document.querySelector('select[name="primary_sport"]').value;
+                        const years = document.querySelector('select[name="training_years"]').value;
+                        const freq = document.querySelector('select[name="training_frequency"]').value;
+                        const injury = document.querySelector('input[name="recent_injury"]:checked');
+                        
+                        if (!sport || !years || !freq || !injury) {
+                            alert('Please answer all Track B questions');
+                            isValid = false;
+                        } else {
+                            formData.screening.primary_sport = sport;
+                            formData.screening.training_years = years;
+                            formData.screening.training_frequency = freq;
+                            formData.screening.recent_injury = injury.value === 'yes';
+                        }
+                    }
+                }
+            }
+            
+            if (step === 5) {
+                // Validate consent
+                const healthConsent = document.getElementById('consent-health');
+                const liabilityConsent = document.getElementById('consent-liability');
+                
+                if (!healthConsent.checked) {
+                    showError('consent-health');
+                    isValid = false;
+                } else {
+                    hideError('consent-health');
+                }
+                
+                if (!liabilityConsent.checked) {
+                    showError('consent-liability');
+                    isValid = false;
+                } else {
+                    hideError('consent-liability');
+                }
+                
+                if (isValid) {
+                    formData.consent = {
+                        health_data: true,
+                        marketing: document.getElementById('consent-marketing').checked,
+                        liability: true,
+                        timestamp: new Date().toISOString(),
+                        ip: 'CLIENT_IP' // Would be filled by backend
+                    };
+                }
+            }
+            
+            return isValid;
+        }
+        
+        function showError(fieldId) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(fieldId + '-error');
+            if (field) field.classList.add('error');
+            if (error) error.classList.add('show');
+        }
+        
+        function hideError(fieldId) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(fieldId + '-error');
+            if (field) field.classList.remove('error');
+            if (error) error.classList.remove('show');
+        }
+        
+        // Checkbox card selection visual feedback
+        document.querySelectorAll('.checkbox-card input[type="checkbox"]').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const card = this.closest('.checkbox-card');
+                if (this.checked) {
+                    card.classList.add('selected');
+                } else {
+                    card.classList.remove('selected');
+                }
+            });
+        });
+        
+        // Next button
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (validateStep(currentStep)) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            }
+        });
+        
+        // Previous button
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        });
+        
+        // Log formData for debugging (would be submitted to backend in production)
+        window.addEventListener('beforeunload', () => {
+            console.log('Assessment Data:', formData);
+        });
+    </script>
+</body>
+</html>

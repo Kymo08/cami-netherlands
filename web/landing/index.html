@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Clinical exercise and athletic performance programs in Utrecht. Trilingual support (IT/EN/NL). Personalized coaching for pain relief, mobility, strength, and performance.">
+    <title>CAMI Netherlands - Clinical Exercise & Performance Training | Utrecht</title>
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="CAMI Netherlands - Move Without Pain, Perform Without Limits">
+    <meta property="og:description" content="3-day programs + 30 days personalized coaching for Utrecht expats. Reduce chronic pain or break performance plateaus.">
+    <meta property="og:image" content="https://nl.centrocami.it/og-image.jpg">
+    <meta property="og:url" content="https://nl.centrocami.it">
+    
+    <!-- Tailwind CSS CDN (production: inline critical CSS) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Custom Design System */
+        :root {
+            --color-primary: #1E3A8A; /* Deep blue */
+            --color-primary-light: #3B82F6;
+            --color-accent: #10B981; /* Green */
+            --color-text: #1F2937;
+            --color-text-light: #6B7280;
+            --color-bg: #FFFFFF;
+            --color-bg-alt: #F9FAFB;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--color-text);
+            background: var(--color-bg);
+        }
+        
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Button hover effects */
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .btn-primary:hover {
+            background: var(--color-primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+        
+        /* Language switcher */
+        .lang-switcher button {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            background: transparent;
+            color: var(--color-text-light);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .lang-switcher button.active {
+            background: var(--color-primary);
+            color: white;
+        }
+        
+        /* Hide inactive language content */
+        [data-lang-content]:not(.active) {
+            display: none;
+        }
+        
+        /* Gradient background hero */
+        .hero-gradient {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+        }
+        
+        /* Testimonial cards */
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* FAQ accordion */
+        .faq-item {
+            border-bottom: 1px solid #E5E7EB;
+            padding: 1.5rem 0;
+        }
+        
+        .faq-question {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--color-text);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--color-text-light);
+            padding-top: 0;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding-top: 1rem;
+        }
+        
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        /* Program cards */
+        .program-card {
+            background: var(--color-bg-alt);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .program-card:hover {
+            border-color: var(--color-primary);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.15);
+        }
+        
+        /* Stats counter */
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold" style="color: var(--color-primary);">CAMI</a>
+                    <span class="ml-2 text-sm text-gray-500">Netherlands</span>
+                </div>
+                
+                <!-- Language switcher -->
+                <div class="lang-switcher flex gap-2">
+                    <button onclick="switchLanguage('it')" data-lang-btn="it" class="active">IT</button>
+                    <button onclick="switchLanguage('en')" data-lang-btn="en">EN</button>
+                    <button onclick="switchLanguage('nl')" data-lang-btn="nl">NL</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white pt-32 pb-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <!-- Italian -->
+            <div data-lang-content="it" class="active">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 fade-in">
+                    Muoviti Senza Dolore.<br>Performa Senza Limiti.
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto fade-in">
+                    Programmi di esercizio clinico e preparazione atletica a Utrecht. 3 giorni in presenza + 30 giorni di coaching personalizzato.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                    <a href="#assessment" class="btn-primary">Prenota Valutazione Gratuita</a>
+                    <a href="#how-it-works" class="btn-secondary">Come Funziona</a>
+                </div>
+            </div>
+            
+            <!-- English -->
+            <div data-lang-content="en">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 fade-in">
+                    Move Without Pain.<br>Perform Without Limits.
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto fade-in">
+                    Clinical exercise and athletic performance programs in Utrecht. 3-day in-person + 30 days personalized coaching.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                    <a href="#assessment" class="btn-primary">Book Free Assessment</a>
+                    <a href="#how-it-works" class="btn-secondary">How It Works</a>
+                </div>
+            </div>
+            
+            <!-- Dutch -->
+            <div data-lang-content="nl">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 fade-in">
+                    Beweeg Zonder Pijn.<br>Presteer Zonder Grenzen.
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 max-w-3xl mx-auto fade-in">
+                    Klinische oefenprogramma's en atletische prestaties in Utrecht. 3-daags persoonlijk + 30 dagen gepersonaliseerde coaching.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in">
+                    <a href="#assessment" class="btn-primary">Boek Gratis Assessment</a>
+                    <a href="#how-it-works" class="btn-secondary">Hoe Het Werkt</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Social Proof Stats -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="fade-in">
+                    <div class="stat-number">85%</div>
+                    <div data-lang-content="it" class="active text-gray-600 mt-2">Riduzione del dolore</div>
+                    <div data-lang-content="en" class="text-gray-600 mt-2">Pain reduction</div>
+                    <div data-lang-content="nl" class="text-gray-600 mt-2">Pijnvermindering</div>
+                </div>
+                <div class="fade-in">
+                    <div class="stat-number">10+</div>
+                    <div data-lang-content="it" class="active text-gray-600 mt-2">Anni esperienza</div>
+                    <div data-lang-content="en" class="text-gray-600 mt-2">Years experience</div>
+                    <div data-lang-content="nl" class="text-gray-600 mt-2">Jaar ervaring</div>
+                </div>
+                <div class="fade-in">
+                    <div class="stat-number">3</div>
+                    <div data-lang-content="it" class="active text-gray-600 mt-2">Lingue supportate</div>
+                    <div data-lang-content="en" class="text-gray-600 mt-2">Languages supported</div>
+                    <div data-lang-content="nl" class="text-gray-600 mt-2">Ondersteunde talen</div>
+                </div>
+                <div class="fade-in">
+                    <div class="stat-number">10</div>
+                    <div data-lang-content="it" class="active text-gray-600 mt-2">Max partecipanti</div>
+                    <div data-lang-content="en" class="text-gray-600 mt-2">Max participants</div>
+                    <div data-lang-content="nl" class="text-gray-600 mt-2">Max deelnemers</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Problem Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-5xl mx-auto">
+            <!-- Italian -->
+            <div data-lang-content="it" class="active text-center fade-in">
+                <h2 class="text-4xl font-bold mb-6" style="color: var(--color-primary);">Ti Riconosci?</h2>
+                <div class="grid md:grid-cols-2 gap-8 mt-12 text-left">
+                    <div class="program-card">
+                        <h3 class="text-xl font-semibold mb-4" style="color: var(--color-primary);">🩹 Dolore Cronico</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li>• Dolore a schiena, collo, ginocchia che non passa</li>
+                            <li>• Fisioterapia che offre solo sollievo temporaneo</li>
+                            <li>• Paura di cadere, perdita di equilibrio</li>
+                            <li>• Vuoi essere autonomo nelle attività quotidiane</li>
+                        </ul>
+                    </div>
+                    <div class="program-card">
+                        <h3 class="text-xl font-semibold mb-4" style="color: var(--color-primary);">💪 Plateau di Performance</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li>• Massimali fermi da mesi, nessun progresso</li>
+                            <li>• Programmi generici che non portano risultati</li>
+                            <li>• Rischio infortuni con programmazione sbagliata</li>
+                            <li>• Vuoi allenamento periodizzato e specializzato</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- English -->
+            <div data-lang-content="en" class="text-center fade-in">
+                <h2 class="text-4xl font-bold mb-6" style="color: var(--color-primary);">Do You Recognize Yourself?</h2>
+                <div class="grid md:grid-cols-2 gap-8 mt-12 text-left">
+                    <div class="program-card">
+                        <h3 class="text-xl font-semibold mb-4" style="color: var(--color-primary);">🩹 Chronic Pain</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li>• Back, neck, knee pain that won't go away</li>
+                            <li>• Physiotherapy offers only temporary relief</li>
+                            <li>• Fear of falling, loss of balance</li>
+                            <li>• You want autonomy in daily activities</li>
+                        </ul>
+                    </div>
+                    <div class="program-card">
+                        <h3 class="text-xl font-semibold mb-4" style="color: var(--color-primary);">💪 Performance Plateaus</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li>• Stuck at same PRs for months, no progress</li>
+                            <li>• Generic programs don't deliver results</li>
+                            <li>• Risk of injury with poor programming</li>
+                            <li>• You want periodized, specialized training</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Dutch -->
+            <div data-lang-content="nl" class="text-center fade-in">
+                <h2 class="text-4xl font-bold mb-6" style="color: var(--color-primary);">Herken Je Dit?</h2>
+                <div class="grid md:grid-cols-2 gap-8 mt-12 text-left">
+                    <div class="program-card">
+                        <h3 class="text-xl font-semibold mb-4" style="color: var(--color-primary);">🩹 Chronische Pijn</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li>• Rug-, nek-, kniepijn die niet overgaat</li>
+                            <li>• Fysiotherapie biedt alleen tijdelijke verlichting</li>
+                            <li>• Angst om te vallen, verlies van evenwicht</li>
+                            <li>• Je wilt zelfstandig blijven in dagelijkse activiteiten</li>
+                        </ul>
+                    </div>
+                    <div class="program-card">
+                        <h3 class="text-xl font-semibold mb-4" style="color: var(--color-primary);">💪 Prestatie Plateaus</h3>
+                        <ul class="space-y-3 text-gray-600">
+                            <li>• Maanden vast op dezelfde PR's, geen vooruitgang</li>
+                            <li>• Generieke programma's leveren geen resultaten</li>
+                            <li>• Blessurerisico door slechte programmering</li>
+                            <li>• Je wilt geperiodiseerde, gespecialiseerde training</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Solution Section -->
+    <section class="py-20 px-4 bg-gray-50">
+        <div class="max-w-5xl mx-auto text-center">
+            <!-- Italian -->
+            <div data-lang-content="it" class="active fade-in">
+                <h2 class="text-4xl font-bold mb-6" style="color: var(--color-primary);">La Soluzione CAMI</h2>
+                <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+                    Programmi di 3 giorni in presenza a Utrecht + 30 giorni di coaching quotidiano personalizzato. Non solo esercizi: ricevi consigli adattati ogni giorno al tuo progresso.
+                </p>
+            </div>
+            
+            <!-- English -->
+            <div data-lang-content="en" class="fade-in">
+                <h2 class="text-4xl font-bold mb-6" style="color: var(--color-primary);">The CAMI Solution</h2>
+                <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+                    3-day in-person programs in Utrecht + 30 days of daily personalized coaching. Not just exercises: receive recommendations adapted daily to your progress.
+                </p>
+            </div>
+            
+            <!-- Dutch -->
+            <div data-lang-content="nl" class="fade-in">
+                <h2 class="text-4xl font-bold mb-6" style="color: var(--color-primary);">De CAMI Oplossing</h2>
+                <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+                    3-daags persoonlijk programma in Utrecht + 30 dagen dagelijkse gepersonaliseerde coaching. Niet alleen oefeningen: ontvang aanbevelingen die dagelijks worden aangepast aan je voortgang.
+                </p>
+            </div>
+            
+            <!-- Program Cards (same for all languages, translate track names) -->
+            <div class="grid md:grid-cols-2 gap-8 mt-12">
+                <!-- Track A -->
+                <div class="program-card text-left">
+                    <div class="text-4xl mb-4">🧘</div>
+                    <h3 data-lang-content="it" class="active text-2xl font-bold mb-4" style="color: var(--color-primary);">Track A: Esercizio Clinico</h3>
+                    <h3 data-lang-content="en" class="text-2xl font-bold mb-4" style="color: var(--color-primary);">Track A: Clinical Exercise</h3>
+                    <h3 data-lang-content="nl" class="text-2xl font-bold mb-4" style="color: var(--color-primary);">Track A: Klinische Oefening</h3>
+                    
+                    <p data-lang-content="it" class="active text-gray-600 mb-6">Per chi vuole ridurre il dolore cronico, migliorare mobilità ed equilibrio, prevenire cadute.</p>
+                    <p data-lang-content="en" class="text-gray-600 mb-6">For those who want to reduce chronic pain, improve mobility and balance, prevent falls.</p>
+                    <p data-lang-content="nl" class="text-gray-600 mb-6">Voor wie chronische pijn wil verminderen, mobiliteit en evenwicht wil verbeteren, vallen wil voorkomen.</p>
+                    
+                    <ul class="space-y-2 mb-6">
+                        <li data-lang-content="it" class="active text-gray-700">✓ Giorno 1: Valutazione completa</li>
+                        <li data-lang-content="en" class="text-gray-700">✓ Day 1: Complete assessment</li>
+                        <li data-lang-content="nl" class="text-gray-700">✓ Dag 1: Volledige beoordeling</li>
+                        
+                        <li data-lang-content="it" class="active text-gray-700">✓ Giorno 2: Schiena e gambe</li>
+                        <li data-lang-content="en" class="text-gray-700">✓ Day 2: Back and legs</li>
+                        <li data-lang-content="nl" class="text-gray-700">✓ Dag 2: Rug en benen</li>
+                        
+                        <li data-lang-content="it" class="active text-gray-700">✓ Giorno 3: Collo e respirazione</li>
+                        <li data-lang-content="en" class="text-gray-700">✓ Day 3: Neck and breathing</li>
+                        <li data-lang-content="nl" class="text-gray-700">✓ Dag 3: Nek en ademhaling</li>
+                        
+                        <li data-lang-content="it" class="active text-gray-700">✓ 30 giorni email quotidiane</li>
+                        <li data-lang-content="en" class="text-gray-700">✓ 30 days daily emails</li>
+                        <li data-lang-content="nl" class="text-gray-700">✓ 30 dagen dagelijkse e-mails</li>
+                    </ul>
+                    
+                    <a href="#assessment" class="btn-primary inline-block">
+                        <span data-lang-content="it" class="active">Scegli Track A</span>
+                        <span data-lang-content="en">Choose Track A</span>
+                        <span data-lang-content="nl">Kies Track A</span>
+                    </a>
+                </div>
+                
+                <!-- Track B -->
+                <div class="program-card text-left">
+                    <div class="text-4xl mb-4">🏋️</div>
+                    <h3 data-lang-content="it" class="active text-2xl font-bold mb-4" style="color: var(--color-primary);">Track B: Performance Atletica</h3>
+                    <h3 data-lang-content="en" class="text-2xl font-bold mb-4" style="color: var(--color-primary);">Track B: Athletic Performance</h3>
+                    <h3 data-lang-content="nl" class="text-2xl font-bold mb-4" style="color: var(--color-primary);">Track B: Atletische Prestaties</h3>
+                    
+                    <p data-lang-content="it" class="active text-gray-600 mb-6">Per atleti che vogliono aumentare forza, potenza, velocità e preparazione sport-specifica.</p>
+                    <p data-lang-content="en" class="text-gray-600 mb-6">For athletes who want to increase strength, power, speed, and sport-specific preparation.</p>
+                    <p data-lang-content="nl" class="text-gray-600 mb-6">Voor atleten die kracht, kracht, snelheid en sportspecifieke voorbereiding willen verhogen.</p>
+                    
+                    <ul class="space-y-2 mb-6">
+                        <li data-lang-content="it" class="active text-gray-700">✓ Giorno 1: Test di forza</li>
+                        <li data-lang-content="en" class="text-gray-700">✓ Day 1: Strength testing</li>
+                        <li data-lang-content="nl" class="text-gray-700">✓ Dag 1: Krachttesten</li>
+                        
+                        <li data-lang-content="it" class="active text-gray-700">✓ Giorno 2: Forza massimale</li>
+                        <li data-lang-content="en" class="text-gray-700">✓ Day 2: Maximal strength</li>
+                        <li data-lang-content="nl" class="text-gray-700">✓ Dag 2: Maximale kracht</li>
+                        
+                        <li data-lang-content="it" class="active text-gray-700">✓ Giorno 3: Potenza e recupero</li>
+                        <li data-lang-content="en" class="text-gray-700">✓ Day 3: Power and recovery</li>
+                        <li data-lang-content="nl" class="text-gray-700">✓ Dag 3: Kracht en herstel</li>
+                        
+                        <li data-lang-content="it" class="active text-gray-700">✓ 30 giorni programmazione personalizzata</li>
+                        <li data-lang-content="en" class="text-gray-700">✓ 30 days personalized programming</li>
+                        <li data-lang-content="nl" class="text-gray-700">✓ 30 dagen gepersonaliseerde programmering</li>
+                    </ul>
+                    
+                    <a href="#assessment" class="btn-primary inline-block">
+                        <span data-lang-content="it" class="active">Scegli Track B</span>
+                        <span data-lang-content="en">Choose Track B</span>
+                        <span data-lang-content="nl">Kies Track B</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-20 px-4">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 fade-in" style="color: var(--color-primary);">
+                <span data-lang-content="it" class="active">Come Funziona</span>
+                <span data-lang-content="en">How It Works</span>
+                <span data-lang-content="nl">Hoe Het Werkt</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="text-center fade-in">
+                    <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold" style="background: var(--color-primary);">1</div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span data-lang-content="it" class="active">Valutazione</span>
+                        <span data-lang-content="en">Assessment</span>
+                        <span data-lang-content="nl">Beoordeling</span>
+                    </h3>
+                    <p data-lang-content="it" class="active text-gray-600">Compila il questionario online. Ti consigliamo il programma giusto (Track A o B).</p>
+                    <p data-lang-content="en" class="text-gray-600">Complete the online questionnaire. We recommend the right program (Track A or B).</p>
+                    <p data-lang-content="nl" class="text-gray-600">Vul de online vragenlijst in. Wij adviseren het juiste programma (Track A of B).</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="text-center fade-in">
+                    <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold" style="background: var(--color-primary);">2</div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span data-lang-content="it" class="active">Iscrizione</span>
+                        <span data-lang-content="en">Enrollment</span>
+                        <span data-lang-content="nl">Inschrijving</span>
+                    </h3>
+                    <p data-lang-content="it" class="active text-gray-600">Scegli le date del programma e paga online (€200-300). Massimo 10 partecipanti.</p>
+                    <p data-lang-content="en" class="text-gray-600">Choose program dates and pay online (€200-300). Maximum 10 participants.</p>
+                    <p data-lang-content="nl" class="text-gray-600">Kies programma data en betaal online (€200-300). Maximaal 10 deelnemers.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="text-center fade-in">
+                    <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold" style="background: var(--color-primary);">3</div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span data-lang-content="it" class="active">3 Giorni</span>
+                        <span data-lang-content="en">3 Days</span>
+                        <span data-lang-content="nl">3 Dagen</span>
+                    </h3>
+                    <p data-lang-content="it" class="active text-gray-600">Partecipa al programma in presenza a Utrecht. Valutazione + esercizi personalizzati + gruppo WhatsApp.</p>
+                    <p data-lang-content="en" class="text-gray-600">Attend in-person program in Utrecht. Assessment + personalized exercises + WhatsApp group.</p>
+                    <p data-lang-content="nl" class="text-gray-600">Volg persoonlijk programma in Utrecht. Beoordeling + gepersonaliseerde oefeningen + WhatsApp groep.</p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="text-center fade-in">
+                    <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold" style="background: var(--color-primary);">4</div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span data-lang-content="it" class="active">30 Giorni</span>
+                        <span data-lang-content="en">30 Days</span>
+                        <span data-lang-content="nl">30 Dagen</span>
+                    </h3>
+                    <p data-lang-content="it" class="active text-gray-600">Ricevi email quotidiane con esercizi adattati ai tuoi progressi. Continua a migliorare a casa.</p>
+                    <p data-lang-content="en" class="text-gray-600">Receive daily emails with exercises adapted to your progress. Keep improving at home.</p>
+                    <p data-lang-content="nl" class="text-gray-600">Ontvang dagelijkse e-mails met oefeningen aangepast aan je voortgang. Blijf thuis verbeteren.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why CAMI -->
+    <section class="py-20 px-4 bg-gray-50">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 fade-in" style="color: var(--color-primary);">
+                <span data-lang-content="it" class="active">Perché CAMI</span>
+                <span data-lang-content="en">Why CAMI</span>
+                <span data-lang-content="nl">Waarom CAMI</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Trilingual -->
+                <div class="text-center fade-in">
+                    <div class="text-5xl mb-4">🌍</div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span data-lang-content="it" class="active">Supporto Trilingue</span>
+                        <span data-lang-content="en">Trilingual Support</span>
+                        <span data-lang-content="nl">Meertalige Ondersteuning</span>
+                    </h3>
+                    <p data-lang-content="it" class="active text-gray-600">Italiano, English, Nederlands. Nessuna barriera linguistica per gli expat a Utrecht.</p>
+                    <p data-lang-content="en" class="text-gray-600">Italian, English, Dutch. No language barriers for expats in Utrecht.</p>
+                    <p data-lang-content="nl" class="text-gray-600">Italiaans, Engels, Nederlands. Geen taalbarrières voor expats in Utrecht.</p>
+                </div>
+                
+                <!-- Personalization -->
+                <div class="text-center fade-in">
+                    <div class="text-5xl mb-4">🤖</div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span data-lang-content="it" class="active">Coaching Adattivo</span>
+                        <span data-lang-content="en">Adaptive Coaching</span>
+                        <span data-lang-content="nl">Adaptieve Coaching</span>
+                    </h3>
+                    <p data-lang-content="it" class="active text-gray-600">Tecnologia CAMIX adatta i consigli ogni giorno ai tuoi progressi. Non ricette generiche.</p>
+                    <p data-lang-content="en" class="text-gray-600">CAMIX technology adapts recommendations daily to your progress. No generic recipes.</p>
+                    <p data-lang-content="nl" class="text-gray-600">CAMIX technologie past aanbevelingen dagelijks aan aan je voortgang. Geen generieke recepten.</p>
+                </div>
+                
+                <!-- Expertise -->
+                <div class="text-center fade-in">
+                    <div class="text-5xl mb-4">🎓</div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span data-lang-content="it" class="active">Esperienza Clinica</span>
+                        <span data-lang-content="en">Clinical Expertise</span>
+                        <span data-lang-content="nl">Klinische Expertise</span>
+                    </h3>
+                    <p data-lang-content="it" class="active text-gray-600">10+ anni in esercizio clinico e preparazione atletica. Evidence-based, non improvvisazione.</p>
+                    <p data-lang-content="en" class="text-gray-600">10+ years in clinical exercise and athletic preparation. Evidence-based, not improvisation.</p>
+                    <p data-lang-content="nl" class="text-gray-600">10+ jaar in klinische oefening en atletische voorbereiding. Evidence-based, geen improvisatie.</p>
+                </div>
+                
+                <!-- Community -->
+                <div class="text-center fade-in">
+                    <div class="text-5xl mb-4">👥</div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span data-lang-content="it" class="active">Gruppo Piccolo</span>
+                        <span data-lang-content="en">Small Group</span>
+                        <span data-lang-content="nl">Kleine Groep</span>
+                    </h3>
+                    <p data-lang-content="it" class="active text-gray-600">Massimo 10 partecipanti. Attenzione individuale + supporto della comunità.</p>
+                    <p data-lang-content="en" class="text-gray-600">Maximum 10 participants. Individual attention + community support.</p>
+                    <p data-lang-content="nl" class="text-gray-600">Maximaal 10 deelnemers. Individuele aandacht + gemeenschapsondersteuning.</p>
+                </div>
+                
+                <!-- Safety -->
+                <div class="text-center fade-in">
+                    <div class="text-5xl mb-4">🛡️</div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span data-lang-content="it" class="active">Sicurezza Prima</span>
+                        <span data-lang-content="en">Safety First</span>
+                        <span data-lang-content="nl">Veiligheid Eerst</span>
+                    </h3>
+                    <p data-lang-content="it" class="active text-gray-600">Screening PAR-Q+, controlli medici se necessari, filtri automatici per esercizi controindicati.</p>
+                    <p data-lang-content="en" class="text-gray-600">PAR-Q+ screening, medical clearance if needed, automatic filters for contraindicated exercises.</p>
+                    <p data-lang-content="nl" class="text-gray-600">PAR-Q+ screening, medische goedkeuring indien nodig, automatische filters voor gecontra-indiceerde oefeningen.</p>
+                </div>
+                
+                <!-- Results -->
+                <div class="text-center fade-in">
+                    <div class="text-5xl mb-4">📈</div>
+                    <h3 class="text-xl font-semibold mb-3">
+                        <span data-lang-content="it" class="active">Risultati Misurabili</span>
+                        <span data-lang-content="en">Measurable Results</span>
+                        <span data-lang-content="nl">Meetbare Resultaten</span>
+                    </h3>
+                    <p data-lang-content="it" class="active text-gray-600">Tracking progressi, feedback continuo, adattamento settimanale. Sai sempre dove stai andando.</p>
+                    <p data-lang-content="en" class="text-gray-600">Progress tracking, continuous feedback, weekly adaptation. You always know where you're going.</p>
+                    <p data-lang-content="nl" class="text-gray-600">Voortgangsregistratie, continue feedback, wekelijkse aanpassing. Je weet altijd waar je naartoe gaat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials -->
+    <section class="py-20 px-4">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 fade-in" style="color: var(--color-primary);">
+                <span data-lang-content="it" class="active">Cosa Dicono i Clienti</span>
+                <span data-lang-content="en">What Clients Say</span>
+                <span data-lang-content="nl">Wat Klanten Zeggen</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 (Track A) -->
+                <div class="testimonial-card fade-in">
+                    <div class="text-yellow-400 text-2xl mb-4">★★★★★</div>
+                    <p data-lang-content="it" class="active text-gray-700 mb-4">"Dopo 5 anni di mal di schiena cronico, finalmente ho trovato qualcosa che funziona. 30 giorni e ho ridotto il dolore dell'80%. Grazie CAMI!"</p>
+                    <p data-lang-content="en" class="text-gray-700 mb-4">"After 5 years of chronic back pain, I finally found something that works. 30 days and I reduced pain by 80%. Thank you CAMI!"</p>
+                    <p data-lang-content="nl" class="text-gray-700 mb-4">"Na 5 jaar chronische rugpijn heb ik eindelijk iets gevonden dat werkt. 30 dagen en ik heb de pijn met 80% verminderd. Bedankt CAMI!"</p>
+                    <p class="font-semibold">— Maria, 62, Utrecht</p>
+                </div>
+                
+                <!-- Testimonial 2 (Track B) -->
+                <div class="testimonial-card fade-in">
+                    <div class="text-yellow-400 text-2xl mb-4">★★★★★</div>
+                    <p data-lang-content="it" class="active text-gray-700 mb-4">"Ho aumentato lo squat di 15kg in un mese. La periodizzazione funziona davvero. Email quotidiane perfette per restare focalizzato."</p>
+                    <p data-lang-content="en" class="text-gray-700 mb-4">"I increased my squat by 15kg in one month. Periodization really works. Daily emails perfect for staying focused."</p>
+                    <p data-lang-content="nl" class="text-gray-700 mb-4">"Ik heb mijn squat met 15 kg verhoogd in één maand. Periodisering werkt echt. Dagelijkse e-mails perfect om gefocust te blijven."</p>
+                    <p class="font-semibold">— Luca, 34, CrossFit athlete</p>
+                </div>
+                
+                <!-- Testimonial 3 (Trilingual) -->
+                <div class="testimonial-card fade-in">
+                    <div class="text-yellow-400 text-2xl mb-4">★★★★★</div>
+                    <p data-lang-content="it" class="active text-gray-700 mb-4">"Fantastico avere tutto in italiano! Ad Utrecht è difficile trovare servizi per expat. CAMI è professionale e chiaro."</p>
+                    <p data-lang-content="en" class="text-gray-700 mb-4">"Fantastic to have everything in English! In Utrecht it's hard to find expat services. CAMI is professional and clear."</p>
+                    <p data-lang-content="nl" class="text-gray-700 mb-4">"Fantastisch om alles in het Nederlands te hebben! In Utrecht is het moeilijk om expat-diensten te vinden. CAMI is professioneel en duidelijk."</p>
+                    <p class="font-semibold">— Anna, 58, Terwijde</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing -->
+    <section class="py-20 px-4 bg-gray-50">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-6 fade-in" style="color: var(--color-primary);">
+                <span data-lang-content="it" class="active">Pricing Trasparente</span>
+                <span data-lang-content="en">Transparent Pricing</span>
+                <span data-lang-content="nl">Transparante Prijzen</span>
+            </h2>
+            
+            <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12 fade-in">
+                <div class="text-5xl font-bold mb-4" style="color: var(--color-accent);">€250</div>
+                <p data-lang-content="it" class="active text-xl text-gray-600 mb-8">Per il programma completo (Track A o Track B)</p>
+                <p data-lang-content="en" class="text-xl text-gray-600 mb-8">For the complete program (Track A or Track B)</p>
+                <p data-lang-content="nl" class="text-xl text-gray-600 mb-8">Voor het volledige programma (Track A of Track B)</p>
+                
+                <div class="text-left max-w-md mx-auto mb-8 space-y-3">
+                    <div class="flex items-start">
+                        <span class="text-green-500 mr-3 text-xl">✓</span>
+                        <span data-lang-content="it" class="active text-gray-700">3 sessioni in presenza a Utrecht (Giorno 1-3)</span>
+                        <span data-lang-content="en" class="text-gray-700">3 in-person sessions in Utrecht (Day 1-3)</span>
+                        <span data-lang-content="nl" class="text-gray-700">3 persoonlijke sessies in Utrecht (Dag 1-3)</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-green-500 mr-3 text-xl">✓</span>
+                        <span data-lang-content="it" class="active text-gray-700">30 giorni di coaching quotidiano via email</span>
+                        <span data-lang-content="en" class="text-gray-700">30 days of daily coaching via email</span>
+                        <span data-lang-content="nl" class="text-gray-700">30 dagen dagelijkse coaching via e-mail</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-green-500 mr-3 text-xl">✓</span>
+                        <span data-lang-content="it" class="active text-gray-700">Valutazione completa (postura, mobilità, forza)</span>
+                        <span data-lang-content="en" class="text-gray-700">Complete assessment (posture, mobility, strength)</span>
+                        <span data-lang-content="nl" class="text-gray-700">Volledige beoordeling (houding, mobiliteit, kracht)</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-green-500 mr-3 text-xl">✓</span>
+                        <span data-lang-content="it" class="active text-gray-700">Gruppo WhatsApp privato con altri partecipanti</span>
+                        <span data-lang-content="en" class="text-gray-700">Private WhatsApp group with other participants</span>
+                        <span data-lang-content="nl" class="text-gray-700">Privé WhatsApp groep met andere deelnemers</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-green-500 mr-3 text-xl">✓</span>
+                        <span data-lang-content="it" class="active text-gray-700">Supporto continuo via email/WhatsApp</span>
+                        <span data-lang-content="en" class="text-gray-700">Continuous support via email/WhatsApp</span>
+                        <span data-lang-content="nl" class="text-gray-700">Continue ondersteuning via e-mail/WhatsApp</span>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-green-500 mr-3 text-xl">✓</span>
+                        <span data-lang-content="it" class="active text-gray-700">Tracking progressi e adattamento settimanale</span>
+                        <span data-lang-content="en" class="text-gray-700">Progress tracking and weekly adaptation</span>
+                        <span data-lang-content="nl" class="text-gray-700">Voortgangsregistratie en wekelijkse aanpassing</span>
+                    </div>
+                </div>
+                
+                <p data-lang-content="it" class="active text-sm text-gray-500 mb-8">Rimborso completo entro 14 giorni dall'iscrizione. Nessun rimborso dopo l'inizio del programma.</p>
+                <p data-lang-content="en" class="text-sm text-gray-500 mb-8">Full refund within 14 days of enrollment. No refunds after program starts.</p>
+                <p data-lang-content="nl" class="text-sm text-gray-500 mb-8">Volledige terugbetaling binnen 14 dagen na inschrijving. Geen terugbetalingen na start van het programma.</p>
+                
+                <a href="#assessment" class="btn-primary text-lg">
+                    <span data-lang-content="it" class="active">Inizia Ora - Valutazione Gratuita</span>
+                    <span data-lang-content="en">Start Now - Free Assessment</span>
+                    <span data-lang-content="nl">Start Nu - Gratis Beoordeling</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ -->
+    <section class="py-20 px-4">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 fade-in" style="color: var(--color-primary);">
+                <span data-lang-content="it" class="active">Domande Frequenti</span>
+                <span data-lang-content="en">Frequently Asked Questions</span>
+                <span data-lang-content="nl">Veelgestelde Vragen</span>
+            </h2>
+            
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-lang-content="it" class="active">Devo avere esperienza con l'esercizio fisico?</span>
+                        <span data-lang-content="en">Do I need exercise experience?</span>
+                        <span data-lang-content="nl">Heb ik oefenervaring nodig?</span>
+                        <svg class="faq-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-lang-content="it" class="active">No. Track A è perfetto per chi non ha mai fatto esercizio o ha dolore cronico. Track B richiede almeno 1 anno di esperienza di allenamento. Valutiamo tutti prima di iniziare.</p>
+                        <p data-lang-content="en">No. Track A is perfect for those who never exercised or have chronic pain. Track B requires at least 1 year training experience. We assess everyone before starting.</p>
+                        <p data-lang-content="nl">Nee. Track A is perfect voor degenen die nooit hebben geoefend of chronische pijn hebben. Track B vereist minimaal 1 jaar trainingservaring. We beoordelen iedereen voordat we beginnen.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-lang-content="it" class="active">Posso usare l'assicurazione sanitaria?</span>
+                        <span data-lang-content="en">Can I use health insurance?</span>
+                        <span data-lang-content="nl">Kan ik zorgverzekering gebruiken?</span>
+                        <svg class="faq-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-lang-content="it" class="active">Questo non è un servizio di fisioterapia coperto da assicurazione. È un programma di wellness premium a pagamento diretto. Alcuni clienti ottengono rimborso parziale dalla loro assicurazione complementare (aanvullende verzekering) - contatta la tua assicurazione per verificare.</p>
+                        <p data-lang-content="en">This is not physiotherapy covered by insurance. It's a premium wellness program with direct payment. Some clients get partial reimbursement from supplementary insurance (aanvullende verzekering) - contact your insurer to check.</p>
+                        <p data-lang-content="nl">Dit is geen fysiotherapie gedekt door verzekering. Het is een premium welzijnsprogramma met directe betaling. Sommige klanten krijgen gedeeltelijke vergoeding van aanvullende verzekering - neem contact op met uw verzekeraar om te controleren.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-lang-content="it" class="active">Dove si svolgono le sessioni in presenza?</span>
+                        <span data-lang-content="en">Where are the in-person sessions?</span>
+                        <span data-lang-content="nl">Waar zijn de persoonlijke sessies?</span>
+                        <svg class="faq-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-lang-content="it" class="active">A Utrecht, zona Terwijde/Leidsche Rijn (indirizzo esatto fornito dopo l'iscrizione). Facilmente raggiungibile in auto o con i mezzi pubblici.</p>
+                        <p data-lang-content="en">In Utrecht, Terwijde/Leidsche Rijn area (exact address provided after enrollment). Easily accessible by car or public transport.</p>
+                        <p data-lang-content="nl">In Utrecht, Terwijde/Leidsche Rijn gebied (exacte adres verstrekt na inschrijving). Gemakkelijk bereikbaar met auto of openbaar vervoer.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-lang-content="it" class="active">Cosa succede se non posso partecipare alle date programmate?</span>
+                        <span data-lang-content="en">What if I can't attend the scheduled dates?</span>
+                        <span data-lang-content="nl">Wat als ik niet op de geplande data kan?</span>
+                        <svg class="faq-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-lang-content="it" class="active">Puoi spostare la tua iscrizione al programma successivo (entro 6 mesi). Cancelliamo almeno 7 giorni prima per rimborso completo. Dopo l'inizio del programma, nessun rimborso (ma puoi recuperare le sessioni perse individualmente).</p>
+                        <p data-lang-content="en">You can move your enrollment to the next program (within 6 months). Cancel at least 7 days before for full refund. After program starts, no refunds (but you can make up missed sessions individually).</p>
+                        <p data-lang-content="nl">Je kunt je inschrijving naar het volgende programma verplaatsen (binnen 6 maanden). Annuleer minimaal 7 dagen voor voor volledige terugbetaling. Na start programma geen terugbetalingen (maar je kunt gemiste sessies individueel inhalen).</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 5 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-lang-content="it" class="active">Le email quotidiane sono davvero personalizzate?</span>
+                        <span data-lang-content="en">Are the daily emails really personalized?</span>
+                        <span data-lang-content="nl">Zijn de dagelijkse e-mails echt gepersonaliseerd?</span>
+                        <svg class="faq-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-lang-content="it" class="active">Sì. Tecnologia CAMIX genera consigli basati sulla tua valutazione (dolore, mobilità, obiettivi) e si adatta ogni settimana in base ai tuoi feedback. Non email generiche - ogni persona riceve esercizi diversi.</p>
+                        <p data-lang-content="en">Yes. CAMIX technology generates recommendations based on your assessment (pain, mobility, goals) and adapts weekly based on your feedback. Not generic emails - each person receives different exercises.</p>
+                        <p data-lang-content="nl">Ja. CAMIX-technologie genereert aanbevelingen op basis van uw beoordeling (pijn, mobiliteit, doelen) en past zich wekelijks aan op basis van uw feedback. Geen generieke e-mails - elke persoon ontvangt verschillende oefeningen.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 6 -->
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span data-lang-content="it" class="active">Quanto tempo richiedono gli esercizi quotidiani?</span>
+                        <span data-lang-content="en">How much time do daily exercises require?</span>
+                        <span data-lang-content="nl">Hoeveel tijd kosten de dagelijkse oefeningen?</span>
+                        <svg class="faq-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p data-lang-content="it" class="active">Track A: 10-15 minuti al giorno (micro-routine, mobilità, postura). Track B: 30-60 minuti se hai già una routine di allenamento (i nostri consigli si integrano con il tuo allenamento esistente).</p>
+                        <p data-lang-content="en">Track A: 10-15 minutes daily (micro-routines, mobility, posture). Track B: 30-60 minutes if you already have a training routine (our recommendations integrate with your existing training).</p>
+                        <p data-lang-content="nl">Track A: 10-15 minuten per dag (micro-routines, mobiliteit, houding). Track B: 30-60 minuten als je al een trainingsroutine hebt (onze aanbevelingen integreren met je bestaande training).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Final -->
+    <section id="assessment" class="py-20 px-4 hero-gradient text-white">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 fade-in">
+                <span data-lang-content="it" class="active">Pronto a Iniziare?</span>
+                <span data-lang-content="en">Ready to Start?</span>
+                <span data-lang-content="nl">Klaar om te Beginnen?</span>
+            </h2>
+            <p data-lang-content="it" class="active text-xl mb-8 opacity-90 fade-in">Completa la valutazione gratuita in 5 minuti. Ti consigliamo il programma giusto (Track A o B) entro 24 ore.</p>
+            <p data-lang-content="en" class="text-xl mb-8 opacity-90 fade-in">Complete the free assessment in 5 minutes. We recommend the right program (Track A or B) within 24 hours.</p>
+            <p data-lang-content="nl" class="text-xl mb-8 opacity-90 fade-in">Voltooi de gratis beoordeling in 5 minuten. Wij adviseren het juiste programma (Track A of B) binnen 24 uur.</p>
+            
+            <a href="/assessment" class="btn-primary text-lg inline-block fade-in" style="background: white; color: var(--color-primary);">
+                <span data-lang-content="it" class="active">Inizia Valutazione Gratuita →</span>
+                <span data-lang-content="en">Start Free Assessment →</span>
+                <span data-lang-content="nl">Start Gratis Beoordeling →</span>
+            </a>
+            
+            <p data-lang-content="it" class="active mt-6 text-sm opacity-75">Nessun impegno. Nessuna carta di credito richiesta.</p>
+            <p data-lang-content="en" class="mt-6 text-sm opacity-75">No commitment. No credit card required.</p>
+            <p data-lang-content="nl" class="mt-6 text-sm opacity-75">Geen verplichting. Geen creditcard vereist.</p>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+            <!-- Brand -->
+            <div>
+                <div class="text-2xl font-bold mb-4">CAMI Netherlands</div>
+                <p class="text-gray-400">
+                    <span data-lang-content="it" class="active">Esercizio clinico e preparazione atletica per expat a Utrecht.</span>
+                    <span data-lang-content="en">Clinical exercise and athletic preparation for expats in Utrecht.</span>
+                    <span data-lang-content="nl">Klinische oefening en atletische voorbereiding voor expats in Utrecht.</span>
+                </p>
+            </div>
+            
+            <!-- Links -->
+            <div>
+                <h3 class="font-semibold mb-4">
+                    <span data-lang-content="it" class="active">Link Utili</span>
+                    <span data-lang-content="en">Useful Links</span>
+                    <span data-lang-content="nl">Nuttige Links</span>
+                </h3>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="https://www.centrocami.it" class="hover:text-white transition">Centro CAMI Italy</a></li>
+                    <li><a href="#how-it-works" class="hover:text-white transition">
+                        <span data-lang-content="it" class="active">Come Funziona</span>
+                        <span data-lang-content="en">How It Works</span>
+                        <span data-lang-content="nl">Hoe Het Werkt</span>
+                    </a></li>
+                    <li><a href="#" class="hover:text-white transition">
+                        <span data-lang-content="it" class="active">Privacy Policy</span>
+                        <span data-lang-content="en">Privacy Policy</span>
+                        <span data-lang-content="nl">Privacy Policy</span>
+                    </a></li>
+                    <li><a href="#" class="hover:text-white transition">
+                        <span data-lang-content="it" class="active">Termini di Servizio</span>
+                        <span data-lang-content="en">Terms of Service</span>
+                        <span data-lang-content="nl">Algemene Voorwaarden</span>
+                    </a></li>
+                </ul>
+            </div>
+            
+            <!-- Contact -->
+            <div>
+                <h3 class="font-semibold mb-4">
+                    <span data-lang-content="it" class="active">Contatti</span>
+                    <span data-lang-content="en">Contact</span>
+                    <span data-lang-content="nl">Contact</span>
+                </h3>
+                <ul class="space-y-2 text-gray-400">
+                    <li>📧 info@centrocami.it</li>
+                    <li>📱 WhatsApp: +31 XX XXX XXXX</li>
+                    <li>📍 Utrecht, Netherlands</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
+            <p>&copy; 2026 CAMI Netherlands. 
+                <span data-lang-content="it" class="active">Tutti i diritti riservati.</span>
+                <span data-lang-content="en">All rights reserved.</span>
+                <span data-lang-content="nl">Alle rechten voorbehouden.</span>
+            </p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script>
+        // Language switcher
+        function switchLanguage(lang) {
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            document.documentElement.setAttribute('data-lang', lang);
+            
+            // Update all language content
+            const allContent = document.querySelectorAll('[data-lang-content]');
+            allContent.forEach(el => {
+                el.classList.remove('active');
+                if (el.getAttribute('data-lang-content') === lang) {
+                    el.classList.add('active');
+                }
+            });
+            
+            // Update language switcher buttons
+            const allBtns = document.querySelectorAll('[data-lang-btn]');
+            allBtns.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang-btn') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Store preference
+            localStorage.setItem('preferredLanguage', lang);
+        }
+        
+        // Load preferred language on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const preferredLang = localStorage.getItem('preferredLanguage') || 'en';
+            switchLanguage(preferredLang);
+            
+            // Fade-in animation observer
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+        
+        // FAQ accordion
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked FAQ if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

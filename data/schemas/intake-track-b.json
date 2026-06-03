@@ -1,0 +1,398 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CAMI Track B - Performance & Athletic Preparation Intake Schema",
+  "description": "Assessment schema for Track B (Performance Training) clients",
+  "type": "object",
+  "required": [
+    "profile",
+    "goals",
+    "performance_screening",
+    "consent"
+  ],
+  "properties": {
+    "profile": {
+      "type": "object",
+      "required": ["name", "email", "age", "language"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100,
+          "description": "Full name"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Primary email address"
+        },
+        "age": {
+          "type": "integer",
+          "minimum": 18,
+          "maximum": 99,
+          "description": "Age in years"
+        },
+        "language": {
+          "type": "string",
+          "enum": ["it", "en", "nl"],
+          "description": "Preferred language (Italiano, English, Nederlands)"
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+?[0-9\\s\\-()]{8,20}$",
+          "description": "Phone number (optional but recommended)"
+        },
+        "referral_source": {
+          "type": "string",
+          "enum": ["meta_ad", "google_ad", "friend", "website", "other"],
+          "description": "How did you hear about us?"
+        }
+      }
+    },
+    "goals": {
+      "type": "object",
+      "required": ["primary_goals"],
+      "properties": {
+        "primary_goals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "increase_strength",
+              "build_muscle",
+              "improve_power",
+              "improve_speed",
+              "improve_endurance",
+              "competition_prep",
+              "injury_recovery_return",
+              "other"
+            ]
+          },
+          "description": "Select all that apply"
+        },
+        "other_goal": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "If 'other' selected, describe your goal"
+        },
+        "specific_performance_targets": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "Optional: Specific targets (e.g., 'squat 150kg', '10% BF', 'run sub-20min 5K')"
+        }
+      }
+    },
+    "performance_screening": {
+      "type": "object",
+      "required": ["parq_core", "sport_activity", "training_history"],
+      "properties": {
+        "parq_core": {
+          "type": "object",
+          "required": [
+            "heart_condition",
+            "chest_pain_active",
+            "chest_pain_rest",
+            "dizziness_loss_consciousness",
+            "bone_joint_problem",
+            "blood_pressure_medication",
+            "other_reason"
+          ],
+          "properties": {
+            "heart_condition": {
+              "type": "boolean",
+              "description": "Has your doctor ever said you have a heart condition?"
+            },
+            "chest_pain_active": {
+              "type": "boolean",
+              "description": "Do you have chest pain when you do physical activity?"
+            },
+            "chest_pain_rest": {
+              "type": "boolean",
+              "description": "In the past month, have you had chest pain when not active?"
+            },
+            "dizziness_loss_consciousness": {
+              "type": "boolean",
+              "description": "Do you lose balance due to dizziness or lose consciousness?"
+            },
+            "bone_joint_problem": {
+              "type": "boolean",
+              "description": "Do you have a bone or joint problem that could worsen with activity?"
+            },
+            "blood_pressure_medication": {
+              "type": "boolean",
+              "description": "Is your doctor prescribing medication for blood pressure or heart?"
+            },
+            "other_reason": {
+              "type": "boolean",
+              "description": "Do you know any other reason you should not do physical activity?"
+            }
+          }
+        },
+        "parq_followup": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "If YES to any PAR-Q+ question, describe your condition and medical guidance"
+        },
+        "sport_activity": {
+          "type": "object",
+          "required": ["primary_sport"],
+          "properties": {
+            "primary_sport": {
+              "type": "string",
+              "enum": [
+                "running",
+                "cycling",
+                "strength_training",
+                "crossfit",
+                "martial_arts",
+                "team_sports",
+                "swimming",
+                "triathlon",
+                "climbing",
+                "other"
+              ],
+              "description": "Primary sport or activity"
+            },
+            "other_sport": {
+              "type": "string",
+              "maxLength": 100,
+              "description": "If 'other', specify"
+            },
+            "competition_level": {
+              "type": "string",
+              "enum": ["recreational", "amateur", "competitive", "elite"],
+              "description": "Competition level"
+            }
+          }
+        },
+        "training_history": {
+          "type": "object",
+          "required": ["years_training", "frequency"],
+          "properties": {
+            "years_training": {
+              "type": "string",
+              "enum": ["less_1", "1_3", "3_5", "5_10", "10plus"],
+              "description": "How many years have you been training?"
+            },
+            "frequency": {
+              "type": "string",
+              "enum": ["1_2x", "3_4x", "5_6x", "7plus_x"],
+              "description": "Current training frequency (sessions per week)"
+            },
+            "training_description": {
+              "type": "string",
+              "maxLength": 500,
+              "description": "Optional: Describe your current training (e.g., 'Push/pull/legs split, 4x/week, focus on hypertrophy')"
+            }
+          }
+        },
+        "strength_baselines": {
+          "type": "object",
+          "description": "Optional: Recent 1RM or PRs (helps us tailor programming)",
+          "properties": {
+            "squat_1rm": {
+              "type": "number",
+              "description": "Squat 1RM or estimated max (kg)"
+            },
+            "deadlift_1rm": {
+              "type": "number",
+              "description": "Deadlift 1RM or estimated max (kg)"
+            },
+            "bench_press_1rm": {
+              "type": "number",
+              "description": "Bench press 1RM or estimated max (kg)"
+            },
+            "overhead_press_1rm": {
+              "type": "number",
+              "description": "Overhead press 1RM or estimated max (kg)"
+            },
+            "other_lifts": {
+              "type": "string",
+              "maxLength": 300,
+              "description": "Other relevant lifts or performance metrics (e.g., 'Clean 80kg', 'Vertical jump 60cm')"
+            }
+          }
+        },
+        "injury_history": {
+          "type": "object",
+          "required": ["has_recent_injury"],
+          "properties": {
+            "has_recent_injury": {
+              "type": "boolean",
+              "description": "Have you had any injuries in the past 6 months?"
+            },
+            "injury_details": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "location": {
+                    "type": "string",
+                    "enum": ["shoulder", "elbow", "wrist", "back", "hip", "knee", "ankle", "other"],
+                    "description": "Injury location"
+                  },
+                  "type": {
+                    "type": "string",
+                    "maxLength": 200,
+                    "description": "Type of injury (e.g., 'hamstring strain', 'rotator cuff tendinitis')"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": ["healed", "healing", "still_painful"],
+                    "description": "Current status"
+                  },
+                  "medical_clearance": {
+                    "type": "boolean",
+                    "description": "Have you received medical clearance to train?"
+                  }
+                }
+              },
+              "description": "Details of recent injuries"
+            }
+          },
+          "dependencies": {
+            "injury_details": ["has_recent_injury"]
+          }
+        },
+        "current_limitations": {
+          "type": "object",
+          "properties": {
+            "has_limitations": {
+              "type": "boolean",
+              "description": "Do you have any current pain or movement limitations?"
+            },
+            "limitations_description": {
+              "type": "string",
+              "maxLength": 500,
+              "description": "Describe your limitations (e.g., 'limited shoulder ROM, can't overhead press', 'knee pain during deep squats')"
+            }
+          },
+          "dependencies": {
+            "limitations_description": ["has_limitations"]
+          }
+        }
+      }
+    },
+    "emergency_contact": {
+      "type": "object",
+      "description": "Emergency contact information (requested after value demonstrated)",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Emergency contact name"
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+?[0-9\\s\\-()]{8,20}$",
+          "description": "Emergency contact phone"
+        },
+        "relationship": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Relationship (e.g., spouse, sibling, friend)"
+        }
+      }
+    },
+    "consent": {
+      "type": "object",
+      "required": ["health_data", "liability"],
+      "properties": {
+        "health_data": {
+          "type": "object",
+          "required": ["consented", "timestamp"],
+          "properties": {
+            "consented": {
+              "type": "boolean",
+              "const": true,
+              "description": "Must be true (GDPR Art. 9 explicit consent, even for performance data with injury history)"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Consent timestamp (ISO 8601)"
+            },
+            "ip_address": {
+              "type": "string",
+              "description": "IP address (audit trail)"
+            },
+            "consent_version": {
+              "type": "string",
+              "description": "Consent text version (for audit)"
+            }
+          }
+        },
+        "marketing": {
+          "type": "object",
+          "required": ["consented"],
+          "properties": {
+            "consented": {
+              "type": "boolean",
+              "description": "Optional marketing consent"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "liability": {
+          "type": "object",
+          "required": ["acknowledged", "timestamp"],
+          "properties": {
+            "acknowledged": {
+              "type": "boolean",
+              "const": true,
+              "description": "Must be true (assumption of risk waiver for performance training)"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "System metadata (auto-populated)",
+      "properties": {
+        "assessment_id": {
+          "type": "string",
+          "description": "Unique assessment ID (UUID)"
+        },
+        "submitted_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Submission timestamp (ISO 8601)"
+        },
+        "utm_source": {
+          "type": "string",
+          "description": "Traffic source (e.g., meta, google)"
+        },
+        "utm_medium": {
+          "type": "string",
+          "description": "Traffic medium (e.g., cpc, organic)"
+        },
+        "utm_campaign": {
+          "type": "string",
+          "description": "Campaign name"
+        },
+        "track_recommended": {
+          "type": "string",
+          "enum": ["A", "B", "hybrid"],
+          "description": "Auto-triage recommendation"
+        },
+        "medical_clearance_required": {
+          "type": "boolean",
+          "description": "True if PAR-Q+ or recent injury indicates medical clearance needed"
+        },
+        "sentinel_status": {
+          "type": "string",
+          "enum": ["pass", "review", "decline"],
+          "description": "SENTINEL safety gate result"
+        }
+      }
+    }
+  }
+}

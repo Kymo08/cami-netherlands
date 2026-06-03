@@ -1,0 +1,395 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CAMI Track A - Clinical Exercise Intake Schema",
+  "description": "Assessment schema for Track A (Clinical Exercise & Healthy Aging) clients",
+  "type": "object",
+  "required": [
+    "profile",
+    "goals",
+    "health_screening",
+    "consent"
+  ],
+  "properties": {
+    "profile": {
+      "type": "object",
+      "required": ["name", "email", "age", "language"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 100,
+          "description": "Full name"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Primary email address"
+        },
+        "age": {
+          "type": "integer",
+          "minimum": 18,
+          "maximum": 99,
+          "description": "Age in years"
+        },
+        "language": {
+          "type": "string",
+          "enum": ["it", "en", "nl"],
+          "description": "Preferred language (Italiano, English, Nederlands)"
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+?[0-9\\s\\-()]{8,20}$",
+          "description": "Phone number (optional but recommended)"
+        },
+        "referral_source": {
+          "type": "string",
+          "enum": ["meta_ad", "google_ad", "friend", "website", "other"],
+          "description": "How did you hear about us?"
+        }
+      }
+    },
+    "goals": {
+      "type": "object",
+      "required": ["primary_goals"],
+      "properties": {
+        "primary_goals": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "enum": [
+              "reduce_chronic_pain",
+              "improve_mobility",
+              "improve_balance",
+              "prevent_falls",
+              "maintain_independence",
+              "other"
+            ]
+          },
+          "description": "Select all that apply"
+        },
+        "other_goal": {
+          "type": "string",
+          "maxLength": 500,
+          "description": "If 'other' selected, describe your goal"
+        }
+      }
+    },
+    "health_screening": {
+      "type": "object",
+      "required": ["parq_core"],
+      "properties": {
+        "parq_core": {
+          "type": "object",
+          "required": [
+            "heart_condition",
+            "chest_pain_active",
+            "chest_pain_rest",
+            "dizziness_loss_consciousness",
+            "bone_joint_problem",
+            "blood_pressure_medication",
+            "other_reason"
+          ],
+          "properties": {
+            "heart_condition": {
+              "type": "boolean",
+              "description": "Has your doctor ever said you have a heart condition?"
+            },
+            "chest_pain_active": {
+              "type": "boolean",
+              "description": "Do you have chest pain when you do physical activity?"
+            },
+            "chest_pain_rest": {
+              "type": "boolean",
+              "description": "In the past month, have you had chest pain when not active?"
+            },
+            "dizziness_loss_consciousness": {
+              "type": "boolean",
+              "description": "Do you lose balance due to dizziness or lose consciousness?"
+            },
+            "bone_joint_problem": {
+              "type": "boolean",
+              "description": "Do you have a bone or joint problem that could worsen with activity?"
+            },
+            "blood_pressure_medication": {
+              "type": "boolean",
+              "description": "Is your doctor prescribing medication for blood pressure or heart?"
+            },
+            "other_reason": {
+              "type": "boolean",
+              "description": "Do you know any other reason you should not do physical activity?"
+            }
+          }
+        },
+        "parq_followup": {
+          "type": "string",
+          "maxLength": 1000,
+          "description": "If YES to any PAR-Q+ question, describe your condition and medical guidance"
+        },
+        "chronic_pain": {
+          "type": "object",
+          "properties": {
+            "has_pain": {
+              "type": "boolean",
+              "description": "Do you experience chronic pain?"
+            },
+            "pain_location": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["back", "neck", "knees", "hips", "shoulders", "other"]
+              },
+              "description": "Where do you experience pain? (Select all that apply)"
+            },
+            "pain_severity": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 10,
+              "description": "Pain severity on average (0 = no pain, 10 = worst imaginable)"
+            },
+            "pain_duration": {
+              "type": "string",
+              "enum": ["less_3_months", "3_12_months", "1_5_years", "5plus_years"],
+              "description": "How long have you had this pain?"
+            },
+            "pain_description": {
+              "type": "string",
+              "maxLength": 500,
+              "description": "Optional: Describe your pain (sharp, dull, constant, intermittent, etc.)"
+            }
+          },
+          "dependencies": {
+            "pain_location": ["has_pain"],
+            "pain_severity": ["has_pain"],
+            "pain_duration": ["has_pain"]
+          }
+        },
+        "fall_history": {
+          "type": "object",
+          "properties": {
+            "fallen_past_year": {
+              "type": "boolean",
+              "description": "Have you fallen in the past year?"
+            },
+            "fall_count": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20,
+              "description": "How many times have you fallen?"
+            },
+            "fall_circumstances": {
+              "type": "string",
+              "maxLength": 500,
+              "description": "Describe the circumstances (e.g., tripping, loss of balance, etc.)"
+            }
+          },
+          "dependencies": {
+            "fall_count": ["fallen_past_year"],
+            "fall_circumstances": ["fallen_past_year"]
+          }
+        },
+        "balance_difficulty": {
+          "type": "object",
+          "properties": {
+            "has_difficulty": {
+              "type": "boolean",
+              "description": "Do you have difficulty with balance or walking?"
+            },
+            "difficulty_description": {
+              "type": "string",
+              "maxLength": 500,
+              "description": "Describe your balance or walking difficulties"
+            }
+          },
+          "dependencies": {
+            "difficulty_description": ["has_difficulty"]
+          }
+        },
+        "chronic_conditions": {
+          "type": "object",
+          "properties": {
+            "has_conditions": {
+              "type": "boolean",
+              "description": "Have you been diagnosed with osteoporosis, arthritis, or chronic musculoskeletal condition?"
+            },
+            "conditions_list": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["osteoporosis", "arthritis", "fibromyalgia", "chronic_back_pain", "scoliosis", "other"]
+              },
+              "description": "Which conditions? (Select all that apply)"
+            },
+            "conditions_description": {
+              "type": "string",
+              "maxLength": 500,
+              "description": "Additional details about your conditions"
+            }
+          },
+          "dependencies": {
+            "conditions_list": ["has_conditions"]
+          }
+        },
+        "medications": {
+          "type": "object",
+          "properties": {
+            "takes_medications": {
+              "type": "boolean",
+              "description": "Do you take medications that affect balance or coordination?"
+            },
+            "medication_list": {
+              "type": "string",
+              "maxLength": 500,
+              "description": "List medications (generic names or categories, e.g., blood pressure, sedatives)"
+            }
+          },
+          "dependencies": {
+            "medication_list": ["takes_medications"]
+          }
+        }
+      }
+    },
+    "emergency_contact": {
+      "type": "object",
+      "description": "Emergency contact information (requested after value demonstrated)",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Emergency contact name"
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+?[0-9\\s\\-()]{8,20}$",
+          "description": "Emergency contact phone"
+        },
+        "relationship": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Relationship (e.g., spouse, sibling, friend)"
+        }
+      }
+    },
+    "gp_contact": {
+      "type": "object",
+      "description": "General practitioner contact (only if medical clearance required)",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "GP name"
+        },
+        "practice_name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Medical practice name"
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^\\+?[0-9\\s\\-()]{8,20}$",
+          "description": "GP phone number"
+        }
+      }
+    },
+    "consent": {
+      "type": "object",
+      "required": ["health_data", "liability"],
+      "properties": {
+        "health_data": {
+          "type": "object",
+          "required": ["consented", "timestamp"],
+          "properties": {
+            "consented": {
+              "type": "boolean",
+              "const": true,
+              "description": "Must be true (GDPR Art. 9 explicit consent)"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Consent timestamp (ISO 8601)"
+            },
+            "ip_address": {
+              "type": "string",
+              "description": "IP address (audit trail)"
+            },
+            "consent_version": {
+              "type": "string",
+              "description": "Consent text version (for audit)"
+            }
+          }
+        },
+        "marketing": {
+          "type": "object",
+          "required": ["consented"],
+          "properties": {
+            "consented": {
+              "type": "boolean",
+              "description": "Optional marketing consent"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "liability": {
+          "type": "object",
+          "required": ["acknowledged", "timestamp"],
+          "properties": {
+            "acknowledged": {
+              "type": "boolean",
+              "const": true,
+              "description": "Must be true (assumption of risk waiver)"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "System metadata (auto-populated)",
+      "properties": {
+        "assessment_id": {
+          "type": "string",
+          "description": "Unique assessment ID (UUID)"
+        },
+        "submitted_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Submission timestamp (ISO 8601)"
+        },
+        "utm_source": {
+          "type": "string",
+          "description": "Traffic source (e.g., meta, google)"
+        },
+        "utm_medium": {
+          "type": "string",
+          "description": "Traffic medium (e.g., cpc, organic)"
+        },
+        "utm_campaign": {
+          "type": "string",
+          "description": "Campaign name"
+        },
+        "track_recommended": {
+          "type": "string",
+          "enum": ["A", "B", "hybrid"],
+          "description": "Auto-triage recommendation"
+        },
+        "medical_clearance_required": {
+          "type": "boolean",
+          "description": "True if PAR-Q+ indicates medical clearance needed"
+        },
+        "sentinel_status": {
+          "type": "string",
+          "enum": ["pass", "review", "decline"],
+          "description": "SENTINEL safety gate result"
+        }
+      }
+    }
+  }
+}
