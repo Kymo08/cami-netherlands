@@ -85,10 +85,11 @@ def submit_assessment():
               (id, created_at, name, email, age, phone, referral_source, language,
                goals, screening,
                track_recommended, sentinel_status, clinical_score, performance_score,
+               medical_clearance_required,
                consent_health, consent_marketing, consent_liability, consent_timestamp,
                utm_source, utm_medium, utm_campaign)
             VALUES
-              (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+              (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
         """, (
             assessment_id, now,
             profile['name'].strip(),
@@ -103,6 +104,7 @@ def submit_assessment():
             sentinel_status,
             triage_result['clinical_score'],
             triage_result['performance_score'],
+            1 if triage_result['medical_clearance_required'] else 0,
             1 if consent.get('health_data') else 0,
             1 if consent.get('marketing')    else 0,
             1 if consent.get('liability')    else 0,

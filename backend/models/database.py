@@ -33,10 +33,11 @@ def init_db():
             screening       TEXT NOT NULL,
 
             -- Results
-            track_recommended   TEXT,
-            sentinel_status     TEXT,
-            clinical_score      INTEGER DEFAULT 0,
-            performance_score   INTEGER DEFAULT 0,
+            track_recommended          TEXT,
+            sentinel_status            TEXT,
+            clinical_score             INTEGER DEFAULT 0,
+            performance_score          INTEGER DEFAULT 0,
+            medical_clearance_required BOOLEAN DEFAULT 0,
 
             -- Consent
             consent_health      BOOLEAN DEFAULT 0,
@@ -44,11 +45,12 @@ def init_db():
             consent_liability   BOOLEAN DEFAULT 0,
             consent_timestamp   TEXT,
 
-            -- Workflow status
-            status          TEXT DEFAULT 'pending',
-            payment_status  TEXT DEFAULT 'pending',
-            payment_id      TEXT,
-            notes           TEXT,
+            -- Workflow
+            status              TEXT DEFAULT 'new',
+            payment_status      TEXT DEFAULT 'pending',
+            payment_id          TEXT,
+            stripe_payment_link TEXT,
+            notes               TEXT,
 
             -- UTM tracking
             utm_source      TEXT,
@@ -62,5 +64,22 @@ def init_db():
         CREATE INDEX IF NOT EXISTS idx_track      ON assessments(track_recommended);
     """)
     conn.commit()
+
+    # ── Migrations: add columns to existing DBs ──────────────────────────────
+    _migrate(conn)
     conn.close()
     print(f"[DB] Initialized at {DB_PATH}")
+
+
+def _migrate(conn):
+    """Idempotent column additions for schema upgrades."""
+    existing = {row[1] for row in conn.execute("PRAGMA table_info(assessments)")}
+    migrations = [
+        ("medical_clearance_required", "BOOLEAN DEFAULT 0"),
+        ("stripe_payment_link",        "TEXT"),
+    ]
+    for col, definition in migrations:
+        if col not in existing:
+            conn.execute(f"ALTER TABLE assessments ADD COLUMN {col} {definition}")
+            print(f"[DB] Migration: added column {col}")
+    conn.commit()

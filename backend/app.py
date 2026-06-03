@@ -10,6 +10,8 @@ from dotenv import load_dotenv
 
 from models.database import init_db
 from routes.assessment import assessment_bp
+from routes.admin import admin_bp
+from routes.stripe_webhook import stripe_bp
 
 load_dotenv()
 
@@ -23,6 +25,8 @@ CORS(app, origins=[
 
 # Register blueprints
 app.register_blueprint(assessment_bp)
+app.register_blueprint(admin_bp)
+app.register_blueprint(stripe_bp)
 
 
 @app.route('/api/health')

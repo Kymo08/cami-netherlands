@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: cami-netherlands-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --threads 4 --timeout 60
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: RESEND_API_KEY
+        sync: false          # set manually in Render dashboard
+      - key: ADMIN_EMAIL
+        value: info@centrocami.it
+      - key: ADMIN_PASSWORD
+        sync: false          # set manually
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
+        sync: false
+    healthCheckPath: /api/health
+    autoDeploy: true

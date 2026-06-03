@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAMI Admin – Assessment Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root { --primary: #1E3A8A; --accent: #10B981; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F1F5F9; }
+        .stat-card { background: white; border-radius: .75rem; padding: 1.25rem 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.07); }
+        .badge { display:inline-flex; align-items:center; padding:.2rem .6rem; border-radius:9999px; font-size:.7rem; font-weight:600; }
+        .badge-new        { background:#DBEAFE; color:#1E40AF; }
+        .badge-reviewing  { background:#FEF3C7; color:#92400E; }
+        .badge-approved   { background:#D1FAE5; color:#065F46; }
+        .badge-payment_sent { background:#E0E7FF; color:#3730A3; }
+        .badge-enrolled   { background:#ECFDF5; color:#047857; border: 1px solid #10B981; }
+        .badge-declined   { background:#FEE2E2; color:#991B1B; }
+        .badge-waitlist   { background:#F3F4F6; color:#374151; }
+        .badge-track-A    { background:#DBEAFE; color:#1E40AF; }
+        .badge-track-B    { background:#FCE7F3; color:#9D174D; }
+        .badge-track-Hybrid { background:#FEF3C7; color:#92400E; }
+        .badge-sentinel-pass { background:#D1FAE5; color:#065F46; }
+        .badge-sentinel-medical { background:#FEF3C7; color:#92400E; }
+        .badge-sentinel-declined { background:#FEE2E2; color:#991B1B; }
+        .badge-paid  { background:#D1FAE5; color:#065F46; }
+        .badge-pending { background:#F3F4F6; color:#374151; }
+        .row-hover:hover { background: #F8FAFC; cursor: pointer; }
+        .modal-overlay { position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:50;display:none;overflow-y:auto; }
+        .modal-overlay.show { display:flex; align-items:flex-start; justify-content:center; padding:2rem 1rem; }
+        .modal { background:white; border-radius:1rem; width:100%; max-width:640px; box-shadow:0 20px 60px rgba(0,0,0,.2); }
+        #login-screen { position:fixed;inset:0;background:#F1F5F9;z-index:100;display:flex;align-items:center;justify-content:center; }
+        input, select, textarea { outline:none; }
+        input:focus, select:focus, textarea:focus { border-color: var(--primary) !important; }
+        .spinner { border:3px solid #E2E8F0; border-top-color: var(--primary); border-radius:50%; width:20px; height:20px; animation:spin .7s linear infinite; display:inline-block; }
+        @keyframes spin { to { transform:rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+<!-- ── Login Screen ──────────────────────────────────────────────────────── -->
+<div id="login-screen">
+    <div class="bg-white rounded-2xl shadow-xl p-8 w-full max-w-sm">
+        <h1 class="text-2xl font-bold mb-1" style="color:var(--primary)">CAMI Admin</h1>
+        <p class="text-gray-500 text-sm mb-6">Assessment Dashboard</p>
+        <div class="space-y-4">
+            <input id="login-user" type="text" value="admin" placeholder="Username"
+                class="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm">
+            <input id="login-pass" type="password" placeholder="Password"
+                class="w-full border border-gray-200 rounded-lg px-4 py-2.5 text-sm">
+            <button onclick="doLogin()" class="w-full py-2.5 rounded-lg font-semibold text-white transition-all hover:-translate-y-0.5" style="background:var(--primary)">
+                Sign In
+            </button>
+            <p id="login-error" class="text-red-500 text-sm text-center hidden">Invalid credentials</p>
+        </div>
+    </div>
+</div>
+
+<!-- ── Main Layout ───────────────────────────────────────────────────────── -->
+<div id="app" class="hidden">
+
+    <!-- Sidebar -->
+    <div class="fixed top-0 left-0 h-full w-56 bg-white shadow-lg z-40 flex flex-col">
+        <div class="p-5 border-b border-gray-100">
+            <div class="text-xl font-bold" style="color:var(--primary)">CAMI Admin</div>
+            <div class="text-xs text-gray-400 mt-0.5">Netherlands</div>
+        </div>
+        <nav class="flex-1 p-4 space-y-1">
+            <a onclick="showSection('dashboard')" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium cursor-pointer text-gray-700 hover:bg-gray-50" id="nav-dashboard">
+                📊 Dashboard
+            </a>
+            <a onclick="showSection('assessments')" class="nav-link flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium cursor-pointer text-gray-700 hover:bg-gray-50" id="nav-assessments">
+                📋 Assessments
+            </a>
+        </nav>
+        <div class="p-4 border-t border-gray-100">
+            <button onclick="logout()" class="text-xs text-gray-400 hover:text-gray-600">Sign out</button>
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="ml-56 p-8">
+
+        <!-- Dashboard Section -->
+        <section id="section-dashboard">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Dashboard</h2>
+            <div id="stats-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="stat-card"><div class="text-3xl font-bold text-gray-800" id="stat-total">–</div><div class="text-sm text-gray-500 mt-1">Total Assessments</div></div>
+                <div class="stat-card"><div class="text-3xl font-bold" id="stat-revenue" style="color:var(--accent)">–</div><div class="text-sm text-gray-500 mt-1">Revenue (paid)</div></div>
+                <div class="stat-card"><div class="text-3xl font-bold text-yellow-600" id="stat-medical">–</div><div class="text-sm text-gray-500 mt-1">Medical Flags</div></div>
+                <div class="stat-card"><div class="text-3xl font-bold text-red-500" id="stat-declined">–</div><div class="text-sm text-gray-500 mt-1">SENTINEL Declined</div></div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="stat-card">
+                    <h3 class="font-semibold text-gray-700 mb-4">By Track</h3>
+                    <div id="track-breakdown" class="space-y-2"></div>
+                </div>
+                <div class="stat-card">
+                    <h3 class="font-semibold text-gray-700 mb-4">By Status</h3>
+                    <div id="status-breakdown" class="space-y-2"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Assessments Section -->
+        <section id="section-assessments" class="hidden">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Assessments</h2>
+                <button onclick="loadAssessments()" class="text-sm px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50">↻ Refresh</button>
+            </div>
+
+            <!-- Filters -->
+            <div class="bg-white rounded-xl shadow-sm p-4 mb-5 flex flex-wrap gap-3">
+                <input id="filter-q" type="text" placeholder="Search name / email…"
+                    class="border border-gray-200 rounded-lg px-3 py-2 text-sm flex-1 min-w-40"
+                    oninput="debounceLoad()">
+                <select id="filter-track" onchange="loadAssessments()" class="border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white">
+                    <option value="">All Tracks</option>
+                    <option value="A">Track A – Clinical</option>
+                    <option value="B">Track B – Performance</option>
+                    <option value="Hybrid">Hybrid</option>
+                </select>
+                <select id="filter-status" onchange="loadAssessments()" class="border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white">
+                    <option value="">All Statuses</option>
+                    <option value="new">New</option>
+                    <option value="reviewing">Reviewing</option>
+                    <option value="approved">Approved</option>
+                    <option value="payment_sent">Payment Sent</option>
+                    <option value="enrolled">Enrolled</option>
+                    <option value="declined">Declined</option>
+                    <option value="waitlist">Waitlist</option>
+                </select>
+                <select id="filter-sentinel" onchange="loadAssessments()" class="border border-gray-200 rounded-lg px-3 py-2 text-sm bg-white">
+                    <option value="">All SENTINEL</option>
+                    <option value="pass">Pass</option>
+                    <option value="medical_clearance_required">Medical Req.</option>
+                    <option value="declined">Declined</option>
+                </select>
+            </div>
+
+            <!-- Table -->
+            <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-50 border-b border-gray-100">
+                        <tr>
+                            <th class="text-left px-4 py-3 font-semibold text-gray-600">Name</th>
+                            <th class="text-left px-4 py-3 font-semibold text-gray-600">Age</th>
+                            <th class="text-left px-4 py-3 font-semibold text-gray-600">Track</th>
+                            <th class="text-left px-4 py-3 font-semibold text-gray-600">SENTINEL</th>
+                            <th class="text-left px-4 py-3 font-semibold text-gray-600">Status</th>
+                            <th class="text-left px-4 py-3 font-semibold text-gray-600">Payment</th>
+                            <th class="text-left px-4 py-3 font-semibold text-gray-600">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="assessments-tbody">
+                        <tr><td colspan="7" class="text-center py-12 text-gray-400"><div class="spinner mx-auto"></div></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div id="pagination" class="flex justify-between items-center mt-4 text-sm text-gray-500"></div>
+        </section>
+
+    </div>
+</div>
+
+<!-- ── Detail Modal ──────────────────────────────────────────────────────── -->
+<div id="modal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal p-6" onclick="event.stopPropagation()">
+        <div class="flex justify-between items-start mb-4">
+            <h3 class="text-lg font-bold text-gray-800" id="modal-name">–</h3>
+            <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
+        </div>
+        <div id="modal-body" class="space-y-4 text-sm text-gray-700"></div>
+        <div class="mt-6 pt-4 border-t border-gray-100 flex gap-2 flex-wrap justify-end">
+            <button onclick="closeModal()" class="px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 text-sm">Close</button>
+            <button onclick="saveAssessment()" class="px-4 py-2 rounded-lg text-white text-sm font-semibold hover:-translate-y-0.5 transition-all" style="background:var(--primary)">Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────
+let apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:5000' : '';
+let creds    = null;
+let currentA = null;
+let page     = 1;
+let debTimer = null;
+
+// ── Auth ───────────────────────────────────────────────────────────────────
+async function doLogin() {
+    const user = document.getElementById('login-user').value;
+    const pass = document.getElementById('login-pass').value;
+    const b64  = btoa(`${user}:${pass}`);
+    const resp = await fetch(`${apiBase}/api/admin/stats`, {
+        headers: { 'Authorization': `Basic ${b64}` }
+    });
+    if (resp.ok) {
+        creds = b64;
+        document.getElementById('login-screen').classList.add('hidden');
+        document.getElementById('app').classList.remove('hidden');
+        showSection('dashboard');
+        loadStats();
+    } else {
+        document.getElementById('login-error').classList.remove('hidden');
+    }
+}
+document.getElementById('login-pass').addEventListener('keydown', e => { if (e.key==='Enter') doLogin(); });
+
+function logout() {
+    creds = null;
+    document.getElementById('login-screen').classList.remove('hidden');
+    document.getElementById('app').classList.add('hidden');
+}
+
+function authFetch(url, opts={}) {
+    opts.headers = { ...(opts.headers||{}), 'Authorization': `Basic ${creds}`, 'Content-Type': 'application/json' };
+    return fetch(apiBase + url, opts);
+}
+
+// ── Navigation ─────────────────────────────────────────────────────────────
+function showSection(name) {
+    ['dashboard','assessments'].forEach(s => {
+        document.getElementById(`section-${s}`).classList.toggle('hidden', s !== name);
+        document.getElementById(`nav-${s}`).classList.toggle('bg-blue-50', s === name);
+        document.getElementById(`nav-${s}`).classList.toggle('text-blue-700', s === name);
+    });
+    if (name === 'assessments') loadAssessments();
+}
+
+// ── Stats ──────────────────────────────────────────────────────────────────
+async function loadStats() {
+    const data = await authFetch('/api/admin/stats').then(r=>r.json());
+
+    document.getElementById('stat-total').textContent    = data.total;
+    document.getElementById('stat-revenue').textContent  = `€${(data.revenue_eur||0).toLocaleString()}`;
+    document.getElementById('stat-medical').textContent  = data.medical_flags;
+    document.getElementById('stat-declined').textContent = data.declined;
+
+    const trackEl = document.getElementById('track-breakdown');
+    trackEl.innerHTML = Object.entries(data.by_track||{}).map(([t,c]) =>
+        `<div class="flex justify-between"><span class="font-medium">Track ${t}</span><span class="badge badge-track-${t}">${c}</span></div>`
+    ).join('') || '<p class="text-gray-400">No data yet</p>';
+
+    const statusEl = document.getElementById('status-breakdown');
+    statusEl.innerHTML = Object.entries(data.by_status||{}).map(([s,c]) =>
+        `<div class="flex justify-between"><span class="font-medium capitalize">${s.replace('_',' ')}</span><span class="badge badge-${s}">${c}</span></div>`
+    ).join('') || '<p class="text-gray-400">No data yet</p>';
+}
+
+// ── Assessments Table ─────────────────────────────────────────────────────
+function debounceLoad() {
+    clearTimeout(debTimer);
+    debTimer = setTimeout(() => loadAssessments(), 350);
+}
+
+async function loadAssessments(p = page) {
+    page = p;
+    const q        = document.getElementById('filter-q').value;
+    const track    = document.getElementById('filter-track').value;
+    const status   = document.getElementById('filter-status').value;
+    const sentinel = document.getElementById('filter-sentinel').value;
+    const params   = new URLSearchParams({ page, per_page: 25 });
+    if (q)        params.set('q', q);
+    if (track)    params.set('track', track);
+    if (status)   params.set('status', status);
+    if (sentinel) params.set('sentinel', sentinel);
+
+    const tbody = document.getElementById('assessments-tbody');
+    tbody.innerHTML = `<tr><td colspan="7" class="text-center py-12 text-gray-400"><div class="spinner mx-auto"></div></td></tr>`;
+
+    const data = await authFetch(`/api/admin/assessments?${params}`).then(r=>r.json());
+
+    if (!data.items?.length) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-10 text-gray-400">No assessments found</td></tr>`;
+    } else {
+        tbody.innerHTML = data.items.map(a => `
+            <tr class="border-t border-gray-50 row-hover" onclick="openModal('${a.id}')">
+                <td class="px-4 py-3">
+                    <div class="font-medium text-gray-800">${a.name}</div>
+                    <div class="text-gray-400 text-xs">${a.email}</div>
+                </td>
+                <td class="px-4 py-3 text-gray-600">${a.age}</td>
+                <td class="px-4 py-3"><span class="badge badge-track-${a.track_recommended}">${a.track_recommended||'–'}</span></td>
+                <td class="px-4 py-3">${sentinelBadge(a.sentinel_status)} ${a.medical_clearance_required ? '⚠️' : ''}</td>
+                <td class="px-4 py-3"><span class="badge badge-${a.status}">${(a.status||'').replace('_',' ')}</span></td>
+                <td class="px-4 py-3"><span class="badge badge-${a.payment_status}">${a.payment_status||'–'}</span></td>
+                <td class="px-4 py-3 text-gray-400">${fmtDate(a.created_at)}</td>
+            </tr>
+        `).join('');
+    }
+
+    // Pagination
+    const pag = document.getElementById('pagination');
+    pag.innerHTML = `
+        <span>${data.total} total · page ${data.page} of ${data.pages}</span>
+        <div class="flex gap-2">
+            ${data.page > 1 ? `<button onclick="loadAssessments(${data.page-1})" class="px-3 py-1 rounded border border-gray-200 hover:bg-gray-50">← Prev</button>` : ''}
+            ${data.page < data.pages ? `<button onclick="loadAssessments(${data.page+1})" class="px-3 py-1 rounded border border-gray-200 hover:bg-gray-50">Next →</button>` : ''}
+        </div>
+    `;
+}
+
+function sentinelBadge(s) {
+    const map = { pass: 'pass', medical_clearance_required: 'medical', declined: 'declined' };
+    const lbl = { pass: 'Pass', medical_clearance_required: 'Med. Req.', declined: 'Declined' };
+    return `<span class="badge badge-sentinel-${map[s]||'pass'}">${lbl[s]||s||'–'}</span>`;
+}
+
+function fmtDate(ts) {
+    if (!ts) return '–';
+    const d = new Date(ts);
+    return `${d.getDate().toString().padStart(2,'0')}/${(d.getMonth()+1).toString().padStart(2,'0')} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`;
+}
+
+// ── Detail Modal ───────────────────────────────────────────────────────────
+async function openModal(id) {
+    const data = await authFetch(`/api/admin/assessments/${id}`).then(r=>r.json());
+    currentA = data;
+
+    document.getElementById('modal-name').textContent = `${data.name} — ${data.email}`;
+
+    const goals = Array.isArray(data.goals) ? data.goals.join(', ') : data.goals;
+    const screening = typeof data.screening === 'object' ? data.screening : {};
+    const parq = screening.parq || {};
+    const parqYes = Object.entries(parq).filter(([,v])=>v==='yes').map(([k])=>k.replace('parq_','')).join(', ') || 'none';
+
+    document.getElementById('modal-body').innerHTML = `
+        <!-- Info grid -->
+        <div class="grid grid-cols-3 gap-3 bg-gray-50 rounded-xl p-4">
+            <div><div class="text-xs text-gray-400 mb-0.5">Age</div><div class="font-semibold">${data.age}</div></div>
+            <div><div class="text-xs text-gray-400 mb-0.5">Track</div><span class="badge badge-track-${data.track_recommended}">${data.track_recommended||'–'}</span></div>
+            <div><div class="text-xs text-gray-400 mb-0.5">Language</div><div class="font-semibold uppercase">${data.language||'en'}</div></div>
+            <div><div class="text-xs text-gray-400 mb-0.5">Clinical</div><div class="font-semibold">${data.clinical_score}</div></div>
+            <div><div class="text-xs text-gray-400 mb-0.5">Performance</div><div class="font-semibold">${data.performance_score}</div></div>
+            <div><div class="text-xs text-gray-400 mb-0.5">Phone</div><div class="font-semibold">${data.phone||'–'}</div></div>
+        </div>
+
+        <!-- Flags -->
+        <div class="flex flex-wrap gap-2">
+            ${sentinelBadge(data.sentinel_status)}
+            ${data.medical_clearance_required ? '<span class="badge bg-yellow-50 text-yellow-700">⚠️ Medical Clearance</span>' : ''}
+            ${data.consent_marketing ? '<span class="badge bg-green-50 text-green-700">✓ Marketing consent</span>' : ''}
+        </div>
+
+        <!-- Goals & Screening -->
+        <div>
+            <div class="text-xs font-semibold text-gray-400 uppercase mb-1">Goals</div>
+            <div class="bg-gray-50 rounded-lg p-3 text-gray-700">${goals||'–'}</div>
+        </div>
+        <div>
+            <div class="text-xs font-semibold text-gray-400 uppercase mb-1">PAR-Q+ YES</div>
+            <div class="bg-gray-50 rounded-lg p-3 text-gray-700">${parqYes}</div>
+        </div>
+        ${data.referral_source ? `<div><span class="text-xs text-gray-400">Referral:</span> ${data.referral_source}</div>` : ''}
+        ${data.utm_source ? `<div class="text-xs text-gray-400">UTM: ${data.utm_source} / ${data.utm_medium} / ${data.utm_campaign}</div>` : ''}
+
+        <!-- Editable fields -->
+        <div class="border-t border-gray-100 pt-4 space-y-3">
+            <div>
+                <label class="text-xs font-semibold text-gray-500 block mb-1">Status</label>
+                <select id="edit-status" class="border border-gray-200 rounded-lg px-3 py-2 w-full text-sm bg-white">
+                    ${['new','reviewing','approved','payment_sent','enrolled','declined','waitlist'].map(s =>
+                        `<option value="${s}" ${data.status===s?'selected':''}>${s.replace('_',' ')}</option>`
+                    ).join('')}
+                </select>
+            </div>
+            <div>
+                <label class="text-xs font-semibold text-gray-500 block mb-1">Stripe Payment Link</label>
+                <input id="edit-payment-link" type="url" value="${data.stripe_payment_link||''}"
+                    placeholder="https://buy.stripe.com/…"
+                    class="border border-gray-200 rounded-lg px-3 py-2 w-full text-sm">
+            </div>
+            <div>
+                <label class="text-xs font-semibold text-gray-500 block mb-1">Admin Notes</label>
+                <textarea id="edit-notes" rows="3"
+                    class="border border-gray-200 rounded-lg px-3 py-2 w-full text-sm resize-none">${data.notes||''}</textarea>
+            </div>
+        </div>
+    `;
+
+    document.getElementById('modal').classList.add('show');
+}
+
+async function saveAssessment() {
+    if (!currentA) return;
+    const payload = {
+        status:              document.getElementById('edit-status').value,
+        stripe_payment_link: document.getElementById('edit-payment-link').value,
+        notes:               document.getElementById('edit-notes').value,
+    };
+    await authFetch(`/api/admin/assessments/${currentA.id}`, {
+        method: 'PATCH',
+        body:   JSON.stringify(payload),
+    });
+    closeModal();
+    loadAssessments(page);
+    loadStats();
+}
+
+function closeModal(e) {
+    if (e && e.target !== document.getElementById('modal')) return;
+    document.getElementById('modal').classList.remove('show');
+    currentA = null;
+}
+</script>
+</body>
+</html>
