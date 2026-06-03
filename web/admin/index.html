@@ -182,8 +182,9 @@
 
 <script>
 // ── State ──────────────────────────────────────────────────────────────────
-let apiBase = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-    ? 'http://localhost:5000' : '';
+let apiBase = (window.location.port === '5000' || window.location.hostname !== 'localhost')
+    ? ''
+    : 'http://localhost:5000';
 let creds    = null;
 let currentA = null;
 let page     = 1;

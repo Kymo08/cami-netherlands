@@ -1802,9 +1802,11 @@
         });
         
         // ── API Submit ─────────────────────────────────────────────────────────
-        const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-            ? 'http://localhost:5000'
-            : 'https://api.nl.centrocami.it';
+        // API_BASE: empty = same origin (Flask serves both frontend + API on :5000 in dev).
+        // In production set to 'https://api.nl.centrocami.it' if frontend is on a separate host.
+        const API_BASE = (window.location.port === '5000' || window.location.hostname !== 'localhost')
+            ? ''
+            : 'http://localhost:5000';
 
         async function submitAssessment() {
             const nextBtn = document.getElementById('next-btn');
