@@ -70,6 +70,21 @@ def serve_thankyou():
 def serve_subscriptions():
     return send_from_directory(os.path.join(WEB_DIR, 'subscriptions'), 'index.html')
 
+@app.route('/ebooks')
+@app.route('/ebooks/')
+def serve_ebooks():
+    return send_from_directory(os.path.join(WEB_DIR, 'ebooks'), 'index.html')
+
+@app.route('/ebooks/restore-7-mistakes')
+@app.route('/ebooks/restore-7-mistakes/')
+def serve_ebook_restore():
+    return send_from_directory(os.path.join(WEB_DIR, 'ebooks', 'restore-7-mistakes'), 'index.html')
+
+@app.route('/ebooks/perform-5-patterns')
+@app.route('/ebooks/perform-5-patterns/')
+def serve_ebook_perform():
+    return send_from_directory(os.path.join(WEB_DIR, 'ebooks', 'perform-5-patterns'), 'index.html')
+
 # Serve any static asset (css, js, images) referenced by the HTML files
 @app.route('/landing/<path:filename>')
 def static_landing(filename):
@@ -109,6 +124,7 @@ if __name__ == '__main__':
 ║  Landing       →  http://localhost:{port}/            ║
 ║  Assessment    →  http://localhost:{port}/assessment  ║
 ║  Subscriptions →  http://localhost:{port}/subscriptions ║
+║  eBooks        →  http://localhost:{port}/ebooks      ║
 ║  Admin         →  http://localhost:{port}/admin       ║
 ║  Thank-you     →  http://localhost:{port}/thank-you   ║
 ║  API health    →  http://localhost:{port}/api/health  ║

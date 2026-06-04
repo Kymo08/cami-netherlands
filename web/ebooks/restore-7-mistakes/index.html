@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 Movement Mistakes Making Your Pain Worse — CAMI Restore</title>
+<style>
+/* ── SCREEN STYLES ─────────────────────────────────────────────────────────── */
+:root {
+    --blue:       #1E3A8A;
+    --blue-light: #3B82F6;
+    --green:      #10B981;
+    --green-dark: #059669;
+    --red:        #DC2626;
+    --amber:      #D97706;
+    --text:       #1F2937;
+    --text-light: #6B7280;
+    --bg-alt:     #F9FAFB;
+    --border:     #E5E7EB;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text);
+    background: #fff;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* ── COVER ─────────────────────────────────────────────────────────────────── */
+.cover {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--blue) 0%, #0F2460 60%, #0a1a45 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 4rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+.cover-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1200&q=70&auto=format&fit=crop') center/cover no-repeat;
+    opacity: 0.18;
+}
+.cover-tag {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--green);
+    color: white;
+    padding: 0.35rem 1rem;
+    border-radius: 9999px;
+    margin-bottom: 2rem;
+    display: inline-block;
+}
+.cover h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    max-width: 660px;
+    position: relative;
+}
+.cover h1 em {
+    color: #6EE7B7;
+    font-style: normal;
+}
+.cover .subtitle {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.15rem;
+    opacity: 0.85;
+    max-width: 520px;
+    margin-bottom: 3rem;
+    position: relative;
+    line-height: 1.6;
+}
+.cover-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    margin-top: auto;
+}
+.cover-author img {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.4);
+    object-fit: cover;
+}
+.cover-author .author-text {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.cover-author .name { font-weight: 700; font-size: 1rem; }
+.cover-author .creds { font-size: 0.8rem; opacity: 0.75; }
+.cover-logo {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: white;
+    position: absolute;
+    top: 2rem;
+    right: 3rem;
+    letter-spacing: 0.05em;
+}
+.cover-logo span { color: var(--green); }
+
+/* ── CONTENT SECTIONS ──────────────────────────────────────────────────────── */
+.section { padding: 3.5rem 3rem; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+
+.section-disclaimer {
+    background: #FFF7ED;
+    border-left: 4px solid var(--amber);
+    padding: 2rem 2.5rem;
+    border-radius: 0 0.75rem 0.75rem 0;
+    margin: 2rem 3rem;
+}
+.section-disclaimer p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.875rem;
+    color: #92400E;
+    line-height: 1.65;
+}
+.section-disclaimer strong { color: #78350F; }
+
+.section-about { background: var(--bg-alt); }
+
+/* ── CHAPTER HEADERS ───────────────────────────────────────────────────────── */
+.chapter-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 0.5rem;
+}
+h2 {
+    font-family: Georgia, serif;
+    font-size: 1.9rem;
+    color: var(--blue);
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+}
+h3 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 2rem 0 0.75rem;
+}
+h4 {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 1.5rem 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+p { margin-bottom: 1.25rem; }
+
+/* ── MISTAKE HERO ──────────────────────────────────────────────────────────── */
+.mistake-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 2rem 0;
+    min-height: 240px;
+}
+.mistake-hero-text {
+    background: var(--blue);
+    color: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.mistake-number {
+    font-family: Georgia, serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.15);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+}
+.mistake-title {
+    font-family: Georgia, serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+.mistake-tag {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.15);
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    color: rgba(255,255,255,0.9);
+    display: inline-block;
+    margin-bottom: 0.75rem;
+}
+.mistake-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ── CALLOUT BOXES ─────────────────────────────────────────────────────────── */
+.callout {
+    border-radius: 0.75rem;
+    padding: 1.5rem 1.75rem;
+    margin: 1.75rem 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.9375rem;
+}
+.callout-science {
+    background: #EFF6FF;
+    border-left: 4px solid var(--blue-light);
+}
+.callout-science .callout-label { color: var(--blue); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.callout-fix {
+    background: #ECFDF5;
+    border-left: 4px solid var(--green);
+}
+.callout-fix .callout-label { color: var(--green-dark); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.callout-warning {
+    background: #FEF3C7;
+    border-left: 4px solid var(--amber);
+}
+.callout-warning .callout-label { color: #92400E; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.callout p { margin-bottom: 0.5rem; }
+.callout p:last-child { margin-bottom: 0; }
+
+/* ── EXERCISE BOX ──────────────────────────────────────────────────────────── */
+.exercise-box {
+    background: white;
+    border: 2px solid var(--green);
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 2rem 0;
+}
+.exercise-header {
+    background: var(--green);
+    color: white;
+    padding: 0.875rem 1.5rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.exercise-body { padding: 1.5rem; }
+.exercise-title {
+    font-family: Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+}
+.exercise-meta {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.exercise-meta span {
+    background: var(--bg-alt);
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+}
+.exercise-steps {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.925rem;
+    padding-left: 0;
+    list-style: none;
+}
+.exercise-steps li {
+    display: flex;
+    gap: 0.875rem;
+    padding: 0.625rem 0;
+    border-bottom: 1px solid var(--bg-alt);
+    align-items: flex-start;
+    line-height: 1.5;
+}
+.exercise-steps li:last-child { border-bottom: none; }
+.step-num {
+    flex-shrink: 0;
+    width: 1.5rem;
+    height: 1.5rem;
+    background: var(--green);
+    color: white;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.1rem;
+}
+.exercise-cue {
+    background: #ECFDF5;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.875rem;
+    color: var(--green-dark);
+}
+.exercise-cue strong { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+
+/* ── CHECKLIST ─────────────────────────────────────────────────────────────── */
+.checklist {
+    list-style: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.9375rem;
+    background: var(--bg-alt);
+    border-radius: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    margin: 1.25rem 0;
+}
+.checklist li {
+    display: flex;
+    gap: 0.625rem;
+    padding: 0.4rem 0;
+    align-items: flex-start;
+}
+.checklist li::before {
+    content: "☐";
+    color: var(--blue);
+    font-size: 1rem;
+    flex-shrink: 0;
+    line-height: 1.4;
+}
+
+/* ── TOC ───────────────────────────────────────────────────────────────────── */
+.toc { list-style: none; }
+.toc-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.75rem 0;
+    border-bottom: 1px dotted var(--border);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.toc-item:last-child { border-bottom: none; }
+.toc-num { color: var(--green); font-weight: 700; font-size: 0.8rem; width: 2rem; flex-shrink: 0; }
+.toc-title { flex: 1; font-size: 0.9375rem; color: var(--text); }
+.toc-subtitle { font-size: 0.8rem; color: var(--text-light); display: block; }
+
+/* ── ABOUT AUTHOR ──────────────────────────────────────────────────────────── */
+.author-card {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+.author-photo {
+    width: 140px;
+    height: 140px;
+    border-radius: 1rem;
+    object-fit: cover;
+    border: 3px solid var(--blue);
+}
+.author-name {
+    font-family: Georgia, serif;
+    font-size: 1.5rem;
+    color: var(--blue);
+    margin-bottom: 0.25rem;
+}
+.author-creds {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+.author-bio {
+    font-size: 0.9375rem;
+    line-height: 1.7;
+}
+
+/* ── CONCLUSION / CTA ──────────────────────────────────────────────────────── */
+.cta-box {
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+    color: white;
+    border-radius: 1.25rem;
+    padding: 3rem;
+    text-align: center;
+    margin: 2rem 0;
+}
+.cta-box h2 { color: white; font-size: 1.75rem; margin-bottom: 1rem; }
+.cta-box p {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    opacity: 0.9;
+    max-width: 480px;
+    margin: 0 auto 1.5rem;
+    font-size: 0.9375rem;
+}
+.cta-btn {
+    display: inline-block;
+    background: var(--green);
+    color: white;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 1rem 2.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+.cta-btn:hover { background: var(--green-dark); }
+
+/* ── SUMMARY TABLE ─────────────────────────────────────────────────────────── */
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+.summary-item {
+    background: var(--bg-alt);
+    border-radius: 0.75rem;
+    padding: 1.25rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+.summary-item .num {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 0.25rem;
+}
+.summary-item .mistake-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 0.25rem;
+}
+.summary-item .fix-text {
+    font-size: 0.8rem;
+    color: var(--green-dark);
+}
+
+/* ── DIVIDER ───────────────────────────────────────────────────────────────── */
+.divider {
+    width: 60px;
+    height: 3px;
+    background: var(--green);
+    border-radius: 2px;
+    margin: 1.5rem 0;
+}
+
+/* ── PRINT STYLES ──────────────────────────────────────────────────────────── */
+@media print {
+    @page { size: A4; margin: 18mm 20mm; }
+    body { max-width: 100%; font-size: 11pt; }
+    .cover { min-height: auto; page-break-after: always; padding: 3cm 2.5cm; }
+    .section { padding: 1.5rem 0; page-break-inside: avoid; }
+    .mistake-hero { page-break-inside: avoid; }
+    .exercise-box { page-break-inside: avoid; }
+    .cta-box { page-break-inside: avoid; }
+    .section-disclaimer { margin: 1rem 0; }
+    h2 { font-size: 1.4rem; }
+    .mistake-number { font-size: 2.5rem; }
+    a { color: inherit; }
+    .cover-bg { opacity: 0.1; }
+}
+
+@media (max-width: 640px) {
+    .section { padding: 2.5rem 1.5rem; }
+    .cover { padding: 3rem 1.5rem; }
+    .mistake-hero { grid-template-columns: 1fr; }
+    .mistake-hero img { height: 200px; }
+    .author-card { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: 1fr; }
+    .cover-logo { top: 1.5rem; right: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- COVER                                                                     -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="cover">
+    <div class="cover-bg"></div>
+    <div class="cover-logo">CAMI<span>·</span></div>
+
+    <div class="cover-tag">CAMI Restore — Free Guide</div>
+
+    <h1>7 Movement <em>Mistakes</em> Making Your Pain Worse</h1>
+
+    <p class="subtitle">
+        A kinesiological guide to breaking the chronic pain cycle — and taking back control of how you move.
+    </p>
+
+    <div class="cover-author">
+        <img src="https://www.centrocami.it/wp-content/uploads/2023/06/Team-CAMI-Catania-8-1024x1024.png"
+             alt="Dott. Gabriele Liuzzo" loading="lazy">
+        <div class="author-text">
+            <div class="name">Dott. Gabriele Liuzzo</div>
+            <div class="creds">Clinical Kinesiologist · Direttore Tecnico CAMI · Utrecht</div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- DISCLAIMER                                                                -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="section-disclaimer">
+    <p>
+        <strong>Educational content — not medical advice.</strong>
+        This guide contains kinesiological and movement science information for educational purposes only.
+        It does not constitute medical diagnosis, treatment, or rehabilitation advice.
+        Always consult a qualified healthcare provider before starting any exercise programme.
+        If you experience chest pain, severe shortness of breath, dizziness, or neurological symptoms,
+        stop immediately and seek medical attention. Red-flag symptoms require medical clearance before
+        participation in any exercise programme.
+    </p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- ABOUT THE AUTHOR                                                          -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="section section-about">
+    <div class="chapter-label">About the Author</div>
+    <div class="author-card">
+        <img class="author-photo"
+             src="https://www.centrocami.it/wp-content/uploads/2023/06/Team-CAMI-Catania-8-1024x1024.png"
+             alt="Dott. Gabriele Liuzzo">
+        <div>
+            <div class="author-name">Dott. Gabriele "Lele" Liuzzo</div>
+            <div class="author-creds">Clinical Kinesiologist · University of Catania (UniCT) · 15+ years clinical experience</div>
+            <p class="author-bio">
+                Gabriele Liuzzo is the Technical Director of CAMI — Centro Attività Motoria Integrata. 
+                With over 15 years working at the intersection of clinical exercise, sport science, and 
+                healthy ageing, he has helped hundreds of patients and athletes move better, hurt less, 
+                and perform at their best.
+            </p>
+            <p class="author-bio">
+                His approach is grounded in one simple belief: <em>"The human body is designed to move well. 
+                When it doesn't, there is always a reason — and that reason is almost never 'rest more.'"</em>
+            </p>
+            <p class="author-bio">
+                Gabriele is now based in Utrecht, Netherlands, where he runs CAMI's trilingual 
+                (Italian / English / Dutch) clinical exercise and performance programmes for the expat community.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- INTRODUCTION                                                              -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <div class="chapter-label">Introduction</div>
+    <h2>Why Most Approaches to Chronic Pain Don't Work</h2>
+    <div class="divider"></div>
+
+    <p>
+        If you are reading this, you have probably tried a few things already. Physiotherapy sessions 
+        that helped for a week and then stopped working. Painkillers that masked the sensation but left 
+        the problem untouched. Rest — which felt logical but seemed to make things worse over time. 
+        Maybe a gym programme that re-injured you within the first month.
+    </p>
+    <p>
+        You are not imagining it. Those approaches often fail for a very specific reason: they treat 
+        the symptom, not the movement pattern that created it.
+    </p>
+    <p>
+        Chronic musculoskeletal pain — the kind that lasts more than three months — is almost never 
+        a simple structural problem. It is a systems problem. It involves how your nervous system 
+        interprets threat, how your muscles coordinate (or fail to), how your body has learned 
+        to compensate, and how your daily movement habits perpetuate the cycle.
+    </p>
+
+    <div class="callout callout-science">
+        <div class="callout-label">Clinical Note</div>
+        <p>
+            Research consistently shows that structural findings on MRI (disc bulges, "wear and tear", 
+            degenerative changes) do not reliably predict pain or disability. Many people with significant 
+            imaging findings have no pain at all. Conversely, people in severe pain often show minimal 
+            structural changes. <strong>Movement quality and nervous system sensitivity are far stronger 
+            predictors of pain experience than structural anatomy.</strong>
+        </p>
+    </div>
+
+    <p>
+        This guide covers the seven most common movement mistakes I see in clinical practice — patterns 
+        that actively perpetuate pain, delay recovery, and reduce quality of life. For each mistake, 
+        I will explain the clinical mechanism, the signs to look for, and a practical correction you 
+        can start using today.
+    </p>
+    <p>
+        You do not need to fix all seven at once. Start with the one or two that resonate most, 
+        apply the corrections consistently for two to four weeks, and build from there.
+    </p>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- TABLE OF CONTENTS                                                         -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <div class="chapter-label">Contents</div>
+    <h2>What You Will Learn</h2>
+    <div class="divider"></div>
+    <ul class="toc">
+        <li class="toc-item">
+            <span class="toc-num">01</span>
+            <span class="toc-title">
+                Avoiding Movement Because It Hurts
+                <span class="toc-subtitle">The fear-avoidance cycle and how to break it</span>
+            </span>
+        </li>
+        <li class="toc-item">
+            <span class="toc-num">02</span>
+            <span class="toc-title">
+                Sitting Too Long Without Active Breaks
+                <span class="toc-subtitle">Why static posture is actively hurting you</span>
+            </span>
+        </li>
+        <li class="toc-item">
+            <span class="toc-num">03</span>
+            <span class="toc-title">
+                Relying Only on Static Stretching
+                <span class="toc-subtitle">Why flexibility without control makes things worse</span>
+            </span>
+        </li>
+        <li class="toc-item">
+            <span class="toc-num">04</span>
+            <span class="toc-title">
+                Ignoring Your Breathing
+                <span class="toc-subtitle">The diaphragm, the core, and your spine</span>
+            </span>
+        </li>
+        <li class="toc-item">
+            <span class="toc-num">05</span>
+            <span class="toc-title">
+                Building Strength Before Establishing Stability
+                <span class="toc-subtitle">The hierarchy your body actually needs</span>
+            </span>
+        </li>
+        <li class="toc-item">
+            <span class="toc-num">06</span>
+            <span class="toc-title">
+                Compensating Instead of Correcting
+                <span class="toc-subtitle">How workarounds become the problem</span>
+            </span>
+        </li>
+        <li class="toc-item">
+            <span class="toc-num">07</span>
+            <span class="toc-title">
+                Increasing Load Too Fast
+                <span class="toc-subtitle">Tissue adaptation rates and the 10% rule</span>
+            </span>
+        </li>
+    </ul>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- MISTAKE 1                                                                 -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <div class="mistake-hero">
+        <div class="mistake-hero-text">
+            <div class="mistake-number">01</div>
+            <div class="mistake-tag">Fear-Avoidance</div>
+            <div class="mistake-title">Avoiding Movement Because It Hurts</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=75&auto=format&fit=crop"
+             alt="Clinical exercise assessment" loading="lazy">
+    </div>
+
+    <h3>The Mistake</h3>
+    <p>
+        You have learned to protect yourself by avoiding the movements that trigger pain. You modify 
+        how you sit, stand, walk, and lift. You stop activities you used to enjoy. The logic seems 
+        sound — if movement causes pain, less movement means less pain.
+    </p>
+    <p>
+        In reality, this strategy almost always makes things worse over time.
+    </p>
+
+    <h3>The Clinical Mechanism</h3>
+    <p>
+        This pattern is described in kinesiological literature as the <strong>Fear-Avoidance Model</strong> 
+        (Vlaeyen &amp; Linton, 2000). Here is what happens in the body:
+    </p>
+    <p>
+        When movement triggers pain, the nervous system creates an association: <em>this movement = danger</em>. 
+        The brain, trying to protect you, increases its sensitivity to signals from that area — a process 
+        called <strong>central sensitisation</strong>. Over time, it takes less and less stimulus to 
+        trigger a pain response.
+    </p>
+    <p>
+        Simultaneously, avoiding movement leads to <strong>tissue deconditioning</strong>: muscles weaken, 
+        joint cartilage loses its nutrition (which comes from movement-driven fluid circulation), 
+        and connective tissue stiffens. Deconditioned tissue is more vulnerable — and more painful.
+    </p>
+    <p>
+        The result is a self-reinforcing cycle: avoidance → deconditioning → increased sensitivity → 
+        more pain with less movement → more avoidance.
+    </p>
+
+    <div class="callout callout-science">
+        <div class="callout-label">Why This Happens</div>
+        <p>
+            The nervous system cannot distinguish between "movement that causes damage" and "movement 
+            that the brain predicts will cause damage." After months or years of pain, the prediction 
+            itself becomes the trigger — even when there is no ongoing tissue damage.
+        </p>
+    </div>
+
+    <h4>Signs You May Be in This Cycle</h4>
+    <ul class="checklist">
+        <li>You modify daily activities to avoid pain (avoiding stairs, certain chairs, overhead reaching)</li>
+        <li>You feel anxious or tense before movements that have previously hurt</li>
+        <li>Your pain feels disproportionate to any known injury</li>
+        <li>Pain has persisted for more than 3 months despite rest</li>
+        <li>Your movement repertoire has been shrinking over time</li>
+    </ul>
+
+    <h3>The CAMI Fix — Graded Exposure Protocol</h3>
+    <p>
+        The solution is not to push through pain. It is to systematically re-introduce movement 
+        at sub-threshold levels — below what activates your alarm system — and very gradually 
+        expand the range over weeks.
+    </p>
+
+    <div class="callout callout-fix">
+        <div class="callout-label">The Principle</div>
+        <p>
+            Dull discomfort at 2–3/10 during movement is acceptable and expected in the early stages.
+            <strong>Sharp pain above 4/10 is a signal to reduce range or intensity, not to stop entirely.</strong>
+            The goal is gradual, consistent exposure — not heroic effort.
+        </p>
+    </div>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            ✦ CAMI Exercise Protocol
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-title">Graded Range Explorer</div>
+            <div class="exercise-meta">
+                <span>Duration: 5 min</span>
+                <span>Frequency: Daily</span>
+                <span>Equipment: None</span>
+                <span>Level: All</span>
+            </div>
+            <ul class="exercise-steps">
+                <li>
+                    <span class="step-num">1</span>
+                    <span>Identify your <strong>comfortable range</strong> in the painful area — the range you can move through with zero or minimal discomfort (0–2/10).</span>
+                </li>
+                <li>
+                    <span class="step-num">2</span>
+                    <span>Perform <strong>slow, controlled circles or oscillations</strong> within that comfortable range for 30–60 seconds. Breathe continuously — do not hold your breath.</span>
+                </li>
+                <li>
+                    <span class="step-num">3</span>
+                    <span>Rest for 30 seconds, then repeat 2 more times. <strong>3 sets total</strong>, twice per day (morning and evening).</span>
+                </li>
+                <li>
+                    <span class="step-num">4</span>
+                    <span>After <strong>5–7 days</strong> of consistent practice with no increase in pain, expand your range by 10–15%. This is your new baseline.</span>
+                </li>
+                <li>
+                    <span class="step-num">5</span>
+                    <span>Continue expanding every 5–7 days. <strong>Do not rush this process.</strong> The nervous system needs repeated safe exposure to update its threat map.</span>
+                </li>
+            </ul>
+            <div class="exercise-cue">
+                <strong>Coaching Cue</strong>
+                "Breathe into the movement. Each breath out is a signal to your nervous system that this movement is safe."
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- MISTAKE 2                                                                 -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <div class="mistake-hero">
+        <div class="mistake-hero-text">
+            <div class="mistake-number">02</div>
+            <div class="mistake-tag">Sedentary Behaviour</div>
+            <div class="mistake-title">Sitting Too Long Without Active Breaks</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=75&auto=format&fit=crop"
+             alt="Desk work and sedentary posture" loading="lazy">
+    </div>
+
+    <h3>The Mistake</h3>
+    <p>
+        You sit for 60, 90, sometimes 120 consecutive minutes without moving. You are focused on work, 
+        a meeting, a screen. By the time you stand up, your back aches, your hips feel locked, and 
+        your shoulders are tight.
+    </p>
+
+    <h3>The Clinical Mechanism</h3>
+    <p>
+        Several things happen simultaneously during prolonged sitting:
+    </p>
+    <p>
+        <strong>Gluteal inhibition.</strong> The gluteus maximus — your most powerful hip extensor — 
+        is mechanically compressed when you sit. Position-dependent inhibition sets in after 
+        approximately 20–30 minutes. Weakened glutes force the lumbar spine and hamstrings to 
+        compensate for hip extension, increasing load on the posterior chain.
+    </p>
+    <p>
+        <strong>Hip flexor shortening.</strong> The psoas and iliacus — deep hip flexors attaching to 
+        the lumbar vertebrae — adaptively shorten in prolonged hip flexion. Tight hip flexors 
+        pull the pelvis anteriorly, creating lumbar hyperlordosis and compressive loading on 
+        the L4–L5 and L5–S1 segments.
+    </p>
+    <p>
+        <strong>Increased intradiscal pressure.</strong> Studies using intradiscal pressure sensors 
+        (Nachemson, 1981; updated by Sato et al., 1999) consistently show that seated flexion 
+        creates the highest spinal loads — higher than standing and only slightly lower than 
+        heavy manual lifting.
+    </p>
+    <p>
+        <strong>Reduced spinal nutrition.</strong> Intervertebral discs have no direct blood supply. 
+        They rely on fluid exchange driven by movement and loading/unloading cycles. Static 
+        compression reduces this fluid exchange, impairing disc nutrition and accelerating 
+        degenerative changes over years.
+    </p>
+
+    <h4>Signs You May Be Doing This</h4>
+    <ul class="checklist">
+        <li>Back or neck pain that worsens throughout the workday and improves after movement</li>
+        <li>Morning stiffness that takes 15–30 minutes to resolve</li>
+        <li>Hip tightness or restriction that limits your stride when walking</li>
+        <li>Shoulder tension or upper trapezius pain after screen time</li>
+        <li>Feeling "locked up" when you first stand after long sitting</li>
+    </ul>
+
+    <h3>The CAMI Fix — The 30-3 Rule</h3>
+    <p>
+        Every 30 minutes, take 3 minutes of active movement. Not a coffee break. Not scrolling your 
+        phone standing up. <strong>Deliberate, targeted movement addressing the exact structures 
+        compressed by sitting.</strong>
+    </p>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            ✦ CAMI Exercise Protocol
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-title">3-Minute Desk Reset Protocol</div>
+            <div class="exercise-meta">
+                <span>Duration: 3 min</span>
+                <span>Frequency: Every 30 min</span>
+                <span>Equipment: Chair</span>
+                <span>Level: All</span>
+            </div>
+            <ul class="exercise-steps">
+                <li>
+                    <span class="step-num">1</span>
+                    <span><strong>Standing Hip Flexor Release (40 sec each side).</strong> Step one foot back into a half-kneeling position (or a staggered stance if kneeling is uncomfortable). Posteriorly tilt your pelvis (tuck the tailbone slightly) and hold. Feel the stretch in the front of the rear hip. Breathe slowly.</span>
+                </li>
+                <li>
+                    <span class="step-num">2</span>
+                    <span><strong>Glute Bridge (10 slow reps).</strong> Lie on your back, feet flat, knees bent. Drive through your heels to lift your hips. Squeeze the glutes at the top for 2 seconds. Lower slowly. If floor work isn't possible, do standing single-leg hip extensions holding a wall.</span>
+                </li>
+                <li>
+                    <span class="step-num">3</span>
+                    <span><strong>Thoracic Extension (10 reps).</strong> Sit at the edge of your chair, hands behind your head. Gently extend your upper back over the chair back, opening the chest. Return to neutral. This is the opposite of the rounded forward posture sitting creates.</span>
+                </li>
+                <li>
+                    <span class="step-num">4</span>
+                    <span><strong>Neck Retraction (10 reps).</strong> Keeping your eyes level, draw your chin straight back (not down) — as if making a "double chin." Hold 2 seconds. Release. This decompresses the upper cervical spine and counteracts forward head posture.</span>
+                </li>
+                <li>
+                    <span class="step-num">5</span>
+                    <span><strong>3 Diaphragmatic Breaths.</strong> Inhale slowly for 4 seconds, feeling your belly expand. Hold for 2. Exhale for 6. This resets your autonomic nervous system and reactivates the core stabilisers before you return to sitting.</span>
+                </li>
+            </ul>
+            <div class="exercise-cue">
+                <strong>Coaching Cue</strong>
+                "This is not a stretch. This is maintenance. Every 30 minutes that you don't do this, your body is accumulating a debt. This is how you pay it off before it compounds."
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- MISTAKE 3                                                                 -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <div class="mistake-hero">
+        <div class="mistake-hero-text">
+            <div class="mistake-number">03</div>
+            <div class="mistake-tag">Mobility Strategy</div>
+            <div class="mistake-title">Relying Only on Static Stretching</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=75&auto=format&fit=crop"
+             alt="Stretching and mobility work" loading="lazy">
+    </div>
+
+    <h3>The Mistake</h3>
+    <p>
+        You stretch every day. You hold each stretch for 30–60 seconds, you feel the tension release, 
+        and you feel better in the moment. But your flexibility never actually improves. Six months 
+        later, the same muscles are still tight.
+    </p>
+
+    <h3>The Clinical Mechanism</h3>
+    <p>
+        Static stretching works on the <strong>viscoelastic properties</strong> of connective tissue. 
+        Applied force temporarily increases tissue compliance — gives the tissue some slack. 
+        The problem is that this effect is largely transient. Within 30–60 minutes of finishing 
+        the stretch, most of the tissue returns to its baseline length.
+    </p>
+    <p>
+        Why? Because your nervous system is in charge, not the tissue. If the muscles controlling 
+        a joint are not strong enough to manage movement through an increased range, the 
+        nervous system will not grant access to that range. It is protecting you.
+    </p>
+    <p>
+        This is the kinesiological principle: <strong>Mobility = Range × Control.</strong> 
+        Flexibility without neuromuscular control is instability. The nervous system correctly 
+        identifies uncontrolled range as dangerous and restricts access to it.
+    </p>
+    <p>
+        Furthermore, static stretching before exercise has been shown to temporarily reduce 
+        force production in stretched muscles (by up to 8–10%) — which is the opposite of 
+        what you want before activity.
+    </p>
+
+    <div class="callout callout-warning">
+        <div class="callout-label">Important Distinction</div>
+        <p>
+            Static stretching is not harmful. It has a place — particularly in the cool-down 
+            phase and for restoring circulation. <strong>The problem is using it as the 
+            primary or only mobility strategy</strong>, especially when you have chronic 
+            pain and restricted movement.
+        </p>
+    </div>
+
+    <h4>Signs You May Be Doing This</h4>
+    <ul class="checklist">
+        <li>You stretch the same areas daily but feel no lasting improvement</li>
+        <li>Your range of motion feels better immediately after stretching but resets quickly</li>
+        <li>You feel unstable or "wobbly" at the end of your available range</li>
+        <li>Stretching feels like it's "pulling on a tight cable" — resistance without release</li>
+    </ul>
+
+    <h3>The CAMI Fix — Active Mobility Training</h3>
+    <p>
+        The most effective way to permanently improve range of motion is to train both the 
+        flexibility and the neuromuscular control at the same time — specifically at end range.
+    </p>
+    <p>
+        The technique is based on <strong>PNF (Proprioceptive Neuromuscular Facilitation)</strong> 
+        principles: move into the stretch, isometrically contract the stretched muscle 
+        (tell the nervous system "I'm in control here"), then relax and move further.
+    </p>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            ✦ CAMI Exercise Protocol
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-title">90/90 Hip Active Mobility Drill</div>
+            <div class="exercise-meta">
+                <span>Duration: 6 min</span>
+                <span>Frequency: Daily</span>
+                <span>Equipment: Mat</span>
+                <span>Level: Beginner–Intermediate</span>
+            </div>
+            <ul class="exercise-steps">
+                <li>
+                    <span class="step-num">1</span>
+                    <span>Sit on the floor with both legs bent at 90°: front leg rotated externally (knee and foot pointing to the side), back leg rotated internally (knee to the outside). This is the <strong>90/90 position</strong>.</span>
+                </li>
+                <li>
+                    <span class="step-num">2</span>
+                    <span><strong>Sit tall over your front hip</strong>. Feel the external rotation stretch in the front hip and the internal rotation stretch in the back hip. Hold 20 seconds, breathing continuously.</span>
+                </li>
+                <li>
+                    <span class="step-num">3</span>
+                    <span><strong>PNF contract:</strong> Press your front knee gently into the floor (as if trying to push it through) for 7 seconds. This contracts the hip at end-range, which sends a "safe" signal to the nervous system.</span>
+                </li>
+                <li>
+                    <span class="step-num">4</span>
+                    <span>Relax, then <strong>lean forward 2–3° more</strong> over the front hip. You should find a small new range available. Hold for 15 seconds.</span>
+                </li>
+                <li>
+                    <span class="step-num">5</span>
+                    <span>Repeat the contract-relax cycle 3 times per side. Then <strong>switch sides</strong> by windshield-wipering both legs to the opposite 90/90 position.</span>
+                </li>
+            </ul>
+            <div class="exercise-cue">
+                <strong>Coaching Cue</strong>
+                "You are not fighting your muscles. You are negotiating with your nervous system. The isometric contraction is your proof that you are in control. Without it, the nervous system won't let you in."
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- MISTAKE 4                                                                 -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <div class="mistake-hero">
+        <div class="mistake-hero-text">
+            <div class="mistake-number">04</div>
+            <div class="mistake-tag">Breathing & Core</div>
+            <div class="mistake-title">Ignoring Your Breathing</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=75&auto=format&fit=crop"
+             alt="Diaphragmatic breathing practice" loading="lazy">
+    </div>
+
+    <h3>The Mistake</h3>
+    <p>
+        You think breathing is automatic and irrelevant to pain. You have never been told 
+        that how you breathe is directly linked to how stable your spine is — and therefore, 
+        how much it hurts.
+    </p>
+
+    <h3>The Clinical Mechanism</h3>
+    <p>
+        The <strong>diaphragm</strong> is not only a breathing muscle. It is part of the 
+        deep stabilisation system of the spine — what clinicians call the 
+        <em>intrinsic stabilisation cylinder</em>:
+    </p>
+    <p>
+        The cylinder has a <strong>top</strong> (diaphragm), <strong>front/sides</strong> 
+        (transversus abdominis — the deepest abdominal layer), a <strong>back</strong> 
+        (multifidus — the deep spinal muscle), and a <strong>floor</strong> (pelvic floor). 
+        These four structures should co-activate <em>before</em> any arm or leg movement to 
+        pre-stiffen the lumbar spine and protect the discs.
+    </p>
+    <p>
+        When breathing is dysfunctional — chronic chest breathing, mouth breathing, or 
+        breath-holding under effort — the diaphragm fails to descend properly, intra-abdominal 
+        pressure is not generated efficiently, and the whole cylinder underperforms. 
+        The result is reduced spinal stability, increased load on passive structures 
+        (discs, ligaments, facet joints), and compensatory over-bracing of the 
+        superficial muscles (erector spinae, upper trapezius).
+    </p>
+
+    <div class="callout callout-science">
+        <div class="callout-label">Assessment</div>
+        <p>
+            Place one hand on your chest, one on your belly. Take a normal, relaxed breath.
+            <strong>Which hand moves first and most?</strong>
+        </p>
+        <p>
+            Belly rises first and most → good diaphragmatic breathing pattern.<br>
+            Chest rises first → compensatory chest breathing. Common in people with chronic pain, 
+            stress, and sedentary lifestyles. This is the pattern to correct.
+        </p>
+    </div>
+
+    <h4>Signs You May Have Dysfunctional Breathing</h4>
+    <ul class="checklist">
+        <li>Your shoulders rise visibly when you take a deep breath</li>
+        <li>You tend to hold your breath during effort (lifting, carrying, stair climbing)</li>
+        <li>Your upper trapezius (neck-shoulder area) is chronically tight</li>
+        <li>Core exercises feel ineffective despite regular practice</li>
+        <li>You have chronic low back pain despite "strong abs"</li>
+    </ul>
+
+    <h3>The CAMI Fix — 90/90 Breathing Reset</h3>
+    <p>
+        This drill restores diaphragmatic breathing mechanics by using gravity and positioning 
+        to create ideal conditions for the diaphragm to work. It also simultaneously activates 
+        the transversus abdominis and pelvic floor, re-establishing the full stabilisation cylinder.
+    </p>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            ✦ CAMI Exercise Protocol
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-title">90/90 Breathing Reset</div>
+            <div class="exercise-meta">
+                <span>Duration: 5 min</span>
+                <span>Frequency: Morning + after sitting</span>
+                <span>Equipment: Mat, wall or chair</span>
+                <span>Level: All</span>
+            </div>
+            <ul class="exercise-steps">
+                <li>
+                    <span class="step-num">1</span>
+                    <span>Lie on your back. Place both legs on a chair or against a wall so your hips and knees are both at 90°. This <strong>reduces lumbar lordosis</strong> and puts the diaphragm in an optimal dome shape for its full excursion.</span>
+                </li>
+                <li>
+                    <span class="step-num">2</span>
+                    <span>Place one hand on your lower ribcage (not the belly, not the chest — the lower ribs). Inhale slowly through the nose for <strong>4 seconds</strong>. You should feel your lower ribs expand <em>outward and sideways</em> — like an umbrella opening in all directions.</span>
+                </li>
+                <li>
+                    <span class="step-num">3</span>
+                    <span>At the top of the inhale, pause for 2 seconds. Then <strong>exhale through pursed lips</strong> for 6–8 seconds. As you exhale, gently draw your lower ribs down and in. Feel your abdominals gently engage at the end of the exhale.</span>
+                </li>
+                <li>
+                    <span class="step-num">4</span>
+                    <span>Repeat for <strong>8–10 breaths</strong>. Focus entirely on the quality of each breath — the expansion of the lower ribs, the relaxed descent of the belly, and the gentle engagement at the end of the exhale.</span>
+                </li>
+                <li>
+                    <span class="step-num">5</span>
+                    <span>Practise this daily for <strong>4–6 weeks</strong> to re-establish the pattern. Once automatic in the 90/90 position, progress to practising it while sitting, then standing, then during light exercise.</span>
+                </li>
+            </ul>
+            <div class="exercise-cue">
+                <strong>Coaching Cue</strong>
+                "Your first core exercise is not a plank. It is this. If your diaphragm doesn't work, your core doesn't work. Everything else builds on this foundation."
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- MISTAKE 5                                                                 -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <div class="mistake-hero">
+        <div class="mistake-hero-text">
+            <div class="mistake-number">05</div>
+            <div class="mistake-tag">Training Hierarchy</div>
+            <div class="mistake-title">Building Strength Before Establishing Stability</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=600&q=75&auto=format&fit=crop"
+             alt="Core stability training" loading="lazy">
+    </div>
+
+    <h3>The Mistake</h3>
+    <p>
+        You add resistance to exercises before your joints can properly control the movement. 
+        The result: your body finds the path of least resistance, compensation patterns become 
+        ingrained, and injury is a matter of when, not if.
+    </p>
+
+    <h3>The Clinical Mechanism</h3>
+    <p>
+        Movement quality follows a hierarchy. Skipping a level does not save time — it 
+        creates structural deficits that will eventually express themselves as injury or pain:
+    </p>
+    <p>
+        <strong>Level 1 — Stability:</strong> Can you control the joint through its available range? 
+        Without this, the body recruits superficial global muscles to stabilise — muscles designed 
+        for movement, not for support. They fatigue, they create compressive loads, and they 
+        create the classic "tight but weak" presentation.
+    </p>
+    <p>
+        <strong>Level 2 — Mobility:</strong> Do you have the range to execute the movement pattern 
+        correctly? Without adequate mobility, you compensate — lumbar hyperextension instead 
+        of hip hinging, knee valgus instead of proper squat mechanics, shoulder impingement 
+        instead of true overhead press.
+    </p>
+    <p>
+        <strong>Level 3 — Strength:</strong> Only once you have stable, mobile joints does adding 
+        external load produce training adaptations without injury risk.
+    </p>
+    <p>
+        <strong>Level 4 — Power:</strong> Speed under load requires all three prior levels to be 
+        established first. Power training with unstable, immobile joints is a common source 
+        of acute injury.
+    </p>
+
+    <div class="callout callout-warning">
+        <div class="callout-label">Common Pattern in Clinic</div>
+        <p>
+            "I do yoga three times a week and lift twice a week but my back still hurts." 
+            In most cases, this person has acceptable flexibility but poor segmental stability — 
+            the deep spinal stabilisers are not activating before movement. Adding flexibility 
+            and strength work on top of a stability deficit multiplies the problem.
+        </p>
+    </div>
+
+    <h4>Stability Screening — Can You Pass These Three Tests?</h4>
+    <ul class="checklist">
+        <li><strong>Dead Bug:</strong> 4 reps of 10-second holds, lower back flat on the floor throughout. No arch, no breath-hold.</li>
+        <li><strong>Bird Dog:</strong> 10 reps each side with no trunk rotation. Hips level, no lateral sway, spine neutral.</li>
+        <li><strong>Single-Leg Balance:</strong> 30 seconds each side, eyes open. No excessive sway, no knee collapse.</li>
+    </ul>
+
+    <div class="callout callout-fix">
+        <div class="callout-label">The CAMI Rule</div>
+        <p>
+            If you cannot pass all three screening tests with good form, you are not yet ready 
+            for progressive strength training. This is not a limitation — it is a starting point. 
+            Most people who address their stability deficit see <strong>significant pain reduction 
+            within 3–4 weeks</strong>, before adding any strength work.
+        </p>
+    </div>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            ✦ CAMI Exercise Protocol
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-title">Dead Bug — Spinal Stability Foundation</div>
+            <div class="exercise-meta">
+                <span>Duration: 8 min</span>
+                <span>Frequency: 3–4x per week</span>
+                <span>Equipment: Mat</span>
+                <span>Level: Foundation</span>
+            </div>
+            <ul class="exercise-steps">
+                <li>
+                    <span class="step-num">1</span>
+                    <span>Lie on your back, arms pointing to the ceiling, hips and knees at 90° (tabletop position). <strong>Press your lower back completely flat into the floor.</strong> This is your reference position — maintain it throughout.</span>
+                </li>
+                <li>
+                    <span class="step-num">2</span>
+                    <span>Inhale to prepare. As you exhale, <strong>simultaneously lower your right arm overhead and extend your left leg</strong>, moving them toward the floor but not touching it. Move slowly — 4 seconds down.</span>
+                </li>
+                <li>
+                    <span class="step-num">3</span>
+                    <span>At the lowest point, <strong>hold for 5–10 seconds</strong>. Your lower back should still be flat. If it arches, reduce your range of motion — only go as far as you can control.</span>
+                </li>
+                <li>
+                    <span class="step-num">4</span>
+                    <span>Return to the start position as you inhale. Switch to the left arm and right leg. That is <strong>1 rep</strong>. Complete 6–8 reps per side.</span>
+                </li>
+                <li>
+                    <span class="step-num">5</span>
+                    <span>Master this before progressing to Bird Dog, then to any loaded exercises. <strong>Quality over range.</strong> A perfect Dead Bug with a small range is more valuable than a sloppy one with full extension.</span>
+                </li>
+            </ul>
+            <div class="exercise-cue">
+                <strong>Coaching Cue</strong>
+                "The Dead Bug is not an abdominal exercise. It is a spinal control exercise. If your lower back lifts off the floor, you have exceeded your current stability capacity. Reduce the range."
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- MISTAKE 6                                                                 -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <div class="mistake-hero">
+        <div class="mistake-hero-text">
+            <div class="mistake-number">06</div>
+            <div class="mistake-tag">Movement Patterns</div>
+            <div class="mistake-title">Compensating Instead of Correcting</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=75&auto=format&fit=crop"
+             alt="Posture awareness and correction" loading="lazy">
+    </div>
+
+    <h3>The Mistake</h3>
+    <p>
+        You have found a way to move around the pain and you have stuck with it. Your brain is 
+        brilliant at finding workarounds. The problem is that every workaround has a cost — 
+        paid by whatever structure is doing the extra work.
+    </p>
+
+    <h3>The Clinical Mechanism</h3>
+    <p>
+        Compensation patterns are not posture failures. They are intelligent adaptations. The brain 
+        is optimising for efficiency and pain avoidance given the current state of the system. 
+        But optimised compensation is still compensation — and over thousands of repetitions 
+        per day, it accumulates into structural overload.
+    </p>
+
+    <p>
+        <strong>Forward Head Posture (FHP).</strong> For every inch the head translates forward 
+        from the ideal alignment over the spine, the effective load on the cervical spine increases 
+        by approximately 10 pounds (4.5 kg). A head that sits 3 inches forward — common after 
+        years of screen work — applies the equivalent of a 42 lb load on the cervical spine. 
+        The suboccipital muscles, upper trapezius, and levator scapulae work chronically to support 
+        this load. The result: chronic neck pain, headaches, and shoulder impingement.
+    </p>
+    <p>
+        <strong>Anterior Pelvic Tilt.</strong> Tight hip flexors (from prolonged sitting, Mistake #2) 
+        pull the anterior pelvis down and forward. This simultaneously creates lumbar hyperlordosis 
+        (excessive lower back curve), inhibits the gluteus maximus (which should posteriorly tilt 
+        the pelvis), and increases compressive loading on the lumbar facet joints. Classic chronic 
+        low back pain presentation.
+    </p>
+    <p>
+        <strong>Dynamic Knee Valgus.</strong> During single-leg loading (walking, running, stairs), 
+        the knee collapses inward. Usually driven by hip abductor weakness (gluteus medius) or 
+        excessive hip internal rotation. Loads the medial collateral ligament, IT band, and 
+        patellofemoral joint — a common cause of knee pain in active adults.
+    </p>
+
+    <h4>Identifying Your Primary Compensation</h4>
+    <ul class="checklist">
+        <li>Head forward of shoulders when viewed from the side → Forward Head Posture</li>
+        <li>Lower back curve that does not flatten when you try to stand tall → Anterior Pelvic Tilt</li>
+        <li>Knee(s) that drift inward when you squat or descend stairs → Dynamic Knee Valgus</li>
+        <li>One shoulder consistently higher than the other → Lateral trunk shift / scoliosis pattern</li>
+    </ul>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            ✦ CAMI Exercise Protocol
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-title">Wall Angel — Forward Head + Thoracic Mobility Correction</div>
+            <div class="exercise-meta">
+                <span>Duration: 5 min</span>
+                <span>Frequency: Daily</span>
+                <span>Equipment: Wall</span>
+                <span>Level: All</span>
+            </div>
+            <ul class="exercise-steps">
+                <li>
+                    <span class="step-num">1</span>
+                    <span>Stand with your back against a wall, feet 10–15 cm from the baseboard. <strong>Press five points of contact</strong> into the wall: head, upper back, lower back (a small natural gap is fine), and both shoulder blades.</span>
+                </li>
+                <li>
+                    <span class="step-num">2</span>
+                    <span>Raise your arms to shoulder height with elbows bent at 90° (goalpost position). Press your elbows and backs of your hands against the wall. If this feels impossible, your thoracic mobility is significantly restricted — start with just the elbows touching.</span>
+                </li>
+                <li>
+                    <span class="step-num">3</span>
+                    <span>Slowly slide your arms <strong>upward</strong> along the wall, maintaining all contact points. Only go as high as you can without your lower back or neck compensating (losing contact).</span>
+                </li>
+                <li>
+                    <span class="step-num">4</span>
+                    <span>Slowly slide back down. <strong>10 repetitions</strong>. The goal over weeks: progressively higher range with all contact points maintained.</span>
+                </li>
+                <li>
+                    <span class="step-num">5</span>
+                    <span>At the end of the set, <strong>perform a chin tuck</strong>: keeping your head against the wall, draw your chin straight back (not down). Hold 5 seconds, repeat 5 times. This directly corrects forward head position.</span>
+                </li>
+            </ul>
+            <div class="exercise-cue">
+                <strong>Coaching Cue</strong>
+                "The wall is your reference. It is showing you where neutral is. Most people discover they have never felt what neutral actually feels like. That's where the correction begins."
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- MISTAKE 7                                                                 -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <div class="mistake-hero">
+        <div class="mistake-hero-text">
+            <div class="mistake-number">07</div>
+            <div class="mistake-tag">Load Management</div>
+            <div class="mistake-title">Increasing Load Too Fast</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=600&q=75&auto=format&fit=crop"
+             alt="Progressive strength training" loading="lazy">
+    </div>
+
+    <h3>The Mistake</h3>
+    <p>
+        You feel better. Your pain has reduced. Your energy is up. Naturally, you want to do more — 
+        more reps, more weight, more sessions. By Thursday you are in more pain than you were 
+        before you started.
+    </p>
+
+    <h3>The Clinical Mechanism</h3>
+    <p>
+        Different biological tissues adapt to loading at dramatically different rates. Failing to 
+        respect these timelines is perhaps the most common reason well-intentioned rehabilitation 
+        and training programmes fail:
+    </p>
+    <p>
+        <strong>Muscle:</strong> Responds and recovers within 48–72 hours. Feeling strong after 
+        3 sessions is real — muscle fibres are genuinely adapting.
+    </p>
+    <p>
+        <strong>Bone:</strong> Structural adaptation requires 6–8 weeks of consistent loading.
+    </p>
+    <p>
+        <strong>Tendons:</strong> Collagen turnover — the process of breaking down and rebuilding 
+        tendon fibres in response to training — takes 8–12 weeks. Tendons that feel fine do not 
+        have the structural integrity of tendons that have had 8–12 weeks to adapt.
+    </p>
+    <p>
+        <strong>Ligaments:</strong> 12–16 weeks for meaningful structural change.
+    </p>
+    <p>
+        The result of increasing load faster than your tendons and ligaments can adapt is called 
+        <em>enthesiopathy</em> at best and ligament/tendon rupture at worst. The muscles 
+        become stronger faster than the structures that attach them — and those attachment 
+        points become the failure point.
+    </p>
+
+    <div class="callout callout-science">
+        <div class="callout-label">The 10% Rule</div>
+        <p>
+            Never increase total training volume (sets × reps × load) by more than <strong>10% 
+            per week</strong>. This gives tendon and ligament collagen turnover time to keep 
+            pace with muscle development. For people with chronic pain or previous injury, 
+            use a more conservative 5% rule in the first 8 weeks.
+        </p>
+    </div>
+
+    <h4>Signs You May Be Increasing Too Fast</h4>
+    <ul class="checklist">
+        <li>Pain above 3–4/10 during exercise (not just muscle fatigue)</li>
+        <li>Pain that appears the day after training, not during it (delayed tissue response)</li>
+        <li>Sleep quality declining despite feeling physically fatigued</li>
+        <li>Persistent joint tenderness that does not resolve with a rest day</li>
+        <li>Feeling strong but noticing joint clicking, catching, or instability</li>
+    </ul>
+
+    <div class="exercise-box">
+        <div class="exercise-header">
+            ✦ CAMI Exercise Protocol
+        </div>
+        <div class="exercise-body">
+            <div class="exercise-title">RPE-Based Load Regulation</div>
+            <div class="exercise-meta">
+                <span>Duration: Ongoing</span>
+                <span>Application: Every session</span>
+                <span>Equipment: None extra</span>
+                <span>Level: All</span>
+            </div>
+            <ul class="exercise-steps">
+                <li>
+                    <span class="step-num">1</span>
+                    <span>Use the <strong>RPE Scale (Rate of Perceived Exertion)</strong> instead of rigid rep targets. After each set, ask: "How hard was that?" on a scale of 1–10.</span>
+                </li>
+                <li>
+                    <span class="step-num">2</span>
+                    <span><strong>Early rehabilitation phase (weeks 1–4):</strong> Target RPE 4–6/10. This feels easy. That is intentional. You are building tendon tolerance, not muscle size.</span>
+                </li>
+                <li>
+                    <span class="step-num">3</span>
+                    <span><strong>Building phase (weeks 5–12):</strong> Target RPE 6–7/10. Challenging but not exhausting. You could do 3–4 more reps if needed.</span>
+                </li>
+                <li>
+                    <span class="step-num">4</span>
+                    <span><strong>Pain monitoring rule:</strong> If pain rises above 3/10 during a set, reduce load or range immediately. If it rises above 5/10, stop the exercise and note which variation triggered it.</span>
+                </li>
+                <li>
+                    <span class="step-num">5</span>
+                    <span><strong>Weekly progression:</strong> Only increase volume or load when you can consistently complete your target sets at or below your target RPE. Never increase more than one variable (sets, reps, or load) in a single week.</span>
+                </li>
+            </ul>
+            <div class="exercise-cue">
+                <strong>Coaching Cue</strong>
+                "Training at RPE 5 for 8 weeks and feeling 80% will get you further than training at RPE 9 for 2 weeks and getting injured. Patience is a training variable."
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- CONCLUSION                                                                -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div class="section">
+    <div class="chapter-label">Conclusion</div>
+    <h2>Your Path Forward</h2>
+    <div class="divider"></div>
+
+    <p>
+        These seven mistakes share a common thread: they each reflect a disconnect between 
+        what the body needs and what it is being given. Avoidance instead of graded exposure. 
+        Static load instead of active movement breaks. Passive stretching instead of controlled 
+        mobility. Chest breathing instead of diaphragmatic support. External load before internal 
+        stability. Compensation instead of correction. Speed instead of patience.
+    </p>
+    <p>
+        None of these are character flaws. They are the predictable result of having chronic pain 
+        without a clear clinical framework for addressing it. This guide is that framework.
+    </p>
+
+    <h3>The 7 Mistakes — Quick Reference</h3>
+    <div class="summary-grid">
+        <div class="summary-item">
+            <div class="num">Mistake 01</div>
+            <div class="mistake-name">Fear-Avoidance</div>
+            <div class="fix-text">→ Graded Exposure Protocol</div>
+        </div>
+        <div class="summary-item">
+            <div class="num">Mistake 02</div>
+            <div class="mistake-name">Prolonged Sitting</div>
+            <div class="fix-text">→ 30-3 Rule + Desk Reset</div>
+        </div>
+        <div class="summary-item">
+            <div class="num">Mistake 03</div>
+            <div class="mistake-name">Static Stretching Only</div>
+            <div class="fix-text">→ PNF Active Mobility</div>
+        </div>
+        <div class="summary-item">
+            <div class="num">Mistake 04</div>
+            <div class="mistake-name">Ignoring Breathing</div>
+            <div class="fix-text">→ 90/90 Breathing Reset</div>
+        </div>
+        <div class="summary-item">
+            <div class="num">Mistake 05</div>
+            <div class="mistake-name">Strength Without Stability</div>
+            <div class="fix-text">→ Dead Bug Protocol</div>
+        </div>
+        <div class="summary-item">
+            <div class="num">Mistake 06</div>
+            <div class="mistake-name">Compensating Patterns</div>
+            <div class="fix-text">→ Wall Angel Correction</div>
+        </div>
+        <div class="summary-item" style="grid-column: 1 / -1;">
+            <div class="num">Mistake 07</div>
+            <div class="mistake-name">Overloading Too Fast</div>
+            <div class="fix-text">→ RPE-Based Regulation + 10% Rule</div>
+        </div>
+    </div>
+
+    <h3>Where to Go From Here</h3>
+    <p>
+        This guide gives you the framework. What it cannot give you is individualisation — 
+        the precise assessment of which of these seven mistakes applies to you most critically, 
+        in which order to address them, and at what pace your specific system can progress.
+    </p>
+    <p>
+        That is exactly what the <strong>CAMI Restore programme</strong> does — in person, 
+        in Utrecht, in a small group (max 10 people) with full clinical assessment on Day 1, 
+        followed by structured exercise on Days 2 and 3, and 30 days of personalised 
+        daily coaching via CAMIX.
+    </p>
+
+    <div class="cta-box">
+        <h2>Ready for the Next Step?</h2>
+        <p>
+            Complete a free 10-minute online assessment. We'll analyse your profile and tell 
+            you exactly which programme is right for you — no sales call required.
+        </p>
+        <a href="/assessment" class="cta-btn">Start Free Assessment →</a>
+    </div>
+
+    <div class="callout callout-fix" style="margin-top: 2rem;">
+        <div class="callout-label">CAMI Monthly Subscription</div>
+        <p>
+            Not ready for an in-person programme yet? Our <strong>CAMI Move subscription (€9,90/month)</strong> 
+            gives you access to monthly mobility routines, posture correction guides, and the practical 
+            tools in this guide — in video and PDF format, in IT/EN/NL.
+        </p>
+        <p>
+            <a href="/subscriptions" style="color: var(--green-dark); font-weight: 700;">
+                Explore CAMI Monthly plans →
+            </a>
+        </p>
+    </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<!-- FOOTER                                                                    -->
+<!-- ══════════════════════════════════════════════════════════════════════════ -->
+<div style="background: #111827; color: #9CA3AF; padding: 2.5rem 3rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.8rem;">
+    <div style="margin-bottom: 0.75rem;">
+        <strong style="color: white; font-size: 1rem;">CAMI Netherlands</strong>
+        <span style="margin-left: 0.75rem;">Utrecht · nl.centrocami.it</span>
+    </div>
+    <p style="margin-bottom: 0.5rem;">
+        © 2026 CAMI — Centro Attività Motoria Integrata. All rights reserved.
+    </p>
+    <p>
+        This guide is for educational purposes only and does not constitute medical advice, diagnosis or treatment.
+        Content reflects kinesiological and movement science principles. Always consult a qualified healthcare 
+        provider before beginning any exercise programme.
+    </p>
+</div>
+
+</body>
+</html>

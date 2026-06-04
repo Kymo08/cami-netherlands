@@ -8,6 +8,8 @@ services:
     envVars:
       - key: FLASK_ENV
         value: production
+      - key: BASE_URL
+        value: https://nl.centrocami.it
       - key: RESEND_API_KEY
         sync: false          # set manually in Render dashboard
       - key: ADMIN_EMAIL
@@ -18,5 +20,15 @@ services:
         sync: false
       - key: STRIPE_WEBHOOK_SECRET
         sync: false
+      - key: OPENAI_API_KEY
+        sync: false          # optional – enables CAMIX AI analysis
+      - key: PROGRAM_START_DATE
+        value: 2026-07-05    # update before each cohort
+      - key: PROGRAM_SESSION_HOUR
+        value: "10"
+      - key: PROGRAM_SESSION_DURATION
+        value: "4"
+      - key: PROGRAM_LOCATION
+        value: Utrecht, Netherlands
     healthCheckPath: /api/health
     autoDeploy: true

@@ -198,6 +198,11 @@
                 
                 <!-- Nav links + language switcher -->
                 <div class="flex items-center gap-4">
+                    <a href="/ebooks" class="hidden sm:inline-block text-sm font-medium hover:underline text-gray-600">
+                        <span data-lang-content="it" class="active">Guide</span>
+                        <span data-lang-content="en">Guides</span>
+                        <span data-lang-content="nl">Gidsen</span>
+                    </a>
                     <a href="/subscriptions" class="hidden sm:inline-block text-sm font-medium hover:underline" style="color: var(--color-accent);">
                         <span data-lang-content="it" class="active">Abbonamenti</span>
                         <span data-lang-content="en">Subscriptions</span>
@@ -831,6 +836,42 @@
         </div>
     </section>
     
+    <!-- Free eBooks Banner -->
+    <section class="py-14 px-4 bg-gray-50">
+        <div class="max-w-4xl mx-auto fade-in">
+            <div class="flex flex-col md:flex-row items-center gap-8 bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+                <!-- Icon -->
+                <div class="flex-shrink-0 w-16 h-16 rounded-2xl flex items-center justify-center" style="background: linear-gradient(135deg,#EDE9FE,#DBEAFE);">
+                    <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+                </div>
+                <!-- Copy -->
+                <div class="flex-1 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider mb-2 px-3 py-1 rounded-full" style="background:#D1FAE5; color:#065F46;">
+                        <span data-lang-content="it" class="active">Gratuito</span>
+                        <span data-lang-content="en">Free</span>
+                        <span data-lang-content="nl">Gratis</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2" style="color: var(--color-primary);">
+                        <span data-lang-content="it" class="active">Guide Cliniche CAMI — Scarica Gratis</span>
+                        <span data-lang-content="en">CAMI Clinical Guides — Free Download</span>
+                        <span data-lang-content="nl">CAMI Klinische Gidsen — Gratis Download</span>
+                    </h3>
+                    <p class="text-gray-500 text-sm mb-1">
+                        <span data-lang-content="it" class="active"><strong>CAMI Restore:</strong> 7 errori di movimento che peggiorano il dolore &nbsp;·&nbsp; <strong>CAMI Perform:</strong> I 5 pattern di forza per allenarsi senza limiti</span>
+                        <span data-lang-content="en"><strong>CAMI Restore:</strong> 7 movement mistakes making your pain worse &nbsp;·&nbsp; <strong>CAMI Perform:</strong> The 5 strength patterns to train without limits</span>
+                        <span data-lang-content="nl"><strong>CAMI Restore:</strong> 7 bewegingsfouten die uw pijn erger maken &nbsp;·&nbsp; <strong>CAMI Perform:</strong> De 5 krachtpatronen om zonder grenzen te trainen</span>
+                    </p>
+                </div>
+                <!-- CTA -->
+                <a href="/ebooks" class="flex-shrink-0 inline-block px-6 py-3 rounded-xl font-semibold text-white transition-all hover:opacity-90" style="background: var(--color-primary);">
+                    <span data-lang-content="it" class="active">Leggi le Guide →</span>
+                    <span data-lang-content="en">Read the Guides →</span>
+                    <span data-lang-content="nl">Lees de Gidsen →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
     <!-- FAQ -->
     <section class="py-20 px-4">
         <div class="max-w-3xl mx-auto">
@@ -992,6 +1033,16 @@
                 </h3>
                 <ul class="space-y-2 text-gray-400">
                     <li><a href="https://www.centrocami.it" class="hover:text-white transition">Centro CAMI Italy</a></li>
+                    <li><a href="/ebooks" class="hover:text-white transition">
+                        <span data-lang-content="it" class="active">Guide Gratuite</span>
+                        <span data-lang-content="en">Free Guides</span>
+                        <span data-lang-content="nl">Gratis Gidsen</span>
+                    </a></li>
+                    <li><a href="/subscriptions" class="hover:text-white transition">
+                        <span data-lang-content="it" class="active">Abbonamenti</span>
+                        <span data-lang-content="en">Subscriptions</span>
+                        <span data-lang-content="nl">Abonnementen</span>
+                    </a></li>
                     <li><a href="#how-it-works" class="hover:text-white transition">
                         <span data-lang-content="it" class="active">Come Funziona</span>
                         <span data-lang-content="en">How It Works</span>

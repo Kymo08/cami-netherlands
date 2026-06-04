@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The 5 Strength Patterns: Train Without Limits — CAMI Perform</title>
+<style>
+/* ── DESIGN TOKENS ─────────────────────────────────────────────────────────── */
+:root {
+    --blue:        #1E3A8A;
+    --blue-light:  #3B82F6;
+    --blue-dark:   #0F2460;
+    --amber:       #D97706;
+    --amber-light: #FEF3C7;
+    --green:       #10B981;
+    --green-dark:  #059669;
+    --red:         #DC2626;
+    --text:        #1F2937;
+    --text-light:  #6B7280;
+    --bg-alt:      #F9FAFB;
+    --border:      #E5E7EB;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--text);
+    background: #fff;
+    max-width: 820px;
+    margin: 0 auto;
+}
+
+/* ── COVER ─────────────────────────────────────────────────────────────────── */
+.cover {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #0F2460 0%, #1E3A8A 50%, #D97706 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 3rem;
+    position: relative;
+    overflow: hidden;
+}
+.cover-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=70&auto=format&fit=crop') center/cover no-repeat;
+    opacity: 0.2;
+}
+.cover-tag {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--amber);
+    color: white;
+    padding: 0.35rem 1rem;
+    border-radius: 9999px;
+    margin-bottom: 2rem;
+    display: inline-block;
+    position: relative;
+}
+.cover h1 {
+    font-family: Georgia, serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 1.5rem;
+    max-width: 660px;
+    position: relative;
+}
+.cover h1 em { color: #FCD34D; font-style: normal; }
+.cover .subtitle {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 1.15rem;
+    opacity: 0.88;
+    max-width: 520px;
+    margin-bottom: 3rem;
+    position: relative;
+    line-height: 1.6;
+}
+.cover-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+    margin-top: auto;
+}
+.cover-author img {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.4);
+    object-fit: cover;
+}
+.cover-author .name { font-family: -apple-system, sans-serif; font-weight: 700; font-size: 1rem; }
+.cover-author .creds { font-family: -apple-system, sans-serif; font-size: 0.8rem; opacity: 0.75; }
+.cover-logo {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 800; font-size: 1.5rem;
+    color: white;
+    position: absolute; top: 2rem; right: 3rem;
+    letter-spacing: 0.05em;
+}
+.cover-logo span { color: var(--amber); }
+
+/* ── CONTENT ───────────────────────────────────────────────────────────────── */
+.section { padding: 3.5rem 3rem; border-bottom: 1px solid var(--border); }
+.section:last-child { border-bottom: none; }
+.section-alt { background: var(--bg-alt); }
+
+.section-disclaimer {
+    background: #FFF7ED;
+    border-left: 4px solid var(--amber);
+    padding: 2rem 2.5rem;
+    border-radius: 0 0.75rem 0.75rem 0;
+    margin: 2rem 3rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.875rem;
+    color: #92400E;
+    line-height: 1.65;
+}
+.section-disclaimer strong { color: #78350F; }
+
+.chapter-label {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--amber); margin-bottom: 0.5rem;
+}
+h2 { font-family: Georgia, serif; font-size: 1.9rem; color: var(--blue); line-height: 1.25; margin-bottom: 0.75rem; }
+h3 { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--blue); margin: 2rem 0 0.75rem; }
+h4 { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.9rem; font-weight: 700; color: var(--text); margin: 1.5rem 0 0.5rem; text-transform: uppercase; letter-spacing: 0.06em; }
+p { margin-bottom: 1.25rem; }
+
+.divider { width: 60px; height: 3px; background: var(--amber); border-radius: 2px; margin: 1.5rem 0; }
+
+/* ── PATTERN HERO ──────────────────────────────────────────────────────────── */
+.pattern-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 2rem 0;
+    min-height: 240px;
+}
+.pattern-hero-text {
+    background: var(--blue-dark);
+    color: white;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.pattern-number {
+    font-family: Georgia, serif;
+    font-size: 4rem; font-weight: 700;
+    color: rgba(255,255,255,0.12);
+    line-height: 1; margin-bottom: 0.25rem;
+}
+.pattern-title {
+    font-family: Georgia, serif;
+    font-size: 1.35rem; font-weight: 700;
+    line-height: 1.3; color: white; margin-bottom: 0.5rem;
+}
+.pattern-tag {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    background: var(--amber);
+    padding: 0.2rem 0.6rem; border-radius: 9999px;
+    color: white; display: inline-block; margin-bottom: 0.75rem;
+}
+.pattern-hero img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ── CALLOUT BOXES ─────────────────────────────────────────────────────────── */
+.callout {
+    border-radius: 0.75rem;
+    padding: 1.5rem 1.75rem;
+    margin: 1.75rem 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.9375rem;
+}
+.callout-science { background: #EFF6FF; border-left: 4px solid var(--blue-light); }
+.callout-science .callout-label { color: var(--blue); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.callout-fix { background: #ECFDF5; border-left: 4px solid var(--green); }
+.callout-fix .callout-label { color: var(--green-dark); font-weight: 700; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.callout-performance { background: #FFFBEB; border-left: 4px solid var(--amber); }
+.callout-performance .callout-label { color: #92400E; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.callout p { margin-bottom: 0.5rem; }
+.callout p:last-child { margin-bottom: 0; }
+
+/* ── EXERCISE BOX ──────────────────────────────────────────────────────────── */
+.exercise-box { background: white; border: 2px solid var(--blue); border-radius: 1rem; overflow: hidden; margin: 2rem 0; }
+.exercise-header {
+    background: var(--blue);
+    color: white;
+    padding: 0.875rem 1.5rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+}
+.exercise-body { padding: 1.5rem; }
+.exercise-title { font-family: Georgia, serif; font-size: 1.25rem; color: var(--blue); margin-bottom: 0.5rem; }
+.exercise-meta {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 0.8rem; color: var(--text-light);
+    margin-bottom: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;
+}
+.exercise-meta span { background: var(--bg-alt); padding: 0.2rem 0.6rem; border-radius: 9999px; border: 1px solid var(--border); }
+.exercise-steps { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.925rem; list-style: none; }
+.exercise-steps li { display: flex; gap: 0.875rem; padding: 0.625rem 0; border-bottom: 1px solid var(--bg-alt); align-items: flex-start; line-height: 1.5; }
+.exercise-steps li:last-child { border-bottom: none; }
+.step-num { flex-shrink: 0; width: 1.5rem; height: 1.5rem; background: var(--blue); color: white; border-radius: 50%; font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 0.1rem; }
+.exercise-cue { background: #EFF6FF; border-radius: 0.5rem; padding: 0.75rem 1rem; margin-top: 1rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.875rem; color: var(--blue); }
+.exercise-cue strong { display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+
+/* ── PROGRAMMING TABLE ─────────────────────────────────────────────────────── */
+.prog-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.875rem; }
+.prog-table th { background: var(--blue); color: white; padding: 0.6rem 0.875rem; text-align: left; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; }
+.prog-table td { padding: 0.6rem 0.875rem; border-bottom: 1px solid var(--border); color: var(--text); }
+.prog-table tr:nth-child(even) td { background: var(--bg-alt); }
+.prog-table tr:last-child td { border-bottom: none; }
+
+/* ── ERROR LIST ────────────────────────────────────────────────────────────── */
+.error-list { list-style: none; }
+.error-list li { display: flex; gap: 0.875rem; padding: 0.625rem 0; border-bottom: 1px solid var(--border); align-items: flex-start; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.9375rem; }
+.error-list li:last-child { border-bottom: none; }
+.error-list li::before { content: "✗"; color: var(--red); font-weight: 700; font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+/* ── MUSCLES BADGE ─────────────────────────────────────────────────────────── */
+.muscles-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1.25rem; }
+.muscle-badge { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.78rem; font-weight: 600; background: var(--bg-alt); border: 1.5px solid var(--border); padding: 0.2rem 0.65rem; border-radius: 9999px; color: var(--text); }
+.muscle-badge.primary { background: #EFF6FF; border-color: var(--blue-light); color: var(--blue); }
+
+/* ── TOC ───────────────────────────────────────────────────────────────────── */
+.toc { list-style: none; }
+.toc-item { display: flex; align-items: baseline; gap: 0.75rem; padding: 0.75rem 0; border-bottom: 1px dotted var(--border); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+.toc-item:last-child { border-bottom: none; }
+.toc-num { color: var(--amber); font-weight: 700; font-size: 0.8rem; width: 2rem; flex-shrink: 0; }
+.toc-title { flex: 1; font-size: 0.9375rem; color: var(--text); }
+.toc-subtitle { font-size: 0.8rem; color: var(--text-light); display: block; }
+
+/* ── CTA ───────────────────────────────────────────────────────────────────── */
+.cta-box { background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, var(--blue-light) 100%); color: white; border-radius: 1.25rem; padding: 3rem; text-align: center; margin: 2rem 0; }
+.cta-box h2 { color: white; font-size: 1.75rem; margin-bottom: 1rem; }
+.cta-box p { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; opacity: 0.9; max-width: 480px; margin: 0 auto 1.5rem; font-size: 0.9375rem; }
+.cta-btn { display: inline-block; background: var(--amber); color: white; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-weight: 700; font-size: 1rem; padding: 1rem 2.5rem; border-radius: 0.5rem; text-decoration: none; }
+.cta-btn:hover { opacity: 0.9; }
+
+/* ── AUTHOR ────────────────────────────────────────────────────────────────── */
+.author-card { display: grid; grid-template-columns: 140px 1fr; gap: 2rem; align-items: start; }
+.author-photo { width: 140px; height: 140px; border-radius: 1rem; object-fit: cover; border: 3px solid var(--blue); }
+.author-name { font-family: Georgia, serif; font-size: 1.5rem; color: var(--blue); margin-bottom: 0.25rem; }
+.author-creds { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.85rem; color: var(--text-light); margin-bottom: 1rem; }
+
+/* ── PRINT ─────────────────────────────────────────────────────────────────── */
+@media print {
+    @page { size: A4; margin: 18mm 20mm; }
+    body { max-width: 100%; font-size: 11pt; }
+    .cover { min-height: auto; page-break-after: always; padding: 3cm 2.5cm; }
+    .section { padding: 1.5rem 0; page-break-inside: avoid; }
+    .pattern-hero, .exercise-box, .cta-box { page-break-inside: avoid; }
+    .section-disclaimer { margin: 1rem 0; }
+    h2 { font-size: 1.4rem; }
+    a { color: inherit; }
+    .cover-bg { opacity: 0.1; }
+}
+
+@media (max-width: 640px) {
+    .section { padding: 2.5rem 1.5rem; }
+    .cover { padding: 3rem 1.5rem; }
+    .pattern-hero { grid-template-columns: 1fr; }
+    .pattern-hero img { height: 200px; }
+    .author-card { grid-template-columns: 1fr; }
+    .cover-logo { top: 1.5rem; right: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+    <div class="cover-bg"></div>
+    <div class="cover-logo">CAMI<span>·</span></div>
+
+    <div class="cover-tag">CAMI Perform — Performance Guide</div>
+
+    <h1>The <em>5 Strength Patterns</em>:<br>Train Without Limits</h1>
+
+    <p class="subtitle">
+        Master the five fundamental movement patterns of human performance — and build
+        strength, power, and athletic longevity without the injuries that hold most athletes back.
+    </p>
+
+    <div class="cover-author">
+        <img src="https://www.centrocami.it/wp-content/uploads/2023/06/Team-CAMI-Catania-8-1024x1024.png"
+             alt="Dott. Gabriele Liuzzo" loading="lazy">
+        <div>
+            <div class="name">Dott. Gabriele Liuzzo</div>
+            <div class="creds">Clinical Kinesiologist · CAMI Perform Director · Utrecht</div>
+        </div>
+    </div>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="section-disclaimer">
+    <p>
+        <strong>Performance education — not medical advice.</strong>
+        This guide is for educational and informational purposes only. It does not constitute 
+        medical advice, diagnosis, or personalised training prescription. Strength and power 
+        training carry inherent risk of injury. Always obtain medical clearance before beginning 
+        a new training programme, especially if you have a history of cardiovascular conditions, 
+        recent injury, or surgery. If you experience joint pain (distinct from normal training 
+        fatigue), stop and seek qualified assessment.
+    </p>
+</div>
+
+<!-- ABOUT AUTHOR -->
+<div class="section section-alt">
+    <div class="chapter-label">About the Author</div>
+    <div class="author-card">
+        <img class="author-photo"
+             src="https://www.centrocami.it/wp-content/uploads/2023/06/Team-CAMI-Catania-8-1024x1024.png"
+             alt="Dott. Gabriele Liuzzo">
+        <div>
+            <div class="author-name">Dott. Gabriele "Lele" Liuzzo</div>
+            <div class="author-creds">Clinical Kinesiologist · University of Catania (UniCT) · 15+ years in clinical exercise and sport performance</div>
+            <p>
+                Gabriele has spent over 15 years at the intersection of clinical exercise science and 
+                athletic performance. At CAMI, he has designed and delivered training programmes for 
+                athletes across cycling, martial arts, running, team sports, and general fitness — 
+                from beginners breaking their first plateau to competitive athletes preparing for 
+                national-level events.
+            </p>
+            <p>
+                His philosophy: <em>"Athletic longevity is not a side effect of good training. 
+                It is the goal. If your programme is not sustainable for five years, it is not 
+                a good programme."</em>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- INTRODUCTION -->
+<div class="section">
+    <div class="chapter-label">Introduction</div>
+    <h2>Why Most Athletes Plateau — and How Movement Patterns Break the Cycle</h2>
+    <div class="divider"></div>
+
+    <p>
+        Most athletes who plateau are not lacking effort. They train consistently, they push hard, 
+        they are motivated. What they are typically missing is <strong>structural clarity</strong> — 
+        a framework for understanding which physical capacities need to be developed, in which 
+        order, and through which fundamental patterns.
+    </p>
+    <p>
+        The human body produces movement through a limited number of fundamental mechanical patterns. 
+        Every athletic activity — regardless of sport — is a combination of these patterns, 
+        performed at varying speeds, loads, and ranges of motion. <strong>Developing mastery of 
+        the five fundamental patterns is the most direct route to improving performance 
+        across any discipline.</strong>
+    </p>
+    <p>
+        Equally important: the five patterns are where most overuse injuries and chronic pain 
+        originate. Poor mechanics in the squat pattern load the knee in the wrong plane. 
+        Weak posterior chain in the hinge pattern stresses the lumbar spine. Inadequate 
+        scapular control in the push/pull patterns creates shoulder impingement. Insufficient 
+        core stiffness in the carry pattern generates lateral trunk instability.
+    </p>
+
+    <div class="callout callout-performance">
+        <div class="callout-label">The CAMI Perform Principle</div>
+        <p>
+            Strength and injury prevention are not in tension — they are the same thing. 
+            An athlete who is technically sound in all five patterns will be stronger, more 
+            powerful, and significantly more injury-resistant than one who trains harder 
+            in flawed patterns. <strong>Technical excellence is not for elite athletes. 
+            It is the fastest route to becoming one.</strong>
+        </p>
+    </div>
+
+    <p>
+        This guide walks through each pattern: its anatomy, its sport application, 
+        the most common errors, and the training protocols we use in the CAMI Perform programme. 
+        It is not a complete training programme — it is the conceptual foundation for building one.
+    </p>
+</div>
+
+<!-- TOC -->
+<div class="section">
+    <div class="chapter-label">Contents</div>
+    <h2>The Five Patterns</h2>
+    <div class="divider"></div>
+    <ul class="toc">
+        <li class="toc-item">
+            <span class="toc-num">01</span>
+            <span class="toc-title">
+                The Squat Pattern
+                <span class="toc-subtitle">Knee-dominant lower body loading — the engine of athletic power</span>
+            </span>
+        </li>
+        <li class="toc-item">
+            <span class="toc-num">02</span>
+            <span class="toc-title">
+                The Hinge Pattern
+                <span class="toc-subtitle">Hip-dominant force production — acceleration, jumping, and lumbar health</span>
+            </span>
+        </li>
+        <li class="toc-item">
+            <span class="toc-num">03</span>
+            <span class="toc-title">
+                The Push Pattern
+                <span class="toc-subtitle">Horizontal and vertical pressing — shoulder integrity and upper body strength</span>
+            </span>
+        </li>
+        <li class="toc-item">
+            <span class="toc-num">04</span>
+            <span class="toc-title">
+                The Pull Pattern
+                <span class="toc-subtitle">Horizontal and vertical pulling — postural balance and posterior chain strength</span>
+            </span>
+        </li>
+        <li class="toc-item">
+            <span class="toc-num">05</span>
+            <span class="toc-title">
+                The Carry Pattern
+                <span class="toc-subtitle">Loaded locomotion — core stiffness, grip, and athletic transfer</span>
+            </span>
+        </li>
+    </ul>
+</div>
+
+<!-- PATTERN 1: SQUAT -->
+<div class="section">
+    <div class="pattern-hero">
+        <div class="pattern-hero-text">
+            <div class="pattern-number">01</div>
+            <div class="pattern-tag">Knee-Dominant</div>
+            <div class="pattern-title">The Squat Pattern</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=75&auto=format&fit=crop"
+             alt="Squat pattern strength training" loading="lazy">
+    </div>
+
+    <h3>What Is the Squat Pattern?</h3>
+    <p>
+        The squat is a <strong>bilateral or unilateral knee-dominant movement</strong> in which the 
+        hips and knees flex simultaneously under load. It is the primary pattern for developing 
+        lower body strength and power, and one of the most-used movements in daily life and sport 
+        (sitting, standing, jumping, changing direction).
+    </p>
+
+    <h4>Primary Muscles</h4>
+    <div class="muscles-grid">
+        <span class="muscle-badge primary">Quadriceps (VMO, VL, VI, RF)</span>
+        <span class="muscle-badge primary">Gluteus Maximus</span>
+        <span class="muscle-badge primary">Gluteus Medius</span>
+        <span class="muscle-badge">Hamstrings (eccentric)</span>
+        <span class="muscle-badge">Adductors</span>
+        <span class="muscle-badge">Gastrocnemius</span>
+        <span class="muscle-badge">Spinal Erectors (isometric)</span>
+        <span class="muscle-badge">Transversus Abdominis</span>
+    </div>
+
+    <h3>Sport Application</h3>
+    <p>
+        The squat pattern drives <strong>vertical force production</strong> — which transfers 
+        directly to jumping height, sprint acceleration off the blocks, and change-of-direction 
+        speed. Athletes with strong, technically sound squat patterns consistently show superior 
+        acceleration and jumping performance.
+    </p>
+    <p>
+        The single-leg squat (split squat, Bulgarian split squat, pistol squat) is particularly 
+        important for sport because most athletic propulsion is unilateral — you accelerate, 
+        land, and change direction on one leg at a time.
+    </p>
+
+    <h3>The Three Most Common Errors</h3>
+    <ul class="error-list">
+        <li><strong>Dynamic knee valgus.</strong> The knee(s) cave inward during descent or ascent. Driven by hip abductor weakness (gluteus medius), hip internal rotation, or ankle dorsiflexion restriction. Directly loads the MCL, patellofemoral joint, and medial meniscus.</li>
+        <li><strong>Anterior knee dominance (knees too far forward).</strong> Excessive tibial inclination shifts load from the glutes to the quads and increases patellofemoral compressive force. Often caused by poor hip hinge coordination (inability to send hips back) or ankle mobility restriction.</li>
+        <li><strong>Lumbar flexion at depth ("butt wink").</strong> The pelvis posteriorly tilts and the lower back rounds at the bottom of the squat. Causes: limited hip mobility (particularly hip flexion with internal rotation), insufficient ankle dorsiflexion, or premature depth before mobility is established.</li>
+    </ul>
+
+    <div class="callout callout-science">
+        <div class="callout-label">Diagnostic Screen</div>
+        <p>
+            Perform an overhead squat (arms overhead, feet shoulder-width, squat to depth). 
+            Observe: do the knees track over the toes? Does the lower back stay neutral at depth? 
+            Do the arms stay overhead, or do they fall forward (indicating thoracic stiffness)?
+            <strong>Every deviation tells you something specific about mobility or stability deficits.</strong>
+        </p>
+    </div>
+
+    <div class="exercise-box">
+        <div class="exercise-header">✦ CAMI Perform Protocol</div>
+        <div class="exercise-body">
+            <div class="exercise-title">Goblet Squat — Technical Foundation</div>
+            <div class="exercise-meta">
+                <span>Sets: 3–4</span>
+                <span>Reps: 6–10</span>
+                <span>Tempo: 3-1-1</span>
+                <span>Equipment: Dumbbell or kettlebell</span>
+            </div>
+            <ul class="exercise-steps">
+                <li><span class="step-num">1</span><span>Hold a dumbbell or kettlebell at chest height (goblet position). Feet shoulder-width, toes turned out 15–30°. <strong>Brace the core before moving</strong> — inhale, create intra-abdominal pressure, then descend.</span></li>
+                <li><span class="step-num">2</span><span><strong>Send the hips back and down simultaneously.</strong> Think: hips go down and back, not just down. The knees track in line with the 2nd–3rd toe throughout. No caving inward, no excessive forward lean.</span></li>
+                <li><span class="step-num">3</span><span>Descend to <strong>parallel or slightly below</strong> — only as far as lumbar neutrality is maintained. If the lower back rounds, reduce depth. Depth is earned through mobility work, not forced.</span></li>
+                <li><span class="step-num">4</span><span>At the bottom, pause for 1 second. <strong>Drive the floor away</strong> as you stand — think about pushing the ground down, not pulling yourself up. Exhale through effort.</span></li>
+                <li><span class="step-num">5</span><span>The goblet position keeps you honest: if the weight drops, your upper back is rounding. Once you can do 8 reps with controlled mechanics, <strong>progress to barbell back or front squat</strong>.</span></li>
+            </ul>
+            <div class="exercise-cue">
+                <strong>Coaching Cue</strong>
+                "Knees out, chest up, sit between the feet — not in front of them. The goblet weight is your counterbalance. Use it."
+            </div>
+        </div>
+    </div>
+
+    <h4>Progression Pathway</h4>
+    <table class="prog-table">
+        <thead><tr><th>Phase</th><th>Exercise</th><th>Weeks</th><th>Primary Stimulus</th></tr></thead>
+        <tbody>
+            <tr><td>Foundation</td><td>Goblet Squat / Box Squat</td><td>1–4</td><td>Mechanics, motor pattern</td></tr>
+            <tr><td>Development</td><td>Front Squat / Back Squat</td><td>5–12</td><td>Strength, progressive overload</td></tr>
+            <tr><td>Performance</td><td>Bulgarian Split Squat, Jump Squat</td><td>12+</td><td>Unilateral strength, power</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- PATTERN 2: HINGE -->
+<div class="section section-alt">
+    <div class="pattern-hero">
+        <div class="pattern-hero-text">
+            <div class="pattern-number">02</div>
+            <div class="pattern-tag">Hip-Dominant</div>
+            <div class="pattern-title">The Hinge Pattern</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=600&q=75&auto=format&fit=crop"
+             alt="Hip hinge and deadlift training" loading="lazy">
+    </div>
+
+    <h3>What Is the Hinge Pattern?</h3>
+    <p>
+        The hinge is a <strong>hip-dominant movement</strong> where the torso hinges forward 
+        at the hip joint while the spine maintains neutrality. The primary movers are the 
+        hip extensors (gluteus maximus, hamstrings). The spine is a rigid lever, not a 
+        moving joint.
+    </p>
+    <p>
+        The hinge is the foundation of explosive power: deadlifts, kettlebell swings, jumping, 
+        running acceleration, and sprinting all rely on powerful hip extension through the 
+        hinge pattern.
+    </p>
+
+    <h4>Primary Muscles</h4>
+    <div class="muscles-grid">
+        <span class="muscle-badge primary">Gluteus Maximus</span>
+        <span class="muscle-badge primary">Biceps Femoris (long head)</span>
+        <span class="muscle-badge primary">Semimembranosus / Semitendinosus</span>
+        <span class="muscle-badge">Erector Spinae (isometric)</span>
+        <span class="muscle-badge">Multifidus (isometric)</span>
+        <span class="muscle-badge">Latissimus Dorsi</span>
+        <span class="muscle-badge">Glute Medius / Minimus</span>
+    </div>
+
+    <h3>Sport Application</h3>
+    <p>
+        Hip extension power is the primary driver of <strong>sprint speed, jumping height, 
+        and change-of-direction explosiveness</strong>. EMG research consistently shows that 
+        sprinting at maximum velocity is a hamstring-dominant (not quadriceps-dominant) 
+        activity — the hamstrings decelerate the swing leg and generate ground contact force.
+    </p>
+    <p>
+        Athletes with a weak hinge pattern commonly compensate with excessive lumbar extension 
+        (lower back takes the load the hips should provide) — the most common mechanism 
+        for athletic low back pain.
+    </p>
+
+    <h3>The Three Most Common Errors</h3>
+    <ul class="error-list">
+        <li><strong>Squatting instead of hinging.</strong> The athlete bends the knees excessively and "squats down" instead of "hinging back." The hips travel down instead of back. The posterior chain is never loaded under tension. Result: the deadlift becomes a leg press.</li>
+        <li><strong>Lumbar flexion under load.</strong> The lower back rounds during the pull, concentrating shear and compressive force on the lumbar discs and facets. Usually caused by inadequate hamstring flexibility for the required hip flexion angle, or failure to brace the core before the lift.</li>
+        <li><strong>Bar (or load) drifting forward.</strong> The load moves away from the body during the pull, dramatically increasing the lever arm and lumbar loading. The lat engagement cue ("protect your armpits") is the fix.</li>
+    </ul>
+
+    <div class="callout callout-performance">
+        <div class="callout-label">Hip Hinge Assessment</div>
+        <p>
+            Stand facing a wall, 15 cm away. Push your hips backward toward the wall without bending your knees more than 10°. 
+            Your hands reach toward the floor, spine stays neutral. Can you touch the wall with your hips while keeping the 
+            spine long? <strong>If not, you are squatting the hinge.</strong>
+        </p>
+    </div>
+
+    <div class="exercise-box">
+        <div class="exercise-header">✦ CAMI Perform Protocol</div>
+        <div class="exercise-body">
+            <div class="exercise-title">Romanian Deadlift (RDL) — Posterior Chain Foundation</div>
+            <div class="exercise-meta">
+                <span>Sets: 3–4</span>
+                <span>Reps: 6–8</span>
+                <span>Tempo: 3-1-1</span>
+                <span>Equipment: Barbell or dumbbells</span>
+            </div>
+            <ul class="exercise-steps">
+                <li><span class="step-num">1</span><span>Stand with feet hip-width, barbell at hip height. <strong>Brace the core hard</strong> — inhale and create pressure in the abdomen (Valsalva for heavier loads). Soft knee bend (15–20°), maintained throughout.</span></li>
+                <li><span class="step-num">2</span><span><strong>Push the hips back</strong> as if trying to touch a wall behind you. The barbell slides down your thighs — keep it in contact with your body the entire way down. "Bar stays on the body."</span></li>
+                <li><span class="step-num">3</span><span>Descend until you feel a strong pull in the hamstrings, or until your lower back begins to round (whichever comes first). <strong>Maintain spinal neutrality</strong> throughout — the spine does not flex.</span></li>
+                <li><span class="step-num">4</span><span>Drive the hips forward to stand. Squeeze the glutes hard at the top — <strong>hip extension, not lumbar hyperextension</strong>. Your ribs should stay down, not flare up.</span></li>
+                <li><span class="step-num">5</span><span>Once you can RDL 1.25× bodyweight for 6 reps with perfect mechanics, progress to <strong>conventional deadlift</strong>, then to <strong>trap bar deadlift</strong> or <strong>single-leg RDL</strong> depending on sport demands.</span></li>
+            </ul>
+            <div class="exercise-cue">
+                <strong>Coaching Cue</strong>
+                "The hinge is not a squat with a barbell. You are loading the hamstrings eccentrically like a slingshot — and releasing that energy through hip extension. The hips drive the lift. The lower back does nothing except stay stiff."
+            </div>
+        </div>
+    </div>
+
+    <h4>Progression Pathway</h4>
+    <table class="prog-table">
+        <thead><tr><th>Phase</th><th>Exercise</th><th>Weeks</th><th>Primary Stimulus</th></tr></thead>
+        <tbody>
+            <tr><td>Foundation</td><td>Hip Hinge Drill (dowel), KB Deadlift</td><td>1–3</td><td>Motor pattern, hamstring loading</td></tr>
+            <tr><td>Development</td><td>RDL, Conventional Deadlift</td><td>4–12</td><td>Max strength, posterior chain</td></tr>
+            <tr><td>Performance</td><td>Trap Bar Deadlift, KB Swing, SL RDL</td><td>12+</td><td>Power, unilateral strength</td></tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- PATTERN 3: PUSH -->
+<div class="section">
+    <div class="pattern-hero">
+        <div class="pattern-hero-text">
+            <div class="pattern-number">03</div>
+            <div class="pattern-tag">Upper Body</div>
+            <div class="pattern-title">The Push Pattern</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=75&auto=format&fit=crop"
+             alt="Push pattern upper body training" loading="lazy">
+    </div>
+
+    <h3>What Is the Push Pattern?</h3>
+    <p>
+        The push pattern encompasses all movements where force is directed <strong>away from the 
+        body</strong> — horizontally (bench press, push-up) or vertically (overhead press, 
+        push press). The primary movers are the pectorals, anterior deltoid, and triceps 
+        for horizontal push; the deltoids, upper trapezius, and triceps for vertical push.
+    </p>
+    <p>
+        Critically, every push pattern requires <strong>scapular stability</strong> as a 
+        foundation. The shoulder joint is inherently unstable by design (ball-and-socket 
+        with a very shallow socket). Its stability comes entirely from dynamic muscle control.
+    </p>
+
+    <h4>Primary Muscles</h4>
+    <div class="muscles-grid">
+        <span class="muscle-badge primary">Pectoralis Major (horizontal)</span>
+        <span class="muscle-badge primary">Anterior Deltoid</span>
+        <span class="muscle-badge primary">Triceps Brachii</span>
+        <span class="muscle-badge primary">Serratus Anterior</span>
+        <span class="muscle-badge">Medial Deltoid (vertical)</span>
+        <span class="muscle-badge">Upper Trapezius (vertical)</span>
+        <span class="muscle-badge">Rotator Cuff (stabilisers)</span>
+    </div>
+
+    <h3>Sport Application</h3>
+    <p>
+        Horizontal pushing strength correlates with <strong>contact sport performance</strong> 
+        (rugby, football, wrestling). Vertical pressing power drives <strong>overhead throwing, 
+        volleyball spiking, gymnastics pressing</strong>, and serves as a marker of general 
+        upper body strength and shoulder health.
+    </p>
+
+    <h3>The Three Most Common Errors</h3>
+    <ul class="error-list">
+        <li><strong>Scapular winging during push-up or bench press.</strong> The serratus anterior is not engaging to protract and upwardly rotate the scapula. The medial border of the scapula lifts off the ribcage. This creates impingement risk and indicates insufficient scapular motor control — the prerequisite for all push pattern loading.</li>
+        <li><strong>Elbow flare during bench press.</strong> Elbows at 90° to the torso dramatically increases shoulder joint stress. Optimal: elbows at 45–75° from the torso. Athletes who flare the elbows are almost universally targeting pectorals at the expense of shoulder health.</li>
+        <li><strong>Cervical hyperextension during overhead press.</strong> The head juts forward as the bar passes the face, creating cervical shear. Usually caused by insufficient thoracic extension or lat tightness limiting true overhead reach without lumbar compensation.</li>
+    </ul>
+
+    <div class="exercise-box">
+        <div class="exercise-header">✦ CAMI Perform Protocol</div>
+        <div class="exercise-body">
+            <div class="exercise-title">Push-Up Progression with Scapular Control</div>
+            <div class="exercise-meta">
+                <span>Sets: 3–4</span>
+                <span>Reps: 8–15</span>
+                <span>Tempo: 3-1-1</span>
+                <span>Equipment: Floor / rings (advanced)</span>
+            </div>
+            <ul class="exercise-steps">
+                <li><span class="step-num">1</span><span><strong>Scapular push-up first:</strong> In a standard plank position, without bending the elbows, protract (spread) the scapulae — push the upper back toward the ceiling. Then retract (pinch together). 10 reps. <strong>If you cannot feel this, you need more scapular activation work before loading the push pattern.</strong></span></li>
+                <li><span class="step-num">2</span><span>Perform the push-up with elbows at <strong>45° from the torso</strong> (not 90°). Lower slowly for 3 seconds. At the bottom, your chest touches — do not rest, reverse immediately with control.</span></li>
+                <li><span class="step-num">3</span><span>At the top, <strong>actively push the floor away</strong> for an extra centimetre — you should feel the serratus anterior engage under the armpit. This prevents winging.</span></li>
+                <li><span class="step-num">4</span><span>Progression order: Elevated push-up (hands on bench) → Standard push-up → Tempo push-up (5-1-1) → Loaded push-up → Ring push-up. <strong>Only progress when you can do 15 reps with zero scapular winging.</strong></span></li>
+                <li><span class="step-num">5</span><span>For barbell pressing: same mechanics apply. Elbows 45–75°, scapulae retracted and depressed on the bench (for bench press) or in a neutral position (for overhead). Brace hard before each rep.</span></li>
+            </ul>
+            <div class="exercise-cue">
+                <strong>Coaching Cue</strong>
+                "Every push is a serratus anterior exercise first. If your scapula is winging, you're pressing on an unstable foundation. Fix the base before adding load."
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PATTERN 4: PULL -->
+<div class="section section-alt">
+    <div class="pattern-hero">
+        <div class="pattern-hero-text">
+            <div class="pattern-number">04</div>
+            <div class="pattern-tag">Upper Body</div>
+            <div class="pattern-title">The Pull Pattern</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=75&auto=format&fit=crop"
+             alt="Pull pattern pulling strength" loading="lazy">
+    </div>
+
+    <h3>What Is the Pull Pattern?</h3>
+    <p>
+        The pull pattern encompasses all movements where force is directed <strong>toward the 
+        body</strong> — horizontally (rows) or vertically (pull-ups, lat pulldowns). 
+        It is the antagonist to the push pattern and is chronically underdeveloped in 
+        most training programmes, creating push:pull muscle imbalances that are 
+        a primary cause of shoulder impingement and chronic neck pain.
+    </p>
+    <p>
+        <strong>The target ratio for most athletes is 1:1.5 to 1:2 push:pull volume.</strong> 
+        That is, for every pushing set, you should perform 1.5 to 2 pulling sets. This 
+        counteracts the anterior dominance created by most sport activities and daily life.
+    </p>
+
+    <h4>Primary Muscles</h4>
+    <div class="muscles-grid">
+        <span class="muscle-badge primary">Latissimus Dorsi</span>
+        <span class="muscle-badge primary">Rhomboids (Major + Minor)</span>
+        <span class="muscle-badge primary">Middle / Lower Trapezius</span>
+        <span class="muscle-badge primary">Biceps Brachii</span>
+        <span class="muscle-badge">Posterior Deltoid</span>
+        <span class="muscle-badge">Teres Major / Minor</span>
+        <span class="muscle-badge">Infraspinatus / Subscapularis</span>
+    </div>
+
+    <h3>Sport Application</h3>
+    <p>
+        Vertical pulling (pull-ups) directly drives <strong>climbing, gymnastic performance, 
+        swimming, and overhead sport mechanics</strong>. Horizontal pulling (rows) 
+        is critical for <strong>rowing, kayaking, wrestling grip strength, and 
+        postural endurance</strong> in any athlete who sits or stands for prolonged periods.
+    </p>
+
+    <h3>The Three Most Common Errors</h3>
+    <ul class="error-list">
+        <li><strong>Pulling with the biceps, not the back.</strong> The elbows lead the movement and the lat/mid-back muscles never fully engage. The fix: begin every pull by depressing and retracting the scapulae before the elbows bend. "Shoulder blades to back pockets."</li>
+        <li><strong>Shrugging during vertical pulls.</strong> The upper trapezius elevates the shoulder girdle during pull-ups or lat pulldowns. This recruits the wrong muscles and compresses the cervical spine. The cue: pull the ribcage toward the bar — not the bar toward the face.</span></li>
+        <li><strong>Insufficient shoulder external rotation in horizontal rows.</strong> The elbows flare wide and the movement becomes a shoulder extension, not a scapular retraction. This primarily fatigues the posterior deltoid without training the rhomboids and mid-trapezius.</li>
+    </ul>
+
+    <div class="exercise-box">
+        <div class="exercise-header">✦ CAMI Perform Protocol</div>
+        <div class="exercise-body">
+            <div class="exercise-title">Dead Hang + Scapular Pull-Up Progression</div>
+            <div class="exercise-meta">
+                <span>Sets: 3–4</span>
+                <span>Reps: See progression</span>
+                <span>Equipment: Pull-up bar or rings</span>
+            </div>
+            <ul class="exercise-steps">
+                <li><span class="step-num">1</span><span><strong>Dead Hang (30 seconds):</strong> Hang from the bar with a full dead hang. This decompresses the spine and assesses grip and shoulder passive stability. Breathe continuously. This alone is therapeutic for compressed cervical and lumbar spines.</span></li>
+                <li><span class="step-num">2</span><span><strong>Scapular Pull-Up (10 reps):</strong> From dead hang, without bending the elbows, depress and retract the scapulae — your body rises 3–4 cm. Return to dead hang. This isolates scapular motor control. <strong>Must be mastered before full pull-ups.</strong></span></li>
+                <li><span class="step-num">3</span><span><strong>Eccentric Pull-Up:</strong> Assisted or jumping to the top position, then <strong>lower yourself as slowly as possible</strong> (5–8 seconds). This builds pulling strength faster than concentric reps and preserves control. Do 5 reps.</span></li>
+                <li><span class="step-num">4</span><span><strong>Full Pull-Up:</strong> Initiate from scapular depression, then drive the elbows toward the hips as you rise. Chin clears the bar. Full lockout at the bottom between reps (not kipping). Tempo 1-1-3 (up-top-down).</span></li>
+                <li><span class="step-num">5</span><span>Progress to <strong>weighted pull-ups</strong> once you can do 10 clean reps. Add 2.5–5 kg increments. Also rotate in <strong>horizontal rows</strong> (barbell, dumbbell, or cable) to balance vertical and horizontal pulling volumes.</span></li>
+            </ul>
+            <div class="exercise-cue">
+                <strong>Coaching Cue</strong>
+                "Pull the ribcage to the bar, not the bar to the face. Elbows to hips. Shoulder blades to back pockets. If you can feel it in your traps, you've lost the lat."
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PATTERN 5: CARRY -->
+<div class="section">
+    <div class="pattern-hero">
+        <div class="pattern-hero-text">
+            <div class="pattern-number">05</div>
+            <div class="pattern-tag">Loaded Locomotion</div>
+            <div class="pattern-title">The Carry Pattern</div>
+        </div>
+        <img src="https://images.unsplash.com/photo-1487956382158-bb926046304a?w=600&q=75&auto=format&fit=crop"
+             alt="Loaded carries athletic training" loading="lazy">
+    </div>
+
+    <h3>What Is the Carry Pattern?</h3>
+    <p>
+        The carry pattern — also called <em>loaded locomotion</em> — involves moving under load 
+        while maintaining spinal and core integrity. It is perhaps the most underused pattern 
+        in traditional strength programmes, and arguably one of the highest-value exercises 
+        for real-world athletic performance and injury prevention.
+    </p>
+    <p>
+        Variations include: farmer's carry (bilateral), suitcase carry (unilateral, maximum 
+        anti-lateral-flexion demand), waiter's carry (overhead), front rack carry, and 
+        zercher carry. Each variation stresses the core stabilisation system differently.
+    </p>
+
+    <h4>Primary Muscles (varies by variation)</h4>
+    <div class="muscles-grid">
+        <span class="muscle-badge primary">Quadratus Lumborum</span>
+        <span class="muscle-badge primary">Transversus Abdominis</span>
+        <span class="muscle-badge primary">Obliques (anti-lateral)</span>
+        <span class="muscle-badge primary">Hip Abductors (gait stability)</span>
+        <span class="muscle-badge">Trapezius (scapular depression)</span>
+        <span class="muscle-badge">Forearm Flexors (grip)</span>
+        <span class="muscle-badge">Gastrocnemius (gait)</span>
+        <span class="muscle-badge">Gluteus Medius</span>
+    </div>
+
+    <h3>Why the Carry is Critical for Athletes</h3>
+    <p>
+        All five patterns are ultimately expressed during locomotion — while moving. 
+        The carry trains the body to maintain structural integrity under load during walking, 
+        which directly transfers to maintaining core stiffness during sprinting, cutting, 
+        jumping, and any activity that requires unilateral lower body forces.
+    </p>
+    <p>
+        The suitcase carry (single-arm) is particularly diagnostic: if the trunk laterally 
+        flexes toward the loaded side, it indicates quadratus lumborum and oblique weakness — 
+        almost universally associated with low back pain and reduced athletic performance 
+        on the same side.
+    </p>
+
+    <div class="callout callout-performance">
+        <div class="callout-label">Dan John's Principle</div>
+        <p>
+            "If it's important, do it every day. If it's not important, don't do it at all." 
+            The carry is important. 10–15 minutes of carry variations at the end of every 
+            training session is the highest return-on-time-investment exercise for core 
+            strength, grip, and athletic durability. 
+            <strong>Most athletes who add carries consistently report lower back pain reduction 
+            within 3–4 weeks.</strong>
+        </p>
+    </div>
+
+    <h3>The Three Most Common Errors</h3>
+    <ul class="error-list">
+        <li><strong>Lateral trunk lean toward the load (suitcase carry).</strong> The body takes the path of least resistance and tilts toward the weight. This defeats the purpose — the goal is to prevent that lean, training anti-lateral-flexion strength.</li>
+        <li><strong>Shortened stride and shuffle-walking.</strong> Athletes take tiny steps, reducing the challenge to the hip abductors and the anti-rotation demand. Walk with a normal, full stride. The greater the single-leg stance phase, the greater the anti-lateral-flexion training stimulus.</li>
+        <li><strong>Shrugging or elevated shoulder on the loaded side.</strong> The upper trapezius is compensating for insufficient lat engagement. The cue: pack the shoulder down before picking up the weight and maintain that depression throughout the carry.</li>
+    </ul>
+
+    <div class="exercise-box">
+        <div class="exercise-header">✦ CAMI Perform Protocol</div>
+        <div class="exercise-body">
+            <div class="exercise-title">Carry Progression — Farmer, Suitcase, Waiter</div>
+            <div class="exercise-meta">
+                <span>Duration: 20–40 metres per set</span>
+                <span>Sets: 3–5</span>
+                <span>Frequency: Every session (finisher)</span>
+                <span>Equipment: Dumbbells, kettlebells, or trap bar</span>
+            </div>
+            <ul class="exercise-steps">
+                <li><span class="step-num">1</span><span><strong>Farmer's Carry (both arms):</strong> Pick up dumbbells at your sides. Pack shoulders down, brace core. Walk 20–30 metres with tall posture, normal stride. <strong>Start here</strong> — bilateral carry is the foundation. Load: 25–30% bodyweight per hand for beginners; 50–75% per hand for advanced athletes.</span></li>
+                <li><span class="step-num">2</span><span><strong>Suitcase Carry (one arm):</strong> Same mechanics, one side only. The challenge is preventing lateral flexion toward the loaded side. Walk, actively <strong>resisting the lean</strong>. Switch sides. Begin with the weaker side first. Load: 30–40% bodyweight.</span></li>
+                <li><span class="step-num">3</span><span><strong>Waiter's Carry (overhead):</strong> Press one arm overhead (locked elbow, neutral wrist, ribcage down). Walk 20 metres. This adds a thoracic stability and shoulder external rotation demand. Do not arch the lower back to compensate for limited overhead mobility.</span></li>
+                <li><span class="step-num">4</span><span><strong>Mixed carry (advanced):</strong> Waiter's carry in one hand + suitcase carry in the other. Simultaneously demands anti-lateral-flexion and thoracic stability. This is as close as you can get to simulating athletic demand in a carry variation.</span></li>
+                <li><span class="step-num">5</span><span>Track your <strong>carry distance and load weekly</strong>. The target for general athletic population: farmer's carry for 40 metres with 50% bodyweight per hand, suitcase carry for 20 metres per side with 40% bodyweight — both with zero trunk lean.</span></li>
+            </ul>
+            <div class="exercise-cue">
+                <strong>Coaching Cue</strong>
+                "Walk like you own the room. Tall, confident, no lean. The weight is trying to pull you over. Your job is to refuse. That refusal is the training."
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PROGRAMMING INTEGRATION -->
+<div class="section">
+    <div class="chapter-label">Training Integration</div>
+    <h2>Putting the 5 Patterns Together</h2>
+    <div class="divider"></div>
+
+    <p>
+        The five patterns are not isolated training choices — they are the structural framework 
+        for any well-designed programme. A weekly training plan for a general athletic population 
+        should include all five patterns, balanced across the push:pull ratio and distributed 
+        appropriately across training days for recovery.
+    </p>
+
+    <h3>Sample Weekly Structure (3-Day Programme)</h3>
+    <table class="prog-table">
+        <thead><tr><th>Day</th><th>Pattern Priority</th><th>Supporting Pattern</th><th>Finisher</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Day 1</strong></td><td>Squat + Vertical Push</td><td>Vertical Pull</td><td>Farmer's Carry (3×30m)</td></tr>
+            <tr><td><strong>Day 2</strong></td><td>Hinge + Horizontal Pull</td><td>Horizontal Push</td><td>Suitcase Carry (3×20m each)</td></tr>
+            <tr><td><strong>Day 3</strong></td><td>Unilateral Squat + Hinge</td><td>Push + Pull (supersets)</td><td>Waiter's Carry (3×20m each)</td></tr>
+        </tbody>
+    </table>
+
+    <div class="callout callout-fix">
+        <div class="callout-label">The CAMI Perform Load Management Rule</div>
+        <p>
+            Progress one variable at a time: sets, reps, or load — never all three simultaneously. 
+            Use the <strong>10% rule</strong> (maximum 10% weekly volume increase) and autoregulate 
+            with RPE. Target working sets at <strong>RPE 7–8/10</strong> during development phases. 
+            Back off to RPE 5–6/10 every fourth week (deload) to allow connective tissue adaptation 
+            to catch up to muscle adaptation.
+        </p>
+    </div>
+
+    <h3>Performance Testing — Your Baseline</h3>
+    <p>
+        At CAMI Perform, every participant begins with a full strength baseline assessment. 
+        Progress is measured, not estimated:
+    </p>
+    <table class="prog-table">
+        <thead><tr><th>Pattern</th><th>Beginner Benchmark</th><th>Intermediate</th><th>Advanced</th></tr></thead>
+        <tbody>
+            <tr><td>Squat</td><td>0.75× BW back squat</td><td>1.25× BW</td><td>1.75× BW</td></tr>
+            <tr><td>Hinge</td><td>1× BW deadlift</td><td>1.75× BW</td><td>2.5× BW</td></tr>
+            <tr><td>Vertical Push</td><td>0.5× BW press</td><td>0.75× BW</td><td>1× BW</td></tr>
+            <tr><td>Vertical Pull</td><td>3 strict pull-ups</td><td>10 strict pull-ups</td><td>+20 kg weighted</td></tr>
+            <tr><td>Carry</td><td>0.25× BW/hand ×40m</td><td>0.5× BW/hand</td><td>0.75× BW/hand</td></tr>
+        </tbody>
+    </table>
+    <p style="font-family: -apple-system, sans-serif; font-size: 0.8rem; color: var(--text-light);">
+        BW = bodyweight. These are general benchmarks for healthy adults. Individual variation is significant — 
+        use as orientation, not as rigid standards.
+    </p>
+</div>
+
+<!-- CONCLUSION + CTA -->
+<div class="section">
+    <div class="chapter-label">Conclusion</div>
+    <h2>From Patterns to Performance</h2>
+    <div class="divider"></div>
+
+    <p>
+        The five patterns are simple. Mastering them is not. Each pattern rewards years of 
+        deliberate practice: progressive loading, technical refinement, and respect for 
+        the biological timelines of tissue adaptation.
+    </p>
+    <p>
+        Athletes who commit to this framework systematically break plateaus, sustain 
+        training for longer, and carry fewer injuries into competition and age. Those 
+        who chase novelty — constantly switching exercises, chasing soreness, 
+        avoiding the hard basics — rarely build the structural foundation that allows 
+        real performance.
+    </p>
+    <p>
+        This guide gives you the framework. What it cannot give you is the individualised 
+        assessment, baseline testing, periodised programming, and daily coaching that 
+        translates the framework into measurable progress specific to your sport, 
+        your training age, and your current limitations.
+    </p>
+
+    <div class="cta-box">
+        <h2>Ready to Test Your Baseline?</h2>
+        <p>
+            The CAMI Perform programme starts with a full strength and movement assessment — 
+            Day 1 in Utrecht, max 10 athletes per group. Complete the free online assessment 
+            to find out if CAMI Perform is the right fit.
+        </p>
+        <a href="/assessment" class="cta-btn">Start Free Assessment →</a>
+    </div>
+
+    <div class="callout callout-performance" style="margin-top:2rem;">
+        <div class="callout-label">CAMI Monthly — Coach Plan</div>
+        <p>
+            Training on your own between programmes? The <strong>CAMI Coach subscription (€49,90/month)</strong> 
+            includes a monthly async check-in with Gabriele: send a training video, get written technical 
+            feedback and an adapted monthly plan within 24 hours.
+        </p>
+        <p>
+            <a href="/subscriptions" style="color: #92400E; font-weight: 700;">
+                Explore CAMI Monthly plans →
+            </a>
+        </p>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div style="background: #111827; color: #9CA3AF; padding: 2.5rem 3rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 0.8rem;">
+    <div style="margin-bottom: 0.75rem;">
+        <strong style="color: white; font-size: 1rem;">CAMI Netherlands</strong>
+        <span style="margin-left: 0.75rem;">Utrecht · nl.centrocami.it</span>
+    </div>
+    <p style="margin-bottom: 0.5rem;">© 2026 CAMI — Centro Attività Motoria Integrata. All rights reserved.</p>
+    <p>This guide is for educational purposes only. Training involves inherent risk of injury. Consult a qualified healthcare provider before beginning any exercise programme. Individual results vary.</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CAMI Free eBooks – Clinical movement guides for pain relief and athletic performance. Download free kinesiological resources.">
+    <title>CAMI eBooks – Guide Chinesiologiche Gratuite | Utrecht</title>
+
+    <meta property="og:title" content="CAMI eBooks – Guide Chinesiologiche Gratuite">
+    <meta property="og:description" content="Scarica le guide cliniche gratuite CAMI: 7 errori di movimento per il dolore (Restore) + 5 pattern di forza per la performance (Perform).">
+    <meta property="og:url" content="https://nl.centrocami.it/ebooks">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --color-primary: #1E3A8A;
+            --color-primary-light: #3B82F6;
+            --color-accent: #10B981;
+            --color-accent-dark: #059669;
+            --color-restore: #7C3AED;
+            --color-perform: #1E3A8A;
+            --color-text: #1F2937;
+            --color-text-light: #6B7280;
+            --color-bg: #FFFFFF;
+            --color-bg-alt: #F9FAFB;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--color-text);
+            background: var(--color-bg);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, #1E3A8A 0%, #3B82F6 100%);
+        }
+
+        /* Language switcher */
+        .lang-switcher button {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            background: transparent;
+            color: var(--color-text-light);
+            border: none;
+            cursor: pointer;
+        }
+        .lang-switcher button.active {
+            background: var(--color-primary);
+            color: white;
+        }
+        [data-lang-content]:not(.active) { display: none; }
+
+        /* eBook cards */
+        .ebook-card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            border: 1px solid #E5E7EB;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        .ebook-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.12);
+        }
+        .ebook-card.restore {
+            border-top: 4px solid #7C3AED;
+        }
+        .ebook-card.perform {
+            border-top: 4px solid var(--color-primary);
+        }
+
+        .ebook-cover {
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .tag-restore {
+            background: #EDE9FE;
+            color: #7C3AED;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .tag-perform {
+            background: #DBEAFE;
+            color: var(--color-primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .tag-free {
+            background: #D1FAE5;
+            color: var(--color-accent-dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+        }
+
+        .btn-restore {
+            background: #7C3AED;
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+            width: 100%;
+        }
+        .btn-restore:hover {
+            background: #6D28D9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(124,58,237,0.3);
+        }
+
+        .btn-perform {
+            background: var(--color-primary);
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+            width: 100%;
+        }
+        .btn-perform:hover {
+            background: var(--color-primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30,58,138,0.3);
+        }
+
+        .btn-accent {
+            background: var(--color-accent);
+            color: white;
+            padding: 0.875rem 1.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+        .btn-accent:hover {
+            background: var(--color-accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(16,185,129,0.3);
+        }
+
+        .chapter-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--color-bg-alt);
+            border-radius: 9999px;
+            padding: 0.375rem 0.875rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--color-text-light);
+            border: 1px solid #E5E7EB;
+        }
+
+        .disclaimer-box {
+            background: #FEF3C7;
+            border: 1px solid #FCD34D;
+            border-radius: 0.75rem;
+            padding: 1rem 1.25rem;
+            font-size: 0.85rem;
+            color: #92400E;
+        }
+
+        /* Print button */
+        .btn-print {
+            background: transparent;
+            color: var(--color-text-light);
+            border: 1px solid #E5E7EB;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+        }
+        .btn-print:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav class="fixed top-0 w-full bg-white/95 backdrop-blur-sm shadow-sm z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+            <div class="flex items-center">
+                <a href="/" class="text-2xl font-bold" style="color: var(--color-primary);">CAMI</a>
+                <span class="ml-2 text-sm text-gray-500">Netherlands</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="/subscriptions" class="hidden sm:inline-block text-sm font-medium hover:underline" style="color: var(--color-accent);">
+                    <span data-lang-content="it" class="active">Abbonamenti</span>
+                    <span data-lang-content="en">Subscriptions</span>
+                    <span data-lang-content="nl">Abonnementen</span>
+                </a>
+                <div class="lang-switcher flex gap-2">
+                    <button onclick="switchLang('it')" data-lang-btn="it" class="active">IT</button>
+                    <button onclick="switchLang('en')" data-lang-btn="en">EN</button>
+                    <button onclick="switchLang('nl')" data-lang-btn="nl">NL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero-gradient text-white pt-28 pb-16 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-2 mb-6 text-sm font-semibold backdrop-blur-sm fade-in">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            <span data-lang-content="it" class="active">2 Guide Cliniche · Download Gratuito</span>
+            <span data-lang-content="en">2 Clinical Guides · Free Download</span>
+            <span data-lang-content="nl">2 Klinische Gidsen · Gratis Download</span>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 fade-in">
+            <span data-lang-content="it" class="active">Guide Chinesiologiche CAMI</span>
+            <span data-lang-content="en">CAMI Kinesiological Guides</span>
+            <span data-lang-content="nl">CAMI Kinesiologische Gidsen</span>
+        </h1>
+
+        <p class="text-xl opacity-90 max-w-2xl mx-auto fade-in">
+            <span data-lang-content="it" class="active">Contenuti clinici derivati dai protocolli CAMI. Scaricabili, stampabili, applicabili subito. Non diagnosi medica — educazione al movimento.</span>
+            <span data-lang-content="en">Clinical content derived from CAMI protocols. Downloadable, printable, immediately applicable. Not medical diagnosis — movement education.</span>
+            <span data-lang-content="nl">Klinische inhoud afgeleid van CAMI-protocollen. Downloadbaar, afdrukbaar, direct toepasbaar. Geen medische diagnose — bewegingseducatie.</span>
+        </p>
+    </div>
+</section>
+
+<!-- ── Breadcrumb ── -->
+<div class="max-w-6xl mx-auto px-4 py-4">
+    <nav class="flex items-center gap-2 text-sm text-gray-400">
+        <a href="/" class="hover:text-gray-600">CAMI Netherlands</a>
+        <span>/</span>
+        <span class="text-gray-700 font-medium">
+            <span data-lang-content="it" class="active">Guide</span>
+            <span data-lang-content="en">Guides</span>
+            <span data-lang-content="nl">Gidsen</span>
+        </span>
+    </nav>
+</div>
+
+<!-- ── Disclaimer ── -->
+<div class="max-w-6xl mx-auto px-4 mb-6">
+    <div class="disclaimer-box flex items-start gap-3">
+        <svg class="w-5 h-5 mt-0.5 flex-shrink-0 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <div>
+            <span data-lang-content="it" class="active"><strong>Nota educativa:</strong> Queste guide forniscono educazione chinesiologica, non diagnosi o trattamento medico. Se hai dolore acuto, infortuni recenti o condizioni mediche, consulta un professionista sanitario prima di applicare questi contenuti.</span>
+            <span data-lang-content="en"><strong>Educational note:</strong> These guides provide kinesiological education, not medical diagnosis or treatment. If you have acute pain, recent injuries, or medical conditions, consult a healthcare professional before applying this content.</span>
+            <span data-lang-content="nl"><strong>Educatieve opmerking:</strong> Deze gidsen bieden kinesiologische educatie, geen medische diagnose of behandeling. Als u acute pijn, recente blessures of medische aandoeningen heeft, raadpleeg dan een zorgverlener voordat u deze inhoud toepast.</span>
+        </div>
+    </div>
+</div>
+
+<!-- ── eBook Cards ── -->
+<section class="max-w-6xl mx-auto px-4 pb-20">
+    <div class="grid md:grid-cols-2 gap-10">
+
+        <!-- ── eBook 1: CAMI Restore ── -->
+        <div class="ebook-card restore fade-in">
+            <!-- Cover image -->
+            <div class="relative">
+                <img
+                    src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=700&q=75&auto=format&fit=crop"
+                    alt="CAMI Restore – Movement and pain relief guide"
+                    class="ebook-cover"
+                    loading="lazy"
+                >
+                <div class="absolute top-4 left-4 flex gap-2 flex-wrap">
+                    <span class="tag-restore">CAMI Restore</span>
+                    <span class="tag-free">
+                        <span data-lang-content="it" class="active">Gratuito</span>
+                        <span data-lang-content="en">Free</span>
+                        <span data-lang-content="nl">Gratis</span>
+                    </span>
+                </div>
+                <div class="absolute bottom-4 right-4">
+                    <span class="bg-black/60 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm">PDF · 50+</span>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6">
+                <!-- Title -->
+                <h2 class="text-xl font-bold mb-2" style="color: #7C3AED;">
+                    <span data-lang-content="it" class="active">7 Errori di Movimento che Peggiorano il Tuo Dolore</span>
+                    <span data-lang-content="en">7 Movement Mistakes Making Your Pain Worse</span>
+                    <span data-lang-content="nl">7 Bewegingsfouten die Uw Pijn Erger Maken</span>
+                </h2>
+                <p class="text-sm text-gray-500 mb-4">
+                    <span data-lang-content="it" class="active">Guida clinica per chi soffre di dolore cronico, rigidità mattutina e limitazione funzionale.</span>
+                    <span data-lang-content="en">Clinical guide for those experiencing chronic pain, morning stiffness, and functional limitations.</span>
+                    <span data-lang-content="nl">Klinische gids voor mensen met chronische pijn, ochtendsijheid en functionele beperkingen.</span>
+                </p>
+
+                <!-- Chapter pills -->
+                <div class="flex flex-wrap gap-2 mb-5">
+                    <span class="chapter-pill">
+                        <svg class="w-3 h-3 text-purple-500" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3"/></svg>
+                        <span data-lang-content="it" class="active">Fear-Avoidance</span>
+                        <span data-lang-content="en">Fear-Avoidance</span>
+                        <span data-lang-content="nl">Angst-Vermijding</span>
+                    </span>
+                    <span class="chapter-pill">
+                        <svg class="w-3 h-3 text-purple-500" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3"/></svg>
+                        <span data-lang-content="it" class="active">Core stabilità</span>
+                        <span data-lang-content="en">Core stability</span>
+                        <span data-lang-content="nl">Core stabiliteit</span>
+                    </span>
+                    <span class="chapter-pill">
+                        <svg class="w-3 h-3 text-purple-500" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3"/></svg>
+                        <span data-lang-content="it" class="active">7 Esercizi protocollati</span>
+                        <span data-lang-content="en">7 Protocolled exercises</span>
+                        <span data-lang-content="nl">7 Geprotocolleerde oefeningen</span>
+                    </span>
+                    <span class="chapter-pill">
+                        <svg class="w-3 h-3 text-purple-500" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3"/></svg>
+                        <span data-lang-content="it" class="active">Respirazione & postura</span>
+                        <span data-lang-content="en">Breathing & posture</span>
+                        <span data-lang-content="nl">Ademhaling & houding</span>
+                    </span>
+                </div>
+
+                <!-- Audience -->
+                <div class="bg-purple-50 rounded-lg p-4 mb-5 text-sm" style="border-left: 3px solid #7C3AED;">
+                    <p class="font-semibold text-purple-800 mb-1">
+                        <span data-lang-content="it" class="active">Per te se:</span>
+                        <span data-lang-content="en">For you if:</span>
+                        <span data-lang-content="nl">Voor jou als:</span>
+                    </p>
+                    <ul class="text-purple-700 space-y-1">
+                        <li>
+                            <span data-lang-content="it" class="active">· Hai 40+ anni e dolore ricorrente alla schiena, alle ginocchia o al collo</span>
+                            <span data-lang-content="en">· You're 40+ with recurring back, knee, or neck pain</span>
+                            <span data-lang-content="nl">· Je 40+ bent met terugkerende rug-, knie- of nekpijn</span>
+                        </li>
+                        <li>
+                            <span data-lang-content="it" class="active">· Vuoi muoverti senza dipendere da antidolorifici</span>
+                            <span data-lang-content="en">· You want to move without depending on painkillers</span>
+                            <span data-lang-content="nl">· Je wilt bewegen zonder afhankelijk te zijn van pijnstillers</span>
+                        </li>
+                        <li>
+                            <span data-lang-content="it" class="active">· Stai migliorando la tua mobilità e autonomia quotidiana</span>
+                            <span data-lang-content="en">· You're working on mobility and daily independence</span>
+                            <span data-lang-content="nl">· Je werkt aan mobiliteit en dagelijkse zelfstandigheid</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- CTA -->
+                <a href="/ebooks/restore-7-mistakes" class="btn-restore mb-3">
+                    <span data-lang-content="it" class="active">Leggi la Guida →</span>
+                    <span data-lang-content="en">Read the Guide →</span>
+                    <span data-lang-content="nl">Lees de Gids →</span>
+                </a>
+                <div class="flex items-center justify-between">
+                    <a href="/ebooks/restore-7-mistakes" class="btn-print" target="_blank">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                        <span data-lang-content="it" class="active">Stampa PDF</span>
+                        <span data-lang-content="en">Print PDF</span>
+                        <span data-lang-content="nl">Afdrukken PDF</span>
+                    </a>
+                    <span class="text-xs text-gray-400">
+                        <span data-lang-content="it" class="active">~15 min lettura</span>
+                        <span data-lang-content="en">~15 min read</span>
+                        <span data-lang-content="nl">~15 min lezen</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── eBook 2: CAMI Perform ── -->
+        <div class="ebook-card perform fade-in">
+            <!-- Cover image -->
+            <div class="relative">
+                <img
+                    src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=700&q=75&auto=format&fit=crop"
+                    alt="CAMI Perform – Strength and performance guide"
+                    class="ebook-cover"
+                    loading="lazy"
+                >
+                <div class="absolute top-4 left-4 flex gap-2 flex-wrap">
+                    <span class="tag-perform">CAMI Perform</span>
+                    <span class="tag-free">
+                        <span data-lang-content="it" class="active">Gratuito</span>
+                        <span data-lang-content="en">Free</span>
+                        <span data-lang-content="nl">Gratis</span>
+                    </span>
+                </div>
+                <div class="absolute bottom-4 right-4">
+                    <span class="bg-black/60 text-white text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm">PDF · 25–55</span>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-6">
+                <!-- Title -->
+                <h2 class="text-xl font-bold mb-2" style="color: var(--color-primary);">
+                    <span data-lang-content="it" class="active">I 5 Pattern di Forza: Allena Senza Limiti</span>
+                    <span data-lang-content="en">The 5 Strength Patterns: Train Without Limits</span>
+                    <span data-lang-content="nl">De 5 Krachtpatronen: Train Zonder Grenzen</span>
+                </h2>
+                <p class="text-sm text-gray-500 mb-4">
+                    <span data-lang-content="it" class="active">Guida per atleti e appassionati che vogliono aumentare la forza, prevenire infortuni e ottimizzare le prestazioni sportive.</span>
+                    <span data-lang-content="en">Guide for athletes and fitness enthusiasts looking to build strength, prevent injuries, and optimize sports performance.</span>
+                    <span data-lang-content="nl">Gids voor atleten en sportliefhebbers die kracht willen opbouwen, blessures willen voorkomen en sportprestaties willen optimaliseren.</span>
+                </p>
+
+                <!-- Chapter pills -->
+                <div class="flex flex-wrap gap-2 mb-5">
+                    <span class="chapter-pill">
+                        <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3"/></svg>
+                        <span data-lang-content="it" class="active">Squat · Hinge</span>
+                        <span data-lang-content="en">Squat · Hinge</span>
+                        <span data-lang-content="nl">Squat · Hinge</span>
+                    </span>
+                    <span class="chapter-pill">
+                        <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3"/></svg>
+                        <span data-lang-content="it" class="active">Push · Pull · Carry</span>
+                        <span data-lang-content="en">Push · Pull · Carry</span>
+                        <span data-lang-content="nl">Push · Pull · Carry</span>
+                    </span>
+                    <span class="chapter-pill">
+                        <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3"/></svg>
+                        <span data-lang-content="it" class="active">Progressioni + benchmark</span>
+                        <span data-lang-content="en">Progressions + benchmarks</span>
+                        <span data-lang-content="nl">Progressies + benchmarks</span>
+                    </span>
+                    <span class="chapter-pill">
+                        <svg class="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3"/></svg>
+                        <span data-lang-content="it" class="active">Applicazione sportiva</span>
+                        <span data-lang-content="en">Sport application</span>
+                        <span data-lang-content="nl">Sporttoepassing</span>
+                    </span>
+                </div>
+
+                <!-- Audience -->
+                <div class="bg-blue-50 rounded-lg p-4 mb-5 text-sm" style="border-left: 3px solid var(--color-primary);">
+                    <p class="font-semibold text-blue-900 mb-1">
+                        <span data-lang-content="it" class="active">Per te se:</span>
+                        <span data-lang-content="en">For you if:</span>
+                        <span data-lang-content="nl">Voor jou als:</span>
+                    </p>
+                    <ul class="text-blue-800 space-y-1">
+                        <li>
+                            <span data-lang-content="it" class="active">· Ti alleni regolarmente ma sei arrivato a un plateau di performance</span>
+                            <span data-lang-content="en">· You train regularly but hit a performance plateau</span>
+                            <span data-lang-content="nl">· Je regelmatig traint maar een prestatieplateau bereikt hebt</span>
+                        </li>
+                        <li>
+                            <span data-lang-content="it" class="active">· Vuoi strutturare la forza in modo intelligente e duraturo</span>
+                            <span data-lang-content="en">· You want to structure strength training intelligently and durably</span>
+                            <span data-lang-content="nl">· Je kracht intelligent en duurzaam wilt structureren</span>
+                        </li>
+                        <li>
+                            <span data-lang-content="it" class="active">· Fai sport e vuoi migliorare specifici pattern atletici</span>
+                            <span data-lang-content="en">· You play sports and want to improve specific athletic patterns</span>
+                            <span data-lang-content="nl">· Je sport beoefent en specifieke atletische patronen wilt verbeteren</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- CTA -->
+                <a href="/ebooks/perform-5-patterns" class="btn-perform mb-3">
+                    <span data-lang-content="it" class="active">Leggi la Guida →</span>
+                    <span data-lang-content="en">Read the Guide →</span>
+                    <span data-lang-content="nl">Lees de Gids →</span>
+                </a>
+                <div class="flex items-center justify-between">
+                    <a href="/ebooks/perform-5-patterns" class="btn-print" target="_blank">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                        <span data-lang-content="it" class="active">Stampa PDF</span>
+                        <span data-lang-content="en">Print PDF</span>
+                        <span data-lang-content="nl">Afdrukken PDF</span>
+                    </a>
+                    <span class="text-xs text-gray-400">
+                        <span data-lang-content="it" class="active">~20 min lettura</span>
+                        <span data-lang-content="en">~20 min read</span>
+                        <span data-lang-content="nl">~20 min lezen</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /grid -->
+</section>
+
+<!-- ── Why free section ── -->
+<section class="py-16 px-4 bg-gray-50">
+    <div class="max-w-3xl mx-auto text-center fade-in">
+        <h2 class="text-2xl font-bold mb-4" style="color: var(--color-primary);">
+            <span data-lang-content="it" class="active">Perché gratuite?</span>
+            <span data-lang-content="en">Why free?</span>
+            <span data-lang-content="nl">Waarom gratis?</span>
+        </h2>
+        <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+            <span data-lang-content="it" class="active">Crediamo che la conoscenza chinesiologica di base debba essere accessibile a tutti. Queste guide sono il tuo punto di partenza: se vuoi andare più in profondità, i programmi in presenza o gli abbonamenti mensili CAMI ti accompagnano passo dopo passo con Gabriele.</span>
+            <span data-lang-content="en">We believe fundamental kinesiological knowledge should be accessible to everyone. These guides are your starting point: if you want to go deeper, the in-person programs or CAMI monthly subscriptions take you step by step with Gabriele.</span>
+            <span data-lang-content="nl">Wij geloven dat fundamentele kinesiologische kennis voor iedereen toegankelijk moet zijn. Deze gidsen zijn uw startpunt: als u dieper wilt gaan, begeleiden de persoonlijke programma's of CAMI maandabonnementen u stap voor stap met Gabriele.</span>
+        </p>
+
+        <!-- Three pillars -->
+        <div class="grid sm:grid-cols-3 gap-6 text-left">
+            <div class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style="background: #EDE9FE;">
+                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <h3 class="font-semibold mb-1" style="color: #7C3AED;">
+                    <span data-lang-content="it" class="active">Clinicamente fondato</span>
+                    <span data-lang-content="en">Clinically grounded</span>
+                    <span data-lang-content="nl">Klinisch gefundeerd</span>
+                </h3>
+                <p class="text-sm text-gray-500">
+                    <span data-lang-content="it" class="active">Derivato dai protocolli CAMI e dalla letteratura chinesiologica aggiornata.</span>
+                    <span data-lang-content="en">Derived from CAMI protocols and up-to-date kinesiological literature.</span>
+                    <span data-lang-content="nl">Afgeleid van CAMI-protocollen en actuele kinesiologische literatuur.</span>
+                </p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style="background: #DBEAFE;">
+                    <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <h3 class="font-semibold mb-1" style="color: var(--color-primary);">
+                    <span data-lang-content="it" class="active">Applicabile subito</span>
+                    <span data-lang-content="en">Immediately applicable</span>
+                    <span data-lang-content="nl">Direct toepasbaar</span>
+                </h3>
+                <p class="text-sm text-gray-500">
+                    <span data-lang-content="it" class="active">Protocolli passo-passo, senza attrezzatura speciale. Solo il tuo corpo.</span>
+                    <span data-lang-content="en">Step-by-step protocols, no special equipment. Just your body.</span>
+                    <span data-lang-content="nl">Stap-voor-stap protocollen, geen speciale apparatuur. Alleen uw lichaam.</span>
+                </p>
+            </div>
+            <div class="bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
+                <div class="w-10 h-10 rounded-lg flex items-center justify-center mb-3" style="background: #D1FAE5;">
+                    <svg class="w-5 h-5 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                </div>
+                <h3 class="font-semibold mb-1" style="color: var(--color-accent-dark);">
+                    <span data-lang-content="it" class="active">Stampabile in PDF</span>
+                    <span data-lang-content="en">Printable as PDF</span>
+                    <span data-lang-content="nl">Afdrukbaar als PDF</span>
+                </h3>
+                <p class="text-sm text-gray-500">
+                    <span data-lang-content="it" class="active">Formato A4 ottimizzato. Apri la guida e usa Ctrl+P / Stampa dal browser.</span>
+                    <span data-lang-content="en">Optimized A4 format. Open the guide and use Ctrl+P / Print from browser.</span>
+                    <span data-lang-content="nl">Geoptimaliseerd A4-formaat. Open de gids en gebruik Ctrl+P / Afdrukken vanuit browser.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CTA – Go deeper ── -->
+<section class="py-16 px-4">
+    <div class="max-w-3xl mx-auto">
+        <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8 text-center border border-blue-100 fade-in">
+            <h2 class="text-2xl font-bold mb-3" style="color: var(--color-primary);">
+                <span data-lang-content="it" class="active">Vuoi un percorso personalizzato?</span>
+                <span data-lang-content="en">Want a personalized program?</span>
+                <span data-lang-content="nl">Wil je een persoonlijk programma?</span>
+            </h2>
+            <p class="text-gray-600 mb-6">
+                <span data-lang-content="it" class="active">Le guide ti danno le basi. La valutazione CAMI ti dice esattamente dove sei e quale percorso fa per te — CAMI Restore o CAMI Perform.</span>
+                <span data-lang-content="en">The guides give you the foundation. The CAMI assessment tells you exactly where you are and which path is right for you — CAMI Restore or CAMI Perform.</span>
+                <span data-lang-content="nl">De gidsen geven je de basis. De CAMI-beoordeling vertelt je precies waar je staat en welk pad bij jou past — CAMI Restore of CAMI Perform.</span>
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="/assessment" class="btn-accent px-8">
+                    <span data-lang-content="it" class="active">Valutazione gratuita →</span>
+                    <span data-lang-content="en">Free Assessment →</span>
+                    <span data-lang-content="nl">Gratis Beoordeling →</span>
+                </a>
+                <a href="/subscriptions" style="background: white; color: var(--color-primary); border: 2px solid var(--color-primary); padding: 0.875rem 1.75rem; border-radius: 0.5rem; font-weight: 600; display: inline-block; text-decoration: none; text-align: center;">
+                    <span data-lang-content="it" class="active">Abbonamenti mensili</span>
+                    <span data-lang-content="en">Monthly subscriptions</span>
+                    <span data-lang-content="nl">Maandabonnementen</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="py-10 bg-gray-900 text-gray-400 text-sm px-4">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+        <div>
+            <span class="font-bold text-white">CAMI</span>
+            <span class="ml-2">Netherlands · Utrecht</span>
+        </div>
+        <div class="flex gap-6 flex-wrap justify-center">
+            <a href="/" class="hover:text-white transition-colors">
+                <span data-lang-content="it" class="active">Classi in presenza</span>
+                <span data-lang-content="en">In-person classes</span>
+                <span data-lang-content="nl">Lessen ter plaatse</span>
+            </a>
+            <a href="/subscriptions" class="hover:text-white transition-colors">
+                <span data-lang-content="it" class="active">Abbonamenti</span>
+                <span data-lang-content="en">Subscriptions</span>
+                <span data-lang-content="nl">Abonnementen</span>
+            </a>
+            <a href="/assessment" class="hover:text-white transition-colors">Assessment</a>
+            <a href="mailto:info@centrocami.it" class="hover:text-white transition-colors">info@centrocami.it</a>
+        </div>
+        <div>
+            <span data-lang-content="it" class="active">© 2026 CAMI · Contenuto educativo, non diagnosi medica.</span>
+            <span data-lang-content="en">© 2026 CAMI · Educational content, not medical diagnosis.</span>
+            <span data-lang-content="nl">© 2026 CAMI · Educatieve inhoud, geen medische diagnose.</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // ── Language switcher ──────────────────────────────────────────────────────
+    function switchLang(lang) {
+        document.documentElement.setAttribute('data-lang', lang);
+        document.querySelectorAll('[data-lang-content]').forEach(el => {
+            el.classList.toggle('active', el.dataset.langContent === lang);
+        });
+        document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.langBtn === lang);
+        });
+        localStorage.setItem('cami-lang', lang);
+    }
+
+    // ── Intersection Observer (fade-in) ───────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Restore saved language ────────────────────────────────────────────────
+    (function () {
+        const saved = localStorage.getItem('cami-lang') || 'en';
+        switchLang(saved);
+    })();
+</script>
+</body>
+</html>
