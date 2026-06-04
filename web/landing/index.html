@@ -196,11 +196,18 @@
                     <span class="ml-2 text-sm text-gray-500">Netherlands</span>
                 </div>
                 
-                <!-- Language switcher -->
-                <div class="lang-switcher flex gap-2">
-                    <button onclick="switchLanguage('it')" data-lang-btn="it" class="active">IT</button>
-                    <button onclick="switchLanguage('en')" data-lang-btn="en">EN</button>
-                    <button onclick="switchLanguage('nl')" data-lang-btn="nl">NL</button>
+                <!-- Nav links + language switcher -->
+                <div class="flex items-center gap-4">
+                    <a href="/subscriptions" class="hidden sm:inline-block text-sm font-medium hover:underline" style="color: var(--color-accent);">
+                        <span data-lang-content="it" class="active">Abbonamenti</span>
+                        <span data-lang-content="en">Subscriptions</span>
+                        <span data-lang-content="nl">Abonnementen</span>
+                    </a>
+                    <div class="lang-switcher flex gap-2">
+                        <button onclick="switchLanguage('it')" data-lang-btn="it" class="active">IT</button>
+                        <button onclick="switchLanguage('en')" data-lang-btn="en">EN</button>
+                        <button onclick="switchLanguage('nl')" data-lang-btn="nl">NL</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -805,6 +812,21 @@
                     <span data-lang-content="en">Start Now - Free Assessment</span>
                     <span data-lang-content="nl">Start Nu - Gratis Beoordeling</span>
                 </a>
+
+                <!-- Subscriptions upsell -->
+                <div class="mt-8 pt-6 border-t border-gray-100">
+                    <p class="text-sm text-gray-400 mb-3">
+                        <span data-lang-content="it" class="active">Preferisci qualcosa di più flessibile?</span>
+                        <span data-lang-content="en">Prefer something more flexible?</span>
+                        <span data-lang-content="nl">Liever iets flexibelers?</span>
+                    </p>
+                    <a href="/subscriptions" class="inline-flex items-center gap-2 text-sm font-semibold" style="color: var(--color-accent);">
+                        <span data-lang-content="it" class="active">Scopri i microabbonamenti CAMI Monthly — da €9,90/mese</span>
+                        <span data-lang-content="en">Explore CAMI Monthly micro-subscriptions — from €9.90/mo</span>
+                        <span data-lang-content="nl">Bekijk CAMI Monthly micro-abonnementen — vanaf €9,90/mnd</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </a>
+                </div>
             </div>
         </div>
     </section>

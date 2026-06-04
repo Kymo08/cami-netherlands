@@ -65,6 +65,11 @@ def serve_admin():
 def serve_thankyou():
     return send_from_directory(WEB_DIR, 'thank-you.html')
 
+@app.route('/subscriptions')
+@app.route('/subscriptions/')
+def serve_subscriptions():
+    return send_from_directory(os.path.join(WEB_DIR, 'subscriptions'), 'index.html')
+
 # Serve any static asset (css, js, images) referenced by the HTML files
 @app.route('/landing/<path:filename>')
 def static_landing(filename):
@@ -101,11 +106,12 @@ if __name__ == '__main__':
 ╔══════════════════════════════════════════════════════╗
 ║  CAMI Netherlands  –  Local Dev Server               ║
 ╠══════════════════════════════════════════════════════╣
-║  Landing    →  http://localhost:{port}/               ║
-║  Assessment →  http://localhost:{port}/assessment     ║
-║  Admin      →  http://localhost:{port}/admin          ║
-║  Thank-you  →  http://localhost:{port}/thank-you      ║
-║  API health →  http://localhost:{port}/api/health     ║
+║  Landing       →  http://localhost:{port}/            ║
+║  Assessment    →  http://localhost:{port}/assessment  ║
+║  Subscriptions →  http://localhost:{port}/subscriptions ║
+║  Admin         →  http://localhost:{port}/admin       ║
+║  Thank-you     →  http://localhost:{port}/thank-you   ║
+║  API health    →  http://localhost:{port}/api/health  ║
 ╚══════════════════════════════════════════════════════╝
 Admin login: admin / cami-admin-2026
 """)
