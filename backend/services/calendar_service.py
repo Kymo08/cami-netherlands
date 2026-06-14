@@ -45,9 +45,9 @@ def get_program_days() -> list[datetime]:
 
 # ── Track labels ───────────────────────────────────────────────────────────────
 _TRACK_LABEL = {
-    'A':      {'it': 'Track A – Esercizio Clinico',     'en': 'Track A – Clinical Exercise',      'nl': 'Track A – Klinische Oefening'},
-    'B':      {'it': 'Track B – Performance Atletica',  'en': 'Track B – Athletic Performance',   'nl': 'Track B – Atletische Prestaties'},
-    'Hybrid': {'it': 'Programma Hybrid',                'en': 'Hybrid Program',                   'nl': 'Hybride Programma'},
+    'A':      {'it': 'CAMI Restore – Esercizio Clinico',    'en': 'CAMI Restore – Clinical Exercise',     'nl': 'CAMI Restore – Klinische Oefening'},
+    'B':      {'it': 'CAMI Perform – Performance Atletica', 'en': 'CAMI Perform – Athletic Performance',  'nl': 'CAMI Perform – Atletische Prestaties'},
+    'Hybrid': {'it': 'CAMI Hybrid',                         'en': 'CAMI Hybrid',                          'nl': 'CAMI Hybrid'},
 }
 
 _DAY_DESC = {
