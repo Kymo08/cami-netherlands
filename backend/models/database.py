@@ -78,9 +78,14 @@ def _migrate(conn):
         ("medical_clearance_required", "BOOLEAN DEFAULT 0"),
         ("stripe_payment_link",        "TEXT"),
         ("ai_analysis",                "TEXT"),
+        # CAMIX daily email tracking
+        ("camix_enrolled_at",          "TIMESTAMP"),          # when 30-day journey started
+        ("camix_current_day",          "INTEGER DEFAULT 0"),  # last day email sent (0 = not started)
+        ("camix_last_sent_at",         "TIMESTAMP"),          # timestamp of last send
     ]
     for col, definition in migrations:
         if col not in existing:
             conn.execute(f"ALTER TABLE assessments ADD COLUMN {col} {definition}")
             print(f"[DB] Migration: added column {col}")
     conn.commit()
+

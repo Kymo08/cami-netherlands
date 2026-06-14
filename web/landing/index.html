@@ -184,6 +184,8 @@
             line-height: 1;
         }
     </style>
+    <!-- Analytics: Plausible — privacy-first, GDPR compliant (no cookies) -->
+    <script defer data-domain="nl.centrocami.it" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -696,59 +698,84 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
+    <!-- Testimonials / Social Proof -->
     <section class="py-20 px-4">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-4xl font-bold text-center mb-16 fade-in" style="color: var(--color-primary);">
+            <h2 class="text-4xl font-bold text-center mb-4 fade-in" style="color: var(--color-primary);">
                 <span data-lang-content="it" class="active">Cosa Dicono i Clienti</span>
                 <span data-lang-content="en">What Clients Say</span>
                 <span data-lang-content="nl">Wat Klanten Zeggen</span>
             </h2>
-            
+
+            <!-- Pre-launch honest banner -->
+            <p class="text-center text-gray-500 text-sm mb-12 fade-in">
+                <span data-lang-content="it" class="active">Lancio a Utrecht — luglio 2026. Unisciti ai primi partecipanti e lascia la tua testimonianza.</span>
+                <span data-lang-content="en">Launching in Utrecht — July 2026. Join the founding cohort and share your story.</span>
+                <span data-lang-content="nl">Lancering in Utrecht — juli 2026. Word een van de eerste deelnemers en deel jouw ervaring.</span>
+            </p>
+
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Testimonial 1 (Track A) -->
-                <div class="testimonial-card fade-in">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0" style="background:#1E3A8A">M</div>
-                        <div>
-                            <p class="font-semibold text-sm">Maria, 62</p>
-                            <p class="text-xs text-gray-500">Utrecht · CAMI Restore</p>
+                <!-- Slot 1 — Gabriele's expertise credential -->
+                <div class="testimonial-card fade-in flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0" style="background:#1E3A8A">GL</div>
+                            <div>
+                                <p class="font-semibold text-sm">Dott. Gabriele Liuzzo</p>
+                                <p class="text-xs text-gray-500">Chinesiologo Clinico · Direttore Tecnico CAMI</p>
+                            </div>
                         </div>
+                        <p data-lang-content="it" class="active text-gray-700 text-sm mb-4">"Ho progettato CAMI dopo anni di lavoro clinico con pazienti 50+ e atleti agonisti. Ogni protocollo è basato su evidenza scientifica, non su tendenze di fitness."</p>
+                        <p data-lang-content="en" class="text-gray-700 text-sm mb-4">"I designed CAMI after years of clinical work with 50+ patients and competitive athletes. Every protocol is evidence-based, not trend-based."</p>
+                        <p data-lang-content="nl" class="text-gray-700 text-sm mb-4">"Ik ontwierp CAMI na jaren klinisch werk met 50+ patiënten en wedstrijdatleten. Elk protocol is evidence-based, niet trendgevoelig."</p>
                     </div>
-                    <div class="text-yellow-400 text-xl mb-3">★★★★★</div>
-                    <p data-lang-content="it" class="active text-gray-700 mb-4">"Dopo 5 anni di mal di schiena cronico, finalmente ho trovato qualcosa che funziona. 30 giorni e ho ridotto il dolore dell'80%. Grazie CAMI!"</p>
-                    <p data-lang-content="en" class="text-gray-700 mb-4">"After 5 years of chronic back pain, I finally found something that works. 30 days and I reduced pain by 80%. Thank you CAMI!"</p>
-                    <p data-lang-content="nl" class="text-gray-700 mb-4">"Na 5 jaar chronische rugpijn heb ik eindelijk iets gevonden dat werkt. 30 dagen en ik heb de pijn met 80% verminderd. Bedankt CAMI!"</p>
+                    <span class="text-xs text-gray-400 uppercase tracking-wide">Trainer · CAMI Director</span>
                 </div>
-                
-                <!-- Testimonial 2 (Track B) -->
-                <div class="testimonial-card fade-in">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0" style="background:#10B981">L</div>
-                        <div>
-                            <p class="font-semibold text-sm">Luca, 34</p>
-                            <p class="text-xs text-gray-500">CrossFit athlete · CAMI Perform</p>
+
+                <!-- Slot 2 — Early access invite (Restore) -->
+                <div class="testimonial-card fade-in border-2 flex flex-col justify-between" style="border-color: var(--color-primary);">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 text-white" style="background:#10B981">?</div>
+                            <div>
+                                <p class="font-semibold text-sm" data-lang-content="it" style="display:block">Potresti essere tu</p>
+                                <p class="font-semibold text-sm" data-lang-content="en">This could be you</p>
+                                <p class="font-semibold text-sm" data-lang-content="nl">Dit kun jij zijn</p>
+                                <p class="text-xs text-gray-500">Utrecht · CAMI Restore — Cohort 1</p>
+                            </div>
                         </div>
+                        <p data-lang-content="it" class="active text-gray-500 text-sm italic mb-4">La tua storia va qui. Unisciti alla prima coorte (luglio 2026) e aiutaci a costruire la prova sociale reale di CAMI.</p>
+                        <p data-lang-content="en" class="text-gray-500 text-sm italic mb-4">Your story goes here. Join the first cohort (July 2026) and help us build CAMI's real social proof.</p>
+                        <p data-lang-content="nl" class="text-gray-500 text-sm italic mb-4">Jouw verhaal komt hier. Sluit je aan bij de eerste groep (juli 2026) en help ons echte ervaringen op te bouwen.</p>
                     </div>
-                    <div class="text-yellow-400 text-xl mb-3">★★★★★</div>
-                    <p data-lang-content="it" class="active text-gray-700 mb-4">"Ho aumentato lo squat di 15kg in un mese. La periodizzazione funziona davvero. Email quotidiane perfette per restare focalizzato."</p>
-                    <p data-lang-content="en" class="text-gray-700 mb-4">"I increased my squat by 15kg in one month. Periodization really works. Daily emails perfect for staying focused."</p>
-                    <p data-lang-content="nl" class="text-gray-700 mb-4">"Ik heb mijn squat met 15 kg verhoogd in één maand. Periodisering werkt echt. Dagelijkse e-mails perfect om gefocust te blijven."</p>
+                    <a href="#assessment" class="text-xs font-semibold" style="color: var(--color-primary);">
+                        <span data-lang-content="it" class="active">→ Prenota la valutazione gratuita</span>
+                        <span data-lang-content="en">→ Book the free assessment</span>
+                        <span data-lang-content="nl">→ Boek de gratis beoordeling</span>
+                    </a>
                 </div>
-                
-                <!-- Testimonial 3 (Trilingual) -->
-                <div class="testimonial-card fade-in">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg flex-shrink-0" style="background:#7C3AED">A</div>
-                        <div>
-                            <p class="font-semibold text-sm">Anna, 58</p>
-                            <p class="text-xs text-gray-500">Terwijde · CAMI Restore</p>
+
+                <!-- Slot 3 — Early access invite (Perform) -->
+                <div class="testimonial-card fade-in flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 text-white" style="background:#7C3AED">?</div>
+                            <div>
+                                <p class="font-semibold text-sm" data-lang-content="it" style="display:block">Potresti essere tu</p>
+                                <p class="font-semibold text-sm" data-lang-content="en">This could be you</p>
+                                <p class="font-semibold text-sm" data-lang-content="nl">Dit kun jij zijn</p>
+                                <p class="text-xs text-gray-500">Utrecht · CAMI Perform — Cohort 1</p>
+                            </div>
                         </div>
+                        <p data-lang-content="it" class="active text-gray-500 text-sm italic mb-4">Atleta o appassionato di performance? Posti limitati a 10. Accesso anticipato per chi completa la valutazione ora.</p>
+                        <p data-lang-content="en" class="text-gray-500 text-sm italic mb-4">Athlete or performance enthusiast? Limited to 10 spots. Early access for those who complete the assessment now.</p>
+                        <p data-lang-content="nl" class="text-gray-500 text-sm italic mb-4">Atleet of sportliefhebber? Max 10 plaatsen. Vroege toegang voor wie nu de beoordeling invult.</p>
                     </div>
-                    <div class="text-yellow-400 text-xl mb-3">★★★★★</div>
-                    <p data-lang-content="it" class="active text-gray-700 mb-4">"Fantastico avere tutto in italiano! Ad Utrecht è difficile trovare servizi per expat. CAMI è professionale e chiaro."</p>
-                    <p data-lang-content="en" class="text-gray-700 mb-4">"Fantastic to have everything in English! In Utrecht it's hard to find expat services. CAMI is professional and clear."</p>
-                    <p data-lang-content="nl" class="text-gray-700 mb-4">"Fantastisch om alles in het Nederlands te hebben! In Utrecht is het moeilijk om expat-diensten te vinden. CAMI is professioneel en duidelijk."</p>
+                    <a href="#assessment" class="text-xs font-semibold" style="color: var(--color-primary);">
+                        <span data-lang-content="it" class="active">→ Inizia la valutazione gratuita</span>
+                        <span data-lang-content="en">→ Start the free assessment</span>
+                        <span data-lang-content="nl">→ Start de gratis beoordeling</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1160,6 +1187,23 @@
                 }
             });
         });
+
+        // Plausible CTA tracking
+        (function () {
+            if (!window.plausible) return;
+            // Track clicks on every anchor that leads to the assessment
+            document.querySelectorAll('a[href="#assessment"], a[href="/assessment"]').forEach(function (el) {
+                el.addEventListener('click', function () {
+                    plausible('CTA Click', { props: { destination: 'assessment' } });
+                });
+            });
+            // Track program card links (if they have href targeting assessment)
+            document.querySelectorAll('a[href*="assessment"]').forEach(function (el) {
+                el.addEventListener('click', function () {
+                    plausible('CTA Click', { props: { destination: 'assessment' } });
+                });
+            });
+        })();
     </script>
 </body>
 </html>

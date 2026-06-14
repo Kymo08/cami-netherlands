@@ -505,6 +505,8 @@ p { margin-bottom: 1.25rem; }
     .cover-logo { top: 1.5rem; right: 1.5rem; }
 }
 </style>
+<!-- Analytics: Plausible — privacy-first, GDPR compliant (no cookies) -->
+<script defer data-domain="nl.centrocami.it" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
 
@@ -1585,6 +1587,26 @@ p { margin-bottom: 1.25rem; }
         provider before beginning any exercise programme.
     </p>
 </div>
+
+<script>
+// Plausible: eBook engagement tracking
+(function () {
+    if (!window.plausible) return;
+    plausible('eBook View', { props: { title: 'CAMI Restore – 7 Mistakes' } });
+    var fired = { 25: false, 50: false, 75: false, 100: false };
+    window.addEventListener('scroll', function () {
+        var scrolled = window.scrollY + window.innerHeight;
+        var total = document.body.scrollHeight;
+        var pct = Math.round((scrolled / total) * 100);
+        [25, 50, 75, 100].forEach(function (d) {
+            if (!fired[d] && pct >= d) {
+                fired[d] = true;
+                plausible('eBook Scroll Depth', { props: { percent: String(d), title: 'Restore' } });
+            }
+        });
+    });
+})();
+</script>
 
 </body>
 </html>

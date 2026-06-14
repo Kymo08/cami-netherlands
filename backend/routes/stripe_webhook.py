@@ -16,6 +16,7 @@ from flask import Blueprint, request, jsonify
 
 from models.database import get_db
 from services.email_service import send_enrollment_confirmation
+from services.camix_service import send_daily_email
 
 stripe.api_key        = os.getenv('STRIPE_SECRET_KEY', '')
 WEBHOOK_SECRET        = os.getenv('STRIPE_WEBHOOK_SECRET', '')
@@ -55,6 +56,30 @@ def _enroll(session: dict):
             send_enrollment_confirmation(record)
         except Exception as e:
             print(f"[STRIPE] Enrollment email failed: {e}")
+
+        # ── CAMIX: start 30-day journey ────────────────────────────────────
+        if record.get("consent_marketing"):
+            from datetime import datetime, timezone
+            now = datetime.now(timezone.utc).isoformat()
+            db2 = get_db()
+            try:
+                db2.execute(
+                    "UPDATE assessments SET camix_enrolled_at = ?, camix_current_day = 0 WHERE id = ?",
+                    (now, assessment_id)
+                )
+                db2.commit()
+                # Send Day 1 immediately after enrolment
+                send_daily_email(record, day=1)
+                db2.execute(
+                    "UPDATE assessments SET camix_current_day = 1, camix_last_sent_at = ? WHERE id = ?",
+                    (now, assessment_id)
+                )
+                db2.commit()
+                print(f"[CAMIX] Day 1 sent to {record['name']} ({record['email']})")
+            except Exception as camix_err:
+                print(f"[CAMIX] Day 1 send failed: {camix_err}")
+            finally:
+                db2.close()
     else:
         print(f"[STRIPE] Assessment {assessment_id} not found in DB after payment")
 

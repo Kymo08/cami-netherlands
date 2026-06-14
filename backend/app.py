@@ -13,6 +13,7 @@ from routes.assessment import assessment_bp
 from routes.admin import admin_bp
 from routes.stripe_webhook import stripe_bp
 from routes.calendar import calendar_bp
+from routes.camix import camix_bp
 
 load_dotenv()
 
@@ -34,6 +35,7 @@ app.register_blueprint(assessment_bp)
 app.register_blueprint(admin_bp)
 app.register_blueprint(stripe_bp)
 app.register_blueprint(calendar_bp)
+app.register_blueprint(camix_bp)
 
 
 # ── API Health ─────────────────────────────────────────────────────────────────

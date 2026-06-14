@@ -270,6 +270,8 @@
             background: #EFF6FF;
         }
     </style>
+    <!-- Analytics: Plausible — privacy-first, GDPR compliant (no cookies) -->
+    <script defer data-domain="nl.centrocami.it" src="https://plausible.io/js/script.js"></script>
 </head>
 <body>
 
@@ -1050,6 +1052,17 @@
                 document.getElementById('piani')?.scrollIntoView({ behavior: 'smooth' });
             });
         }
+    })();
+
+    // Plausible: subscription CTA tracking
+    (function () {
+        if (!window.plausible) return;
+        document.querySelectorAll('a[href*="stripe"], a[href*="payment"], a[href*="plan="]').forEach(function (el) {
+            el.addEventListener('click', function () {
+                var plan = (el.href.match(/plan=(\w+)/) || [])[1] || el.textContent.trim().split('\n')[0].trim();
+                plausible('Subscription Click', { props: { plan: plan } });
+            });
+        });
     })();
 </script>
 </body>

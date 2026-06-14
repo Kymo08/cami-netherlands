@@ -21,7 +21,9 @@ services:
       - key: STRIPE_WEBHOOK_SECRET
         sync: false
       - key: OPENAI_API_KEY
-        sync: false          # optional – enables CAMIX AI analysis
+        sync: false          # optional – enables CAMIX AI personalisation
+      - key: CAMIX_DISPATCH_SECRET
+        sync: false          # secret key for the daily cron job endpoint
       - key: PROGRAM_START_DATE
         value: 2026-07-05    # update before each cohort
       - key: PROGRAM_SESSION_HOUR
@@ -32,3 +34,25 @@ services:
         value: Utrecht, Netherlands
     healthCheckPath: /api/health
     autoDeploy: true
+
+  # ── CAMIX Daily Email Cron Job ──────────────────────────────────────────────
+  # Fires every day at 07:00 UTC; Render Free tier supports cron jobs.
+  - type: cron
+    name: camix-daily-dispatch
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install requests
+    schedule: "0 7 * * *"
+    command: >
+      python -c "
+      import os, requests;
+      secret = os.environ.get('CAMIX_DISPATCH_SECRET', '');
+      url = os.environ.get('BASE_URL', 'https://nl.centrocami.it') + '/api/camix/daily-dispatch';
+      r = requests.post(url, headers={'X-Camix-Secret': secret}, timeout=60);
+      print(r.status_code, r.text[:500])
+      "
+    envVars:
+      - key: BASE_URL
+        value: https://nl.centrocami.it
+      - key: CAMIX_DISPATCH_SECRET
+        sync: false

@@ -115,6 +115,29 @@ def analyze_assessment(
         return None
 
 
+def generate_text(prompt: str, max_tokens: int = 200, temperature: float = 0.7) -> str | None:
+    """
+    Generic GPT-4o text generation.
+    Returns the completion string or None on failure / missing key.
+    """
+    api_key = os.getenv('OPENAI_API_KEY', '')
+    if not api_key or not _openai_available:
+        return None
+    try:
+        from openai import OpenAI
+        client = OpenAI(api_key=api_key)
+        response = client.chat.completions.create(
+            model='gpt-4o',
+            messages=[{'role': 'user', 'content': prompt}],
+            max_tokens=max_tokens,
+            temperature=temperature,
+        )
+        return response.choices[0].message.content.strip()
+    except Exception as e:
+        print(f'[AI] generate_text failed: {e}')
+        return None
+
+
 # ── Internal helpers ──────────────────────────────────────────────────────────
 
 def _build_user_message(
